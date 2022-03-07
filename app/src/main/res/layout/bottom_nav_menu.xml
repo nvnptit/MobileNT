@@ -13,7 +13,11 @@
         android:background="#83715A"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/main_menu"
-        tools:ignore="BottomAppBar"
-        >
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        tools:ignore="BottomAppBar"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/BottomNavigationViewMainMenu" />
 </RelativeLayout>

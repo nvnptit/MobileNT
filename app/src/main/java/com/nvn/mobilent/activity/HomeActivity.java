@@ -12,8 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.nvn.mobilent.R;
 import com.squareup.picasso.Picasso;
@@ -33,9 +36,22 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.BottomNavigationViewMainMenu);
+
+        CategoryFragment categoryFragment = new CategoryFragment();
+        CartFragment cartFragment = new CartFragment();
+        SettingFragment settingFragment = new SettingFragment();
+
+
         setControl();
         setActionBar();
         setActionViewLipper();
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, fragment);
+        fragmentTransaction.commit();
     }
 
     private void setActionViewLipper() {
