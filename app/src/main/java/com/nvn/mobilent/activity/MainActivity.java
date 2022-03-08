@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         CartFragment cartFragment = new CartFragment();
         SettingFragment settingFragment = new SettingFragment();
         HomeFragment homeFragment = new HomeFragment();
-
+        setFragment(homeFragment);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

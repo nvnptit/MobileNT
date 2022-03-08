@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY); //Fix vua khung anh
             viewFlipper.addView(imageView);
         }
-        viewFlipper.setFlipInterval(5000); // Set time delay slide
+        viewFlipper.setFlipInterval(4000); // Set time delay slide
         viewFlipper.setAutoStart(true); // Auto
 
         Animation animation_SlideIn = AnimationUtils.loadAnimation(view.getContext().getApplicationContext(), R.anim.slide_in_right);
