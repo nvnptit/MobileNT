@@ -1,6 +1,7 @@
 package com.nvn.mobilent.activity;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -17,13 +19,14 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.nvn.mobilent.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     ViewFlipper viewFlipper;
@@ -35,22 +38,42 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.BottomNavigationViewMainMenu);
+        setContentView(R.layout.activity_main);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
         CategoryFragment categoryFragment = new CategoryFragment();
         CartFragment cartFragment = new CartFragment();
         SettingFragment settingFragment = new SettingFragment();
+        HomeFragment homeFragment = new HomeFragment();
 
-
-        setControl();
-        setActionBar();
-        setActionViewLipper();
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.nav_home) {
+                    setFragment(homeFragment);
+                    return true;
+                } else if (id == R.id.nav_category) {
+                    setFragment(categoryFragment);
+                    return true;
+                } else if (id == R.id.nav_cart) {
+                    setFragment(cartFragment);
+                    return true;
+                } else if (id == R.id.nav_setting) {
+                    setFragment(settingFragment);
+                    return true;
+                }
+                return false;
+            }
+        });
+//        setControl();
+//        setActionBar();
+//        setActionViewLipper();
     }
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame, fragment);
+        fragmentTransaction.replace(R.id.frame_container, fragment);
         fragmentTransaction.commit();
     }
 

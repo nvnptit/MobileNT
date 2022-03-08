@@ -1,9 +1,7 @@
 <resources>
-    <string name="app_name">ModernLogin</string>
+    <string name="app_name">MobileNT</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="tvDSSP">Danh sách các sản phẩm mới nhất</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
