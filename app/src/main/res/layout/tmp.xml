@@ -56,7 +56,5 @@
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </LinearLayout>
-
-
     </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>
