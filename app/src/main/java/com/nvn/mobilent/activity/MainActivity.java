@@ -5,8 +5,6 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -15,9 +13,6 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.nvn.mobilent.R;
 
 public class MainActivity extends AppCompatActivity {
-
-    Toolbar toolbar;
-    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

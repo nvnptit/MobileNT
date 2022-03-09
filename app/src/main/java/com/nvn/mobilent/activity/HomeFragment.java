@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.adapter.CategoryAdapter;
+import com.nvn.mobilent.model.Category;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,32 +32,18 @@ import java.util.ArrayList;
  */
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     RecyclerView recyclerView;
     NavigationView navigationView;
-    ListView listView;
+    ListView listViewHome, listViewCategory;
     DrawerLayout drawerLayout;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
+    ArrayList<Category> categoryArrayList;
+    CategoryAdapter categoryAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
-    }
-
-    // TODO: Rename and change types and number of parameters
-    public static CartFragment newInstance(String param1, String param2) {
-        CartFragment fragment = new CartFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     private void setActionViewLipper(View view) {
@@ -84,11 +72,8 @@ public class HomeFragment extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar); // hỗ trợ toolbar như actionbar
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nút home toolbar
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START); //nhảy ra giữa
-            }
+        toolbar.setNavigationOnClickListener(view -> {
+            drawerLayout.openDrawer(GravityCompat.START); //nhảy ra giữa
         });
 
     }
@@ -98,27 +83,31 @@ public class HomeFragment extends Fragment {
         viewFlipper = view.findViewById(R.id.viewlipper);
         recyclerView = view.findViewById(R.id.recyclerview);
         navigationView = view.findViewById(R.id.navigationview);
-        listView = view.findViewById(R.id.listViewHome);
+        listViewHome = view.findViewById(R.id.listviewhome);
+        listViewCategory = view.findViewById(R.id.listviewcategory);
         drawerLayout = view.findViewById(R.id.drawerlayout);
+
+        categoryArrayList = new ArrayList<>();
+        categoryAdapter = new CategoryAdapter(categoryArrayList, getContext());
+        listViewHome.setAdapter(categoryAdapter);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            System.out.println("OK");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         setControl(view);
-        setActionViewLipper(view);
         setActionBar();
-        // Inflate the layout for this fragment
+        setActionViewLipper(view);
         return view;
     }
 

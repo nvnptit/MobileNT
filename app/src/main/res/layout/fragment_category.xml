@@ -5,11 +5,28 @@
     android:layout_height="match_parent"
     tools:context=".activity.CategoryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Hello category fragment" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="#B6B3B3"
+            android:backgroundTint="#5E84A6"
+            android:gravity="center"
+            android:text="Category"
+            android:textColor="@color/whiteTextColor"
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
+
+        <ListView
+            android:id="@+id/listviewcategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
 
 </FrameLayout>

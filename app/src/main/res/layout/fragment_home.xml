@@ -67,7 +67,7 @@
             android:layout_gravity="start">
 
             <ListView
-                android:id="@+id/listViewHome"
+                android:id="@+id/listviewhome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></ListView>
 

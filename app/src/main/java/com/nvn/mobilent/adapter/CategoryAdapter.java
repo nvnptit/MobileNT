@@ -14,9 +14,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class LoadCategory extends BaseAdapter {
+public class CategoryAdapter extends BaseAdapter {
     ArrayList<Category> arr;
     Context context;
+
+    public CategoryAdapter(ArrayList<Category> arr, Context context) {
+        this.arr = arr;
+        this.context = context;
+    }
 
     @Override
     public int getCount() {
