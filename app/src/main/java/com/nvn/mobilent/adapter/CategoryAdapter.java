@@ -70,8 +70,9 @@ public class CategoryAdapter extends BaseAdapter {
         ImageView imgCategory;
     }
 
-    @Override
-    public void notifyDataSetChanged() {
+    public void notifyDataSetChanged(ArrayList<Category> newList) {
+        arr.clear();
+        arr.addAll(newList);
         super.notifyDataSetChanged();
     }
 }

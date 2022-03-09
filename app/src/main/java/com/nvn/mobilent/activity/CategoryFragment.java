@@ -54,8 +54,8 @@ public class CategoryFragment extends Fragment {
     private void setControl() {
         listViewCategory = getView().findViewById(R.id.listviewcategory);
         categoryArrayList = new ArrayList<>();
-        categoryAdapter = new CategoryAdapter(categoryArrayList, getContext());
-        listViewCategory.setAdapter(categoryAdapter);
+        this.categoryAdapter = new CategoryAdapter(categoryArrayList, getContext());
+        this.listViewCategory.setAdapter(categoryAdapter);
     }
 
     private void getCategory() {
@@ -64,10 +64,9 @@ public class CategoryFragment extends Fragment {
             public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
                 if (response.isSuccessful()) {
                     categoryArrayList = (ArrayList<Category>) response.body();
-                    categoryAdapter.notifyDataSetChanged();//update bản vẽ
-//                    categoryAdapter = new CategoryAdapter(categoryArrayList, getContext());
-//                    listViewCategory.setAdapter(categoryAdapter);
+                    categoryAdapter.notifyDataSetChanged(categoryArrayList);//update bản vẽ
                 }
+
             }
 
             @Override
