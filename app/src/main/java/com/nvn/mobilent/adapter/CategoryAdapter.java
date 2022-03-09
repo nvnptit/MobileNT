@@ -55,13 +55,14 @@ public class CategoryAdapter extends BaseAdapter {
 
         } else {
             viewHolder = (ViewHolder) view.getTag(); // khi da goi truoc do roi thi get cai tag ra thoi
-            Category category = (Category) getItem(i);
-            viewHolder.tvCategory.setText(category.getName());
-            Picasso.get().load(category.getImg())
-                    .placeholder(R.drawable.no_image)
-                    .error(R.drawable.error)
-                    .into(viewHolder.imgCategory); // tra ve imageview
+
         }
+        Category category = (Category) getItem(i);
+        viewHolder.tvCategory.setText(category.getName());
+        Picasso.get().load(category.getImg())
+                .placeholder(R.drawable.no_image)
+                .error(R.drawable.error)
+                .into(viewHolder.imgCategory); // tra ve imageview
         return view;
     }
 

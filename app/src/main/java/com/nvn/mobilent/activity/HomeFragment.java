@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ViewFlipper;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -19,8 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.nvn.mobilent.R;
-import com.nvn.mobilent.adapter.CategoryAdapter;
-import com.nvn.mobilent.model.Category;
+import com.nvn.mobilent.util.CheckConnection;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -36,11 +37,9 @@ public class HomeFragment extends Fragment {
     ViewFlipper viewFlipper;
     RecyclerView recyclerView;
     NavigationView navigationView;
-    ListView listViewHome, listViewCategory;
+    ListView listViewHome;
     DrawerLayout drawerLayout;
 
-    ArrayList<Category> categoryArrayList;
-    CategoryAdapter categoryAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -84,12 +83,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         navigationView = view.findViewById(R.id.navigationview);
         listViewHome = view.findViewById(R.id.listviewhome);
-        listViewCategory = view.findViewById(R.id.listviewcategory);
         drawerLayout = view.findViewById(R.id.drawerlayout);
-
-        categoryArrayList = new ArrayList<>();
-        categoryAdapter = new CategoryAdapter(categoryArrayList, getContext());
-        listViewHome.setAdapter(categoryAdapter);
     }
 
     @Override
@@ -105,10 +99,18 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        setControl(view);
-        setActionBar();
-        setActionViewLipper(view);
+        if (!CheckConnection.haveNetworkConnection(getContext())) {
+            CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
+        } else {
+            setControl(view);
+            setActionBar();
+            setActionViewLipper(view);
+        }
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
 }

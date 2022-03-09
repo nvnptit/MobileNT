@@ -28,8 +28,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Hiahci"
-            android:textSize="25dp" />
+            android:text="NameCategory"
+            android:textSize="15dp" />
 
     </LinearLayout>
 </LinearLayout>
