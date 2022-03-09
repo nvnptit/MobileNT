@@ -42,8 +42,7 @@ public class CategoryAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null; // tuy chinh theo view minh muon
         if (view == null) { // View rong thi nhay vao day
-            viewHolder = new ViewHolder();
-            // Get service la cai layout ra
+            viewHolder = new ViewHolder();   // Get service la cai layout ra
             // LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             LayoutInflater inflater = LayoutInflater.from(context);
             view = inflater.inflate(R.layout.line_category, null); //vẽ
@@ -69,5 +68,10 @@ public class CategoryAdapter extends BaseAdapter {
     public class ViewHolder {
         TextView tvCategory;
         ImageView imgCategory;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
     }
 }

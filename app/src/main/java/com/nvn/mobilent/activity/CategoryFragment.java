@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.nvn.mobilent.R;
@@ -46,19 +48,14 @@ public class CategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
-        if (!CheckConnection.haveNetworkConnection(getContext())) {
-            CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
-        } else {
-            setControl(view);
-            categoryAPI = (CategoryAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CategoryAPI.class);
-            getCategory();
-        }
         return view;
     }
 
-    private void setControl(View view) {
-        listViewCategory = view.findViewById(R.id.listviewcategory);
+    private void setControl() {
+        listViewCategory = getView().findViewById(R.id.listviewcategory);
         categoryArrayList = new ArrayList<>();
+        categoryAdapter = new CategoryAdapter(categoryArrayList, getContext());
+        listViewCategory.setAdapter(categoryAdapter);
     }
 
     private void getCategory() {
@@ -66,9 +63,10 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
                 if (response.isSuccessful()) {
-                    categoryArrayList = response.body();
-                    categoryAdapter = new CategoryAdapter(categoryArrayList, getContext());
-                    listViewCategory.setAdapter(categoryAdapter);
+                    categoryArrayList = (ArrayList<Category>) response.body();
+                    categoryAdapter.notifyDataSetChanged();//update bản vẽ
+//                    categoryAdapter = new CategoryAdapter(categoryArrayList, getContext());
+//                    listViewCategory.setAdapter(categoryAdapter);
                 }
             }
 
@@ -78,5 +76,18 @@ public class CategoryFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setControl();
+        categoryAPI = (CategoryAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CategoryAPI.class);
+        if (!CheckConnection.haveNetworkConnection(getContext())) {
+            CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
+        } else {
+            getCategory();
+        }
+    }
+
 
 }
