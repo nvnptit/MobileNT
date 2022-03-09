@@ -57,23 +57,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start">
-
-            <ListView
-                android:id="@+id/listViewHome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nguyễn Văn Nhất\nMobile Developer\n 3/2022"
-                android:textColor="#26852A" />
-        </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>
