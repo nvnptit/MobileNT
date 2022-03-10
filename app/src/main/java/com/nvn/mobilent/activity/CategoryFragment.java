@@ -64,7 +64,7 @@ public class CategoryFragment extends Fragment {
             public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
                 if (response.isSuccessful()) {
                     categoryArrayList = (ArrayList<Category>) response.body();
-                    categoryAdapter.notifyDataSetChanged(categoryArrayList);//update bản vẽ
+                    categoryAdapter.updateData(categoryArrayList);//update bản vẽ
                 }
 
             }

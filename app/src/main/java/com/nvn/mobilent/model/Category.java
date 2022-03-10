@@ -14,6 +14,9 @@ public class Category {
     @SerializedName("img")
     @Expose
     private String img;
+    @SerializedName("status")
+    @Expose
+    private String status;
 
     public Integer getId() {
         return id;
@@ -37,6 +40,14 @@ public class Category {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }
