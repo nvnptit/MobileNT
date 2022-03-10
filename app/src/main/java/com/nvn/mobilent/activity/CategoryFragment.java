@@ -45,8 +45,7 @@ public class CategoryFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
         return view;
     }
@@ -54,7 +53,7 @@ public class CategoryFragment extends Fragment {
     private void setControl() {
         listViewCategory = getView().findViewById(R.id.listviewcategory);
         categoryArrayList = new ArrayList<>();
-        this.categoryAdapter = new CategoryAdapter(categoryArrayList, getContext());
+        this.categoryAdapter = new CategoryAdapter(getContext(), categoryArrayList);
         this.listViewCategory.setAdapter(categoryAdapter);
     }
 
@@ -66,9 +65,7 @@ public class CategoryFragment extends Fragment {
                     categoryArrayList = (ArrayList<Category>) response.body();
                     categoryAdapter.updateData(categoryArrayList);//update bản vẽ
                 }
-
             }
-
             @Override
             public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
                 Log.d("NVN-API", t.toString());

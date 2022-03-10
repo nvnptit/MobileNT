@@ -1,6 +1,7 @@
 package com.nvn.mobilent.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,24 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.adapter.ProductAdapter;
+import com.nvn.mobilent.base.PathAPI;
+import com.nvn.mobilent.base.RetrofitClient;
+import com.nvn.mobilent.model.Product;
+import com.nvn.mobilent.network.ProductAPI;
 import com.nvn.mobilent.util.CheckConnection;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +51,9 @@ public class HomeFragment extends Fragment {
     ListView listViewHome;
     DrawerLayout drawerLayout;
 
+    ProductAPI productAPI;
+    ArrayList<Product> productArrayList;
+    ProductAdapter productAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -84,6 +98,9 @@ public class HomeFragment extends Fragment {
         navigationView = view.findViewById(R.id.navigationview);
         listViewHome = view.findViewById(R.id.listviewhome);
         drawerLayout = view.findViewById(R.id.drawerlayout);
+
+        // Listview
+        productArrayList = new ArrayList<>();
     }
 
     @Override
@@ -109,8 +126,40 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    private void getProduct() {
+        productAPI.getProduct().enqueue(new Callback<ArrayList<Product>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+                if (response.isSuccessful()) {
+                    productArrayList = (ArrayList<Product>) response.body();
+
+                    for (int i = 0; i < productArrayList.size(); i++) {
+                        if (productArrayList.get(i).getStatus().equals("false")) {
+                            productArrayList.remove(i);
+                        }
+                    }
+                    productAdapter = new ProductAdapter(getContext(), productArrayList);
+                    recyclerView.setHasFixedSize(true);
+                    recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                    recyclerView.setAdapter(productAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+                Log.d("NVN-API", t.toString());
+            }
+        });
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
+        if (!CheckConnection.haveNetworkConnection(getContext())) {
+            CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
+        } else {
+            getProduct();
+        }
     }
 }

@@ -15,22 +15,22 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class CategoryAdapter extends BaseAdapter {
-    ArrayList<Category> arr;
     Context context;
+    ArrayList<Category> arrCate;
 
-    public CategoryAdapter(ArrayList<Category> arr, Context context) {
-        this.arr = arr;
+    public CategoryAdapter(Context context, ArrayList<Category> arr) {
         this.context = context;
+        this.arrCate = arr;
     }
 
     @Override
     public int getCount() {
-        return arr.size();
+        return arrCate.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return arr.get(i);
+        return arrCate.get(i);
     }
 
     @Override
@@ -71,10 +71,10 @@ public class CategoryAdapter extends BaseAdapter {
     }
 
     public void updateData(ArrayList<Category> newList) {
-        arr.clear();
+        arrCate.clear();
         for (int i = 0; i < newList.size(); i++) {
             if (newList.get(i).getStatus().equals("true")) {
-                arr.add(newList.get(i));
+                arrCate.add(newList.get(i));
             }
         }
         super.notifyDataSetChanged();
