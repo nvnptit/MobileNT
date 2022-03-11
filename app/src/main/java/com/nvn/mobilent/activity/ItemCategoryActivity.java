@@ -71,12 +71,10 @@ public class ItemCategoryActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     productArrayList = (ArrayList<Product>) response.body();
                     for (int i = 0; i < productArrayList.size(); i++) {
-                        System.out.println("BBBB| " + i);
                         if (productArrayList.get(i).getStatus().equals("false")) {
                             productArrayList.remove(i);
                         }
                     }
-                    System.out.println("AAAA: " + productArrayList.size());
                     itemCategoryAdapter = new ItemCategoryAdapter(getApplicationContext(), productArrayList);
                     listView.setAdapter(itemCategoryAdapter);
 //                    recyclerView.setHasFixedSize(true);
