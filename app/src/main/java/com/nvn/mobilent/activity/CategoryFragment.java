@@ -1,10 +1,12 @@
 package com.nvn.mobilent.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -28,7 +30,7 @@ import retrofit2.Response;
 public class CategoryFragment extends Fragment {
 
     ListView listViewCategory;
-    ArrayList<Category> categoryArrayList;
+    public ArrayList<Category> categoryArrayList;
     CategoryAdapter categoryAdapter;
     CategoryAPI categoryAPI;
 
@@ -53,8 +55,6 @@ public class CategoryFragment extends Fragment {
     private void setControl() {
         listViewCategory = getView().findViewById(R.id.listviewcategory);
         categoryArrayList = new ArrayList<>();
-        this.categoryAdapter = new CategoryAdapter(getContext(), categoryArrayList);
-        this.listViewCategory.setAdapter(categoryAdapter);
     }
 
     private void getCategory() {
@@ -63,9 +63,18 @@ public class CategoryFragment extends Fragment {
             public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
                 if (response.isSuccessful()) {
                     categoryArrayList = (ArrayList<Category>) response.body();
-                    categoryAdapter.updateData(categoryArrayList);//update bản vẽ
+                    for (int i = 0; i < categoryArrayList.size(); i++) {
+                        if (categoryArrayList.get(i).getStatus().equals("false")) {
+                            categoryArrayList.remove(i);
+                        }
+                    }
+
+                    lisenCategory(categoryArrayList);
+                    categoryAdapter = new CategoryAdapter(getContext(), categoryArrayList);
+                    listViewCategory.setAdapter(categoryAdapter);
                 }
             }
+
             @Override
             public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
                 Log.d("NVN-API", t.toString());
@@ -83,6 +92,34 @@ public class CategoryFragment extends Fragment {
         } else {
             getCategory();
         }
+    }
+
+    private void lisenCategory(ArrayList<Category> arrayList) {
+        listViewCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if (!CheckConnection.haveNetworkConnection(getContext())) {
+                    CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
+                } else {
+                    Intent intent = new Intent(getActivity(), CategoryActivity.class); //CategoryFragment.this.getActivity()
+                    intent.putExtra("id", String.valueOf(categoryAdapter.getItemId(i)));
+                    startActivity(intent);
+                }
+
+//                switch (i){
+//                    case 0:{
+//                        if (!CheckConnection.haveNetworkConnection(getContext())) {
+//                            CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
+//                        } else {
+//                            Intent intent = new Intent(CategoryFragment.this.getActivity(),CategoryActivity.class);
+//                            startActivity(intent);
+//                        }
+//                        break;
+//                    }
+//                }
+            }
+        });
     }
 
 

@@ -70,13 +70,4 @@ public class CategoryAdapter extends BaseAdapter {
         ImageView imgCategory;
     }
 
-    public void updateData(ArrayList<Category> newList) {
-        arrCate.clear();
-        for (int i = 0; i < newList.size(); i++) {
-            if (newList.get(i).getStatus().equals("true")) {
-                arrCate.add(newList.get(i));
-            }
-        }
-        super.notifyDataSetChanged();
-    }
 }
