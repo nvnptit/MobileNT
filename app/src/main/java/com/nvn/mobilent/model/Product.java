@@ -17,6 +17,9 @@ public class Product {
     @SerializedName("discount")
     @Expose
     private Integer discount;
+    @SerializedName("detail")
+    @Expose
+    private String detail;
     @SerializedName("cate_id")
     @Expose
     private Integer cateId;
@@ -63,6 +66,14 @@ public class Product {
 
     public void setDiscount(Integer discount) {
         this.discount = discount;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public Integer getCateId() {

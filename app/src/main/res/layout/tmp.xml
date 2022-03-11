@@ -1,60 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerlayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!-- Drawerlayout dùng đóng mở thanh menu-->
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:background="#E6E4E4"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/textEditSearch"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@color/whiteTextColor"
+            android:drawableStart="@drawable/search_icon"
+            android:hint=" Phone"
+            android:inputType="textFilter"
+            android:padding="10dp"
+            android:textColor="#492626"
+            android:textColorHint="#492626"
+            app:layout_constraintStart_toStartOf="parent"
+            app:searchIcon="@drawable/search_icon" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:background="#B6B3B3"
-                android:backgroundTint="#5E84A6"
-                app:title="Home"
-                app:titleTextColor="@color/login_bk_color">
+        <FrameLayout
+            android:id="@+id/container_phone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:outlineAmbientShadowColor="@color/darkTextColor"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"></FrameLayout>
+    </LinearLayout>
 
-            </androidx.appcompat.widget.Toolbar>
-
-            <ViewFlipper
-                android:id="@+id/viewlipper"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"></ViewFlipper>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#EDEBEB"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="#C0CA33"
-                    android:text="@string/tvDSSP"
-                    android:textColor="#982C2C"
-                    android:textSize="20sp"
-                    android:textStyle="bold"></TextView>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </androidx.recyclerview.widget.RecyclerView>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.drawerlayout.widget.DrawerLayout>
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

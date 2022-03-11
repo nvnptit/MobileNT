@@ -102,7 +102,7 @@ public class CategoryFragment extends Fragment {
                 if (!CheckConnection.haveNetworkConnection(getContext())) {
                     CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
                 } else {
-                    Intent intent = new Intent(getActivity(), CategoryActivity.class); //CategoryFragment.this.getActivity()
+                    Intent intent = new Intent(getActivity(), ItemCategoryActivity.class); //CategoryFragment.this.getActivity()
                     intent.putExtra("id", String.valueOf(categoryAdapter.getItemId(i)));
                     startActivity(intent);
                 }
@@ -112,7 +112,7 @@ public class CategoryFragment extends Fragment {
 //                        if (!CheckConnection.haveNetworkConnection(getContext())) {
 //                            CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
 //                        } else {
-//                            Intent intent = new Intent(CategoryFragment.this.getActivity(),CategoryActivity.class);
+//                            Intent intent = new Intent(CategoryFragment.this.getActivity(),ItemCategoryActivity.class);
 //                            startActivity(intent);
 //                        }
 //                        break;

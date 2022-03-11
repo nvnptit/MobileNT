@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".activity.CategoryActivity"
+            android:name=".activity.ItemCategoryActivity"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
