@@ -58,7 +58,7 @@ public class CategoryAdapter extends BaseAdapter {
         }
         Category category = (Category) getItem(i);
         viewHolder.tvCategory.setText(category.getName());
-        Picasso.get().load(category.getImg())
+        Picasso.get().load(category.getImage())
                 .placeholder(R.drawable.no_image)
                 .error(R.drawable.error)
                 .into(viewHolder.imgCategory); // tra ve imageview

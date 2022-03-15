@@ -11,12 +11,12 @@ public class Category {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("img")
+    @SerializedName("image")
     @Expose
-    private String img;
+    private String image;
     @SerializedName("status")
     @Expose
-    private String status;
+    private Boolean status;
 
     public Integer getId() {
         return id;
@@ -34,19 +34,19 @@ public class Category {
         this.name = name;
     }
 
-    public String getImg() {
-        return img;
+    public String getImage() {
+        return image;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 

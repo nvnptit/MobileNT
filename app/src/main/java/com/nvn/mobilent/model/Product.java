@@ -3,7 +3,9 @@ package com.nvn.mobilent.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -13,28 +15,25 @@ public class Product {
     private String name;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Double price;
     @SerializedName("discount")
     @Expose
-    private Integer discount;
-    @SerializedName("detail")
-    @Expose
-    private String detail;
-    @SerializedName("cate_id")
-    @Expose
-    private Integer cateId;
+    private Double discount;
     @SerializedName("image")
     @Expose
     private String image;
     @SerializedName("unit")
     @Expose
     private String unit;
+    @SerializedName("quantity")
+    @Expose
+    private Integer quantity;
+    @SerializedName("detail")
+    @Expose
+    private String detail;
     @SerializedName("status")
     @Expose
-    private String status;
-    @SerializedName("soLuongTon")
-    @Expose
-    private Integer soLuongTon;
+    private Boolean status;
 
     public Integer getId() {
         return id;
@@ -52,36 +51,20 @@ public class Product {
         this.name = name;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Integer getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Integer discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
-    }
-
-    public String getDetail() {
-        return detail;
-    }
-
-    public void setDetail(String detail) {
-        this.detail = detail;
-    }
-
-    public Integer getCateId() {
-        return cateId;
-    }
-
-    public void setCateId(Integer cateId) {
-        this.cateId = cateId;
     }
 
     public String getImage() {
@@ -100,20 +83,28 @@ public class Product {
         this.unit = unit;
     }
 
-    public String getStatus() {
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         this.status = status;
-    }
-
-    public Integer getSoLuongTon() {
-        return soLuongTon;
-    }
-
-    public void setSoLuongTon(Integer soLuongTon) {
-        this.soLuongTon = soLuongTon;
     }
 
 }

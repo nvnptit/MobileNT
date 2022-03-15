@@ -6,19 +6,18 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface ProductAPI {
-    @GET("/prod")
-    Call<ArrayList<Product>> getProduct();
-}
-/*
-    @GET("/prod/{movie_id}")
-    Call<ArrayList<Product>> getProduct1(
-            @Path("movie_id")int id
+    @GET("/api/product")
+    Call<ArrayList<Product>> getProduct(
+            @Query("page") int type,
+            @Query("page_size") int page
     );
 
-    @GET("/prod")
-    Call<ArrayList<Product>> searchMovieByName(
-            @Query("query") String query,
+    @GET("/api/product/category")
+    Call<ArrayList<Product>> getProductByType(
+            @Query("type") int type,
             @Query("page") int page
-    );*/
+    );
+}

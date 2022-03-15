@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".activity.ProductDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ItemCategoryActivity"
             android:exported="false" />
         <activity

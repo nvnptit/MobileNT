@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void getProduct() {
-        productAPI.getProduct().enqueue(new Callback<ArrayList<Product>>() {
+        productAPI.getProduct(1, 10).enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
                 if (response.isSuccessful()) {

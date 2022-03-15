@@ -13,7 +13,9 @@
         android:layout_height="?actionBarSize"
         android:background="@color/colorAccent"
         app:subtitleTextColor="@color/colorAccent"
-        app:title="Mobile"></androidx.appcompat.widget.Toolbar>
+        app:title="Mobile">
+
+    </androidx.appcompat.widget.Toolbar>
 
     <ListView
         android:id="@+id/listview_itemcategory"

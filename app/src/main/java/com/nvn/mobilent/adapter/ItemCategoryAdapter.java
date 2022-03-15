@@ -58,7 +58,7 @@ public class ItemCategoryAdapter extends BaseAdapter {
         Product product = (Product) getItem(i);
         viewHolder.tvNameItem.setText(product.getName());
         DecimalFormat df = new DecimalFormat("###,###,###");
-        viewHolder.tvPriceItem.setText(df.format(product.getPrice()));
+        viewHolder.tvPriceItem.setText(df.format(product.getPrice()) + "VNĐ");
         viewHolder.tvDetailItem.setMaxLines(2);
         viewHolder.tvDetailItem.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.tvDetailItem.setText(product.getDetail());

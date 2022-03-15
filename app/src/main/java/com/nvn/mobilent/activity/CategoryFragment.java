@@ -68,8 +68,21 @@ public class CategoryFragment extends Fragment {
                             categoryArrayList.remove(i);
                         }
                     }
+                    //
+                    listViewCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    lisenCategory(categoryArrayList);
+                            if (!CheckConnection.haveNetworkConnection(getContext())) {
+                                CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
+                            } else {
+                                Intent intent = new Intent(getActivity(), ItemCategoryActivity.class); //CategoryFragment.this.getActivity()
+                                intent.putExtra("idCate", categoryArrayList.get(i).getId());
+                                intent.putExtra("nameCate", categoryArrayList.get(i).getName());
+                                startActivity(intent);
+                            }
+                        }
+                    });
                     categoryAdapter = new CategoryAdapter(getContext(), categoryArrayList);
                     listViewCategory.setAdapter(categoryAdapter);
                 }
@@ -94,7 +107,7 @@ public class CategoryFragment extends Fragment {
         }
     }
 
-    private void lisenCategory(ArrayList<Category> arrayList) {
+    private void lisenCategory() {
         listViewCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -103,7 +116,9 @@ public class CategoryFragment extends Fragment {
                     CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
                 } else {
                     Intent intent = new Intent(getActivity(), ItemCategoryActivity.class); //CategoryFragment.this.getActivity()
-                    intent.putExtra("id", String.valueOf(categoryAdapter.getItemId(i)));
+                    intent.putExtra("idCate", String.valueOf(categoryAdapter.getItemId(i)));
+                    System.out.println("BBB: " + categoryAdapter.getItemId(i));
+//                    intent.putExtra("nameCate", String.valueOf(categoryAdapter.));
                     startActivity(intent);
                 }
 
