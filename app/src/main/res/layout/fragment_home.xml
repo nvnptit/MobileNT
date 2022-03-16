@@ -21,11 +21,18 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:background="#B6B3B3"
-                android:backgroundTint="#5E84A6"
-                app:title="Home"
+                android:background="#EDEAEA"
                 app:titleTextColor="@color/login_bk_color">
 
+                <Button
+                    android:id="@+id/timkiem"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/roundbutton"
+                    android:backgroundTint="@color/whiteTextColor"
+                    android:hint="Tìm kiếm sản phẩm"
+                    android:textSize="20dp" />
             </androidx.appcompat.widget.Toolbar>
 
             <ViewFlipper
@@ -42,12 +49,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:background="#C0CA33"
+                    android:background="@drawable/roundbutton"
+                    android:gravity="center"
                     android:text="@string/tvDSSP"
-                    android:textColor="#982C2C"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold"></TextView>
 
@@ -55,7 +63,9 @@
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp"></androidx.recyclerview.widget.RecyclerView>
+                    android:layout_margin="5dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </LinearLayout>
 
@@ -65,15 +75,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="start">
 
-            <ListView
-                android:id="@+id/listviewhome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ListView>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nguyễn Văn Nhất\nMobile Developer\n 3/2022"
+                android:text="Nguyễn Văn Nhất\nMobile Developer\n\nHướng dịch vụ 2022"
                 android:textColor="#26852A" />
         </com.google.android.material.navigation.NavigationView>
     </androidx.drawerlayout.widget.DrawerLayout>

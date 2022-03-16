@@ -76,7 +76,7 @@ public class CategoryFragment extends Fragment {
                             if (!CheckConnection.haveNetworkConnection(getContext())) {
                                 CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
                             } else {
-                                Intent intent = new Intent(getActivity(), ItemCategoryActivity.class); //CategoryFragment.this.getActivity()
+                                Intent intent = new Intent(getActivity(), CategoryActivity.class); //CategoryFragment.this.getActivity()
                                 intent.putExtra("idCate", categoryArrayList.get(i).getId());
                                 intent.putExtra("nameCate", categoryArrayList.get(i).getName());
                                 startActivity(intent);
@@ -115,7 +115,7 @@ public class CategoryFragment extends Fragment {
                 if (!CheckConnection.haveNetworkConnection(getContext())) {
                     CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
                 } else {
-                    Intent intent = new Intent(getActivity(), ItemCategoryActivity.class); //CategoryFragment.this.getActivity()
+                    Intent intent = new Intent(getActivity(), CategoryActivity.class); //CategoryFragment.this.getActivity()
                     intent.putExtra("idCate", String.valueOf(categoryAdapter.getItemId(i)));
                     System.out.println("BBB: " + categoryAdapter.getItemId(i));
 //                    intent.putExtra("nameCate", String.valueOf(categoryAdapter.));
@@ -127,7 +127,7 @@ public class CategoryFragment extends Fragment {
 //                        if (!CheckConnection.haveNetworkConnection(getContext())) {
 //                            CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
 //                        } else {
-//                            Intent intent = new Intent(CategoryFragment.this.getActivity(),ItemCategoryActivity.class);
+//                            Intent intent = new Intent(CategoryFragment.this.getActivity(),CategoryActivity.class);
 //                            startActivity(intent);
 //                        }
 //                        break;

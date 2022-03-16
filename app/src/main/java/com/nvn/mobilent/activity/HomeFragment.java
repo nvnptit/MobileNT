@@ -1,5 +1,6 @@
 package com.nvn.mobilent.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -37,23 +38,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CartFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
 
     Toolbar toolbar;
     ViewFlipper viewFlipper;
     RecyclerView recyclerView;
     NavigationView navigationView;
-    ListView listViewHome;
     DrawerLayout drawerLayout;
 
     ProductAPI productAPI;
     ArrayList<Product> productArrayList;
     ProductAdapter productAdapter;
+
+    Button timkiem;
+    boolean limitData = false;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -96,11 +94,11 @@ public class HomeFragment extends Fragment {
         viewFlipper = view.findViewById(R.id.viewlipper);
         recyclerView = view.findViewById(R.id.recyclerview);
         navigationView = view.findViewById(R.id.navigationview);
-        listViewHome = view.findViewById(R.id.listviewhome);
         drawerLayout = view.findViewById(R.id.drawerlayout);
 
         // Listview
         productArrayList = new ArrayList<>();
+        timkiem = view.findViewById(R.id.timkiem);
     }
 
     @Override
@@ -130,7 +128,7 @@ public class HomeFragment extends Fragment {
         productAPI.getProduct(1, 10).enqueue(new Callback<ArrayList<Product>>() {
             @Override
             public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && !limitData) {
                     productArrayList = (ArrayList<Product>) response.body();
 
                     for (int i = 0; i < productArrayList.size(); i++) {
@@ -142,6 +140,7 @@ public class HomeFragment extends Fragment {
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
                     recyclerView.setAdapter(productAdapter);
+                    limitData = true;
                 }
             }
 
@@ -155,11 +154,28 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        timkiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class); //CategoryFragment.this.getActivity()
+                startActivity(intent);
+            }
+        });
+
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
         if (!CheckConnection.haveNetworkConnection(getContext())) {
             CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
         } else {
+            limitData = false;
             getProduct();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (productAdapter != null) {
+            productAdapter.release();
         }
     }
 }

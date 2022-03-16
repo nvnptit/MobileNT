@@ -29,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ItemCategoryActivity extends AppCompatActivity {
+public class CategoryActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     ListView listView;
@@ -67,7 +67,7 @@ public class ItemCategoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
-                intent.putExtra("item", productArrayList.get(i));
+                intent.putExtra("product", productArrayList.get(i));
                 startActivity(intent);
             }
         });

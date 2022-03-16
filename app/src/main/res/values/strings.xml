@@ -2,6 +2,6 @@
     <string name="app_name">MobileNT</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
-    <string name="tvDSSP">Danh sách các sản phẩm mới nhất</string>
+    <string name="tvDSSP">Sản phẩm mới 2022</string>
 
 </resources>

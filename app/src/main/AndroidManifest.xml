@@ -20,10 +20,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".activity.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ProductDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ItemCategoryActivity"
+            android:name=".activity.CategoryActivity"
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"

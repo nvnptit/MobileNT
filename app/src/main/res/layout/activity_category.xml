@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".activity.ItemCategoryActivity">
+    tools:context=".activity.CategoryActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_itemcategory"
@@ -13,7 +13,7 @@
         android:layout_height="?actionBarSize"
         android:background="@color/colorAccent"
         app:subtitleTextColor="@color/colorAccent"
-        app:title="Mobile">
+        app:title="Mobile-Digital Devices">
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -21,6 +21,5 @@
         android:id="@+id/listview_itemcategory"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </ListView>
 </LinearLayout>
