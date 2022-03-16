@@ -21,8 +21,16 @@ import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHolder> {
 
+    // Bỏ context khi dùng interface
+//    ItemClickListener itemClickListener;
+
     Context context;
     ArrayList<Product> arrProd;
+
+//    public ProductAdapter(ArrayList<Product> arrProd,ItemClickListener itemClickListener) {
+//        this.itemClickListener = itemClickListener;
+//        this.arrProd = arrProd;
+//    }
 
     @NonNull
     @Override
@@ -51,6 +59,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
                 .placeholder(R.drawable.no_image)
                 .error(R.drawable.error)
                 .into(holder.imgProduct); // tra ve imageview
+
+//        holder.layoutItem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                itemClickListener.onItemClick(prod);
+//            }
+//        });
     }
 
     public void release() {
@@ -71,8 +86,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
         public ImageView imgProduct;
         public TextView tvNameProduct, tvPriceProduct;
 
+//        public LinearLayout layoutItem;
+
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
+//            layoutItem = itemView.findViewById(R.id.layouthome);
+
             tvNameProduct = itemView.findViewById(R.id.tvnameproduct);
             tvPriceProduct = itemView.findViewById(R.id.tvpriceproduct);
             imgProduct = itemView.findViewById(R.id.imgProduct);

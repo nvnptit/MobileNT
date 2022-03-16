@@ -53,6 +53,8 @@ public class HomeFragment extends Fragment {
     Button timkiem;
     boolean limitData = false;
 
+//    ItemClickListener itemClickListener;
+
     public HomeFragment() {
         // Required empty public constructor
     }
