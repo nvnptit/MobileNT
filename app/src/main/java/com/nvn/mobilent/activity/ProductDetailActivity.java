@@ -2,7 +2,10 @@ package com.nvn.mobilent.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +24,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     ImageView image, heart;
     boolean tmp = false;
     TextView name, quantity, price, detail;
+    Spinner spinner;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +33,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
         setControl();
         actionToolBar();
+        setEventSpinner();
         loadInfo();
         changeHeart();
-
     }
 
     private void loadInfo() {
@@ -39,7 +44,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         quantity.setText("Số lượng tồn: " + product.getQuantity());
         DecimalFormat df = new DecimalFormat("###,###,###");
         price.setText(df.format(product.getPrice()) + " VNĐ");
-//        detail.setMaxLines(5);
         detail.setText(product.getDetail());
         Picasso.get().load(product.getImage())
                 .placeholder(R.drawable.no_image)
@@ -62,15 +66,22 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
     }
 
+    private void setEventSpinner() {
+        Integer[] amount = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, amount);
+        spinner.setAdapter(arrayAdapter);
+    }
 
     private void setControl() {
         toolbar = findViewById(R.id.toolbar_productdetail);
         name = findViewById(R.id.tv_nameproductdetail);
         quantity = findViewById(R.id.tv_quantity);
+        spinner = findViewById(R.id.spinner);
         price = findViewById(R.id.tv_priceproduct);
         detail = findViewById(R.id.tv_productdetail);
         image = findViewById(R.id.image_productdetail);
         heart = findViewById(R.id.ic_heart);
+        button = findViewById(R.id.btn_addcart);
     }
 
     private void actionToolBar() {

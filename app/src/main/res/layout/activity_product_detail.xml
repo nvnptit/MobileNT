@@ -29,7 +29,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -58,25 +58,36 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_priceproduct"
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:gravity="left"
+        android:text="Giá sản phẩm"
+        android:textColor="#854B4B"
+        android:textSize="18sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-        <TextView
-            android:id="@+id/tv_priceproduct"
-            android:layout_width="wrap_content"
-            android:layout_height="30sp"
-            android:layout_weight="1"
-            android:gravity="left"
-            android:text="Giá sản phẩm"
-            android:textColor="#854B4B"
-            android:textSize="18sp" />
-
-        <Button
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/spinner"
+            android:gravity="center"
+            android:paddingLeft="50dp" />
+
+        <Button
+            android:id="@+id/btn_addcart"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
             android:background="@drawable/roundbutton"
             android:gravity="center"
             android:text="Thêm vào giỏ hàng"
