@@ -27,7 +27,9 @@ import com.nvn.mobilent.R;
 import com.nvn.mobilent.adapter.ProductAdapter;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
+import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
+import com.nvn.mobilent.model.RProduct;
 import com.nvn.mobilent.network.ProductAPI;
 import com.nvn.mobilent.util.CheckConnection;
 import com.squareup.picasso.Picasso;
@@ -52,7 +54,8 @@ public class HomeFragment extends Fragment {
 
     Button timkiem;
     boolean limitData = false;
-//    ItemClickListener itemClickListener;
+    //    ItemClickListener itemClickListener;
+    public static ArrayList<Cart> arrCart;
 
     public HomeFragment() {
     }
@@ -86,7 +89,6 @@ public class HomeFragment extends Fragment {
         toolbar.setNavigationOnClickListener(view -> {
             drawerLayout.openDrawer(GravityCompat.START); //nhảy ra giữa
         });
-
     }
 
     private void setControl(View view) {
@@ -99,6 +101,12 @@ public class HomeFragment extends Fragment {
         // Listview
         productArrayList = new ArrayList<>();
         timkiem = view.findViewById(R.id.timkiem);
+
+        if (arrCart != null) {
+
+        } else {
+            arrCart = new ArrayList<>();
+        }
     }
 
     @Override
@@ -125,12 +133,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void getProduct() {
-        productAPI.getProduct(1, 10).enqueue(new Callback<ArrayList<Product>>() {
+        productAPI.getProduct(1, 10).enqueue(new Callback<RProduct>() {
             @Override
-            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
+            public void onResponse(Call<RProduct> call, Response<RProduct> response) {
                 if (response.isSuccessful() && !limitData) {
-                    productArrayList = (ArrayList<Product>) response.body();
-
+                    productArrayList = (ArrayList<Product>) response.body().getData();
                     for (int i = 0; i < productArrayList.size(); i++) {
                         if (productArrayList.get(i).getStatus().equals("false")) {
                             productArrayList.remove(i);
@@ -145,10 +152,12 @@ public class HomeFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+            public void onFailure(Call<RProduct> call, Throwable t) {
                 Log.d("NVN-API", t.toString());
+
             }
         });
+
     }
 
     @Override

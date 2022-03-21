@@ -18,6 +18,7 @@ import com.nvn.mobilent.adapter.CategoryAdapter;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Category;
+import com.nvn.mobilent.model.RCategory;
 import com.nvn.mobilent.network.CategoryAPI;
 import com.nvn.mobilent.util.CheckConnection;
 
@@ -58,17 +59,17 @@ public class CategoryFragment extends Fragment {
     }
 
     private void getCategory() {
-        categoryAPI.getCategory().enqueue(new Callback<ArrayList<Category>>() {
+        categoryAPI.getCategory().enqueue(new Callback<RCategory>() {
             @Override
-            public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
+            public void onResponse(Call<RCategory> call, Response<RCategory> response) {
                 if (response.isSuccessful()) {
-                    categoryArrayList = (ArrayList<Category>) response.body();
+                    categoryArrayList = (ArrayList<Category>) response.body().getData();
                     for (int i = 0; i < categoryArrayList.size(); i++) {
                         if (categoryArrayList.get(i).getStatus().equals("false")) {
                             categoryArrayList.remove(i);
                         }
                     }
-                    //
+
                     listViewCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -89,7 +90,7 @@ public class CategoryFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
+            public void onFailure(Call<RCategory> call, Throwable t) {
                 Log.d("NVN-API", t.toString());
             }
         });

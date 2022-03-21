@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
 import com.squareup.picasso.Picasso;
 
@@ -25,7 +26,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     boolean tmp = false;
     TextView name, quantity, price, detail;
     Spinner spinner;
-    Button button;
+    Button btn_addcart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,37 @@ public class ProductDetailActivity extends AppCompatActivity {
         setEventSpinner();
         loadInfo();
         changeHeart();
+        setEventButton();
+    }
+
+    private void setEventButton() {
+        btn_addcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (HomeFragment.arrCart.size() > 0) {
+                    boolean exist = false;
+                    int amount = Integer.parseInt(spinner.getSelectedItem().toString());
+                    for (Cart item : HomeFragment.arrCart) {
+                        if (item.getId_prod() == product.getId()) {
+                            item.setQuantity(item.getQuantity() + amount);
+                            if (item.getQuantity() >= 10) {
+                                item.setQuantity(10);
+                            }
+                            exist = true;
+                        }
+                    }
+                    if (!exist) {
+                        //   int amount = Integer.parseInt(spinner.getSelectedItem().toString());
+                        long giaMoi = (long) (amount * product.getPrice());
+                        HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), product.getQuantity()));
+                    }
+                } else {
+                    int amount = Integer.parseInt(spinner.getSelectedItem().toString());
+                    long giaMoi = (long) (amount * product.getPrice());
+                    HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), product.getQuantity()));
+                }
+            }
+        });
     }
 
     private void loadInfo() {
@@ -81,7 +113,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         detail = findViewById(R.id.tv_productdetail);
         image = findViewById(R.id.image_productdetail);
         heart = findViewById(R.id.ic_heart);
-        button = findViewById(R.id.btn_addcart);
+        btn_addcart = findViewById(R.id.btn_addcart);
     }
 
     private void actionToolBar() {

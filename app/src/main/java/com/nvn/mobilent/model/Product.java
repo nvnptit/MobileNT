@@ -15,10 +15,10 @@ public class Product implements Serializable {
     private String name;
     @SerializedName("price")
     @Expose
-    private Double price;
+    private Integer price;
     @SerializedName("discount")
     @Expose
-    private Double discount;
+    private Integer discount;
     @SerializedName("image")
     @Expose
     private String image;
@@ -51,19 +51,19 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
-    public Double getDiscount() {
+    public Integer getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(Integer discount) {
         this.discount = discount;
     }
 

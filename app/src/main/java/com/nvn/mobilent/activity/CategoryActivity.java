@@ -20,6 +20,7 @@ import com.nvn.mobilent.adapter.ItemCategoryAdapter;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Product;
+import com.nvn.mobilent.model.RProduct;
 import com.nvn.mobilent.network.ProductAPI;
 import com.nvn.mobilent.util.CheckConnection;
 
@@ -111,14 +112,13 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void getItemCategory(int idCate, int page) {
-        productAPI.getProductByType(idCate, page).enqueue(new Callback<ArrayList<Product>>() {
+        productAPI.getProductByType(idCate, page).enqueue(new Callback<RProduct>() {
             @Override
-            public void onResponse(Call<ArrayList<Product>> call, Response<ArrayList<Product>> response) {
-
-                if (response.isSuccessful() && response.body().size() > 0) {
+            public void onResponse(Call<RProduct> call, Response<RProduct> response) {
+                if (response.isSuccessful() && response.body().getData().size() > 0) {
                     listView.removeFooterView(footerView);
                     ArrayList<Product> arrRes = new ArrayList();
-                    arrRes = response.body();
+                    arrRes = response.body().getData();
                     for (int i = 0; i < arrRes.size(); i++) {
                         if (arrRes.get(i).getStatus()) {
                             productArrayList.add(arrRes.get(i));
@@ -134,7 +134,7 @@ public class CategoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Product>> call, Throwable t) {
+            public void onFailure(Call<RProduct> call, Throwable t) {
                 Log.d("NVN-API", t.toString());
             }
         });
