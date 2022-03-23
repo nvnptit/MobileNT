@@ -19,21 +19,24 @@ public class Product implements Serializable {
     @SerializedName("discount")
     @Expose
     private Integer discount;
+    @SerializedName("cate_id")
+    @Expose
+    private Integer cateId;
     @SerializedName("image")
     @Expose
     private String image;
     @SerializedName("unit")
     @Expose
     private String unit;
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
     @SerializedName("quantity")
     @Expose
     private Integer quantity;
     @SerializedName("detail")
     @Expose
     private String detail;
-    @SerializedName("status")
-    @Expose
-    private Boolean status;
 
     public Integer getId() {
         return id;
@@ -67,6 +70,14 @@ public class Product implements Serializable {
         this.discount = discount;
     }
 
+    public Integer getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(Integer cateId) {
+        this.cateId = cateId;
+    }
+
     public String getImage() {
         return image;
     }
@@ -83,6 +94,14 @@ public class Product implements Serializable {
         this.unit = unit;
     }
 
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
     public Integer getQuantity() {
         return quantity;
     }
@@ -97,14 +116,6 @@ public class Product implements Serializable {
 
     public void setDetail(String detail) {
         this.detail = detail;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
 
 }

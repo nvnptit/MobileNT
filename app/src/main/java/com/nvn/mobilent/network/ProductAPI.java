@@ -1,5 +1,6 @@
 package com.nvn.mobilent.network;
 
+import com.nvn.mobilent.model.RCartItem;
 import com.nvn.mobilent.model.RProduct;
 
 import retrofit2.Call;
@@ -17,5 +18,10 @@ public interface ProductAPI {
     Call<RProduct> getProductByType(
             @Query("type") int type,
             @Query("page") int page
+    );
+
+    @GET("/api/product/id")
+    Call<RCartItem> getProductByID(
+            @Query("id") int type
     );
 }

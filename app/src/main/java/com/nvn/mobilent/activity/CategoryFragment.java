@@ -118,22 +118,8 @@ public class CategoryFragment extends Fragment {
                 } else {
                     Intent intent = new Intent(getActivity(), CategoryActivity.class); //CategoryFragment.this.getActivity()
                     intent.putExtra("idCate", String.valueOf(categoryAdapter.getItemId(i)));
-                    System.out.println("BBB: " + categoryAdapter.getItemId(i));
-//                    intent.putExtra("nameCate", String.valueOf(categoryAdapter.));
                     startActivity(intent);
                 }
-
-//                switch (i){
-//                    case 0:{
-//                        if (!CheckConnection.haveNetworkConnection(getContext())) {
-//                            CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
-//                        } else {
-//                            Intent intent = new Intent(CategoryFragment.this.getActivity(),CategoryActivity.class);
-//                            startActivity(intent);
-//                        }
-//                        break;
-//                    }
-//                }
             }
         });
     }
