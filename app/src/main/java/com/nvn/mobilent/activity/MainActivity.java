@@ -1,6 +1,8 @@
 package com.nvn.mobilent.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -21,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
         CategoryFragment categoryFragment = new CategoryFragment();
-        CartFragment cartFragment = new CartFragment();
         SettingFragment settingFragment = new SettingFragment();
         HomeFragment homeFragment = new HomeFragment();
 
@@ -35,9 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.nav_category) {
                     setFragment(categoryFragment);
                     return true;
-                } else if (id == R.id.nav_cart) {
-                    setFragment(cartFragment);
-                    return true;
                 } else if (id == R.id.nav_setting) {
                     setFragment(settingFragment);
                     return true;
@@ -46,6 +44,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cart_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.cartmenu: {
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setFragment(Fragment fragment) {

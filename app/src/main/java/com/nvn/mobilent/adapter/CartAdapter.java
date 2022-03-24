@@ -1,6 +1,7 @@
 package com.nvn.mobilent.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.base.PathAPI;
+import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
 import com.nvn.mobilent.model.RCartItem;
@@ -51,10 +54,12 @@ public class CartAdapter extends ArrayAdapter<Cart> {
         TextView priceCart = convertView.findViewById(R.id.tv_pricecart);
         ImageView imageCart = convertView.findViewById(R.id.iv_cart);
         Cart cart = cartArrayList.get(position);
-
+        System.out.println(cart.toString());
         Button btnValue = convertView.findViewById(R.id.btnvalue);
 
         ProductAPI productAPI = null;
+        productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
+
         productAPI.getProductByID(cart.getId_prod()).enqueue(new Callback<RCartItem>() {
             @Override
             public void onResponse(Call<RCartItem> call, Response<RCartItem> response) {
@@ -65,6 +70,7 @@ public class CartAdapter extends ArrayAdapter<Cart> {
 
             @Override
             public void onFailure(Call<RCartItem> call, Throwable t) {
+                Log.d("ERROR: ", t.toString());
             }
         });
         nameCart.setText(cart.getName());

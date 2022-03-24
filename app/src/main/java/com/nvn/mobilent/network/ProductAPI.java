@@ -22,6 +22,6 @@ public interface ProductAPI {
 
     @GET("/api/product/id")
     Call<RCartItem> getProductByID(
-            @Query("id") int type
+            @Query("id") int id
     );
 }

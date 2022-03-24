@@ -1,5 +1,6 @@
 package com.nvn.mobilent.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -48,7 +49,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                     boolean exist = false;
                     int amount = Integer.parseInt(spinner.getSelectedItem().toString());
                     for (Cart item : HomeFragment.arrCart) {
-                        if (item.getId_prod() == product.getId()) {
+                        if (item.getId_prod().equals(product.getId())) {
+                            System.out.println("Co thang nay " + product.getName());
                             item.setQuantity(item.getQuantity() + amount);
                             if (item.getQuantity() >= 10) {
                                 item.setQuantity(10);
@@ -56,16 +58,17 @@ public class ProductDetailActivity extends AppCompatActivity {
                             exist = true;
                         }
                     }
-                    if (!exist) {
-                        //   int amount = Integer.parseInt(spinner.getSelectedItem().toString());
-                        long giaMoi = (long) (amount * product.getPrice());
-                        HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), product.getQuantity()));
+
+                    if (exist == false) {
+                        HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), amount));
                     }
                 } else {
                     int amount = Integer.parseInt(spinner.getSelectedItem().toString());
-                    long giaMoi = (long) (amount * product.getPrice());
-                    HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), product.getQuantity()));
+                    System.out.println("AMOUNT NVN: " + amount);
+                    HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), amount));
                 }
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent);
             }
         });
     }

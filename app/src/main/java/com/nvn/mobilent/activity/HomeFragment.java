@@ -56,7 +56,6 @@ public class HomeFragment extends Fragment {
     boolean limitData = false;
     //    ItemClickListener itemClickListener;
     public static ArrayList<Cart> arrCart;
-
     public HomeFragment() {
     }
 

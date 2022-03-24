@@ -1,5 +1,7 @@
 package com.nvn.mobilent.model;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -54,5 +56,11 @@ public class Cart {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "CART:  " + getId_prod() + "|" + getName() + "|" + getQuantity() + "|" + getImage();
     }
 }

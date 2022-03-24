@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -62,6 +64,25 @@ public class CategoryActivity extends AppCompatActivity {
         getItemCategory(idCate, page);
         getMoreItemCategory();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.cart_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.cartmenu: {
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void getMoreItemCategory() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
