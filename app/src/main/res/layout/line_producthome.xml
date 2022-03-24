@@ -72,6 +72,7 @@
                         android:textSize="18sp" />
 
                     <Button
+                        android:id="@+id/btn_addcarthome"
                         android:layout_width="50sp"
                         android:layout_height="35sp"
                         android:layout_gravity="center_horizontal"

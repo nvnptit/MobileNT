@@ -33,7 +33,7 @@ public class CartActivity extends AppCompatActivity {
     Toolbar toolbar;
     CartAdapter cartAdapter;
     ProductAPI productAPI;
-    long total = 0;
+    long total, price = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,22 +42,22 @@ public class CartActivity extends AppCompatActivity {
         setControl();
         setActionBar();
         checkData();
-        loadListCart();
+        xuLy();
     }
 
-    private void setValue(long number, long sl) {
-        this.total = this.total + number * sl;
-    }
-
-    private void loadListCart() {
+    private void xuLy() {
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
         for (Cart item : HomeFragment.arrCart) {
             productAPI.getProductByID(item.getId_prod()).enqueue(new Callback<RCartItem>() {
                 @Override
                 public void onResponse(Call<RCartItem> call, Response<RCartItem> response) {
                     Product product = response.body().getData();
-                    int price = product.getPrice();
-                    setValue(price, item.getQuantity());
+                    price = product.getPrice();
+
+                    total = total + price * item.getQuantity();
+
+                    DecimalFormat df = new DecimalFormat("###,###,###");
+                    tv_TotalCart.setText(df.format(total) + " VNĐ");
                 }
 
                 @Override
@@ -65,8 +65,6 @@ public class CartActivity extends AppCompatActivity {
                 }
 
             });
-            DecimalFormat df = new DecimalFormat("###,###,###");
-            tv_TotalCart.setText(df.format(total) + " VNĐ");
         }
     }
 

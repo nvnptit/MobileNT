@@ -52,10 +52,11 @@ public class HomeFragment extends Fragment {
     ArrayList<Product> productArrayList;
     ProductAdapter productAdapter;
 
-    Button timkiem;
+    Button timkiem, btnAddCartHome;
     boolean limitData = false;
     //    ItemClickListener itemClickListener;
     public static ArrayList<Cart> arrCart;
+
     public HomeFragment() {
     }
 
@@ -96,6 +97,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         navigationView = view.findViewById(R.id.navigationview);
         drawerLayout = view.findViewById(R.id.drawerlayout);
+        btnAddCartHome = view.findViewById(R.id.btn_addcarthome);
 
         // Listview
         productArrayList = new ArrayList<>();
