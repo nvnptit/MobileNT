@@ -15,7 +15,7 @@
             android:id="@+id/editSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nhập tên phim bạn muốn tìm kiếm"
+            android:hint="Nhập tên sản phẩm cần tìm kiếm"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorGrey"
             android:textSize="17sp">

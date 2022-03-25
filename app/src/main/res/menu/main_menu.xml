@@ -3,11 +3,11 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:title="Trang chủ" />
     <item
         android:id="@+id/nav_category"
         android:icon="@drawable/ic_category"
-        android:title="Categories" />
+        android:title="Danh mục sản phẩm" />
     <!--        <item-->
     <!--            android:id="@+id/nav_cart"-->
     <!--            android:icon="@drawable/ic_cart"-->
@@ -15,5 +15,5 @@
     <item
         android:id="@+id/nav_setting"
         android:icon="@drawable/ic_setting"
-        android:title="Settings" />
+        android:title="Thông tin &amp; Cài đặt" />
 </menu>

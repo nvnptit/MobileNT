@@ -20,7 +20,7 @@ import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
-import com.nvn.mobilent.model.RCartItem;
+import com.nvn.mobilent.model.R_ProductCartItem;
 import com.nvn.mobilent.network.ProductAPI;
 import com.squareup.picasso.Picasso;
 
@@ -64,16 +64,16 @@ public class CartAdapter extends ArrayAdapter<Cart> {
         ProductAPI productAPI = null;
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
 
-        productAPI.getProductByID(cart.getId_prod()).enqueue(new Callback<RCartItem>() {
+        productAPI.getProductByID(cart.getId_prod()).enqueue(new Callback<R_ProductCartItem>() {
             @Override
-            public void onResponse(Call<RCartItem> call, Response<RCartItem> response) {
+            public void onResponse(Call<R_ProductCartItem> call, Response<R_ProductCartItem> response) {
                 Product product = response.body().getData();
                 DecimalFormat df = new DecimalFormat("###,###,###");
                 priceCart.setText(df.format(product.getPrice()) + " VNĐ");
             }
 
             @Override
-            public void onFailure(Call<RCartItem> call, Throwable t) {
+            public void onFailure(Call<R_ProductCartItem> call, Throwable t) {
                 Log.d("ERROR: ", t.toString());
             }
         });

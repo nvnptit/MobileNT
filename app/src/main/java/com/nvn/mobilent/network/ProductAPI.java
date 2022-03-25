@@ -1,7 +1,7 @@
 package com.nvn.mobilent.network;
 
-import com.nvn.mobilent.model.RCartItem;
 import com.nvn.mobilent.model.RProduct;
+import com.nvn.mobilent.model.R_ProductCartItem;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -21,7 +21,7 @@ public interface ProductAPI {
     );
 
     @GET("/api/product/id")
-    Call<RCartItem> getProductByID(
+    Call<R_ProductCartItem> getProductByID(
             @Query("id") int id
     );
 }

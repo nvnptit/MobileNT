@@ -24,7 +24,6 @@ import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Product;
 import com.nvn.mobilent.model.RProduct;
 import com.nvn.mobilent.network.ProductAPI;
-import com.nvn.mobilent.util.CheckConnection;
 
 import java.util.ArrayList;
 
@@ -117,7 +116,6 @@ public class CategoryActivity extends AppCompatActivity {
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         footerView = inflater.inflate(R.layout.processbar, null);
-
         myHandler = new MyHandler();
     }
 
@@ -150,7 +148,7 @@ public class CategoryActivity extends AppCompatActivity {
                 } else {
                     limitData = true;
                     listView.removeFooterView(footerView);
-                    CheckConnection.showToast_Short(getApplicationContext(), "Đã hết dữ liệu!");
+//                    CheckConnection.showToast_Short(getApplicationContext(), "Đã hết dữ liệu!");
                 }
             }
 

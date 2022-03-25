@@ -32,8 +32,8 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_gravity="top|right"
                         android:src="@drawable/hot_product" />
 
@@ -73,11 +73,12 @@
 
                     <Button
                         android:id="@+id/btn_addcarthome"
-                        android:layout_width="50sp"
+                        android:layout_width="35sp"
                         android:layout_height="35sp"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="2sp"
-                        android:background="#A8DC71"
+                        android:background="@drawable/roundbutton"
+                        android:backgroundTint="#83C181"
                         android:text="+"
                         android:textColor="@color/whiteTextColor"
                         android:textSize="20sp" />

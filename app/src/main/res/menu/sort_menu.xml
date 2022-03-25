@@ -3,9 +3,9 @@
         <item
             android:id="@+id/sort_name_id"
             android:icon="@drawable/ic_sort"
-            android:title="name"/>
-        <item
-                android:id="@+id/sort_price_id"
-                android:icon="@drawable/ic_sort"
-                android:title="price"/>
+            android:title="Theo tên" />
+    <item
+        android:id="@+id/sort_price_id"
+        android:icon="@drawable/ic_sort"
+        android:title="Theo giá" />
 </menu>

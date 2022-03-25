@@ -30,6 +30,8 @@ import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
 import com.nvn.mobilent.model.RProduct;
+import com.nvn.mobilent.model.R_ResCart;
+import com.nvn.mobilent.network.CartItemAPI;
 import com.nvn.mobilent.network.ProductAPI;
 import com.nvn.mobilent.util.CheckConnection;
 import com.squareup.picasso.Picasso;
@@ -134,6 +136,20 @@ public class HomeFragment extends Fragment {
     }
 
     private void getProduct() {
+        CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
+        cartItemAPI.setNewCartItem(1, 2, 1).enqueue(new Callback<R_ResCart>() {
+            @Override
+            public void onResponse(Call<R_ResCart> call, Response<R_ResCart> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("KETQUA POST: " + response.body().getResult());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<R_ResCart> call, Throwable t) {
+
+            }
+        });
         productAPI.getProduct(1, 10).enqueue(new Callback<RProduct>() {
             @Override
             public void onResponse(Call<RProduct> call, Response<RProduct> response) {

@@ -1,6 +1,7 @@
 package com.nvn.mobilent.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.nvn.mobilent.R;
 import com.nvn.mobilent.adapter.CartAdapter;
@@ -18,8 +21,9 @@ import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
-import com.nvn.mobilent.model.RCartItem;
+import com.nvn.mobilent.model.R_ProductCartItem;
 import com.nvn.mobilent.network.ProductAPI;
+import com.nvn.mobilent.util.CheckConnection;
 
 import java.text.DecimalFormat;
 
@@ -47,9 +51,9 @@ public class CartActivity extends AppCompatActivity {
         if (HomeFragment.arrCart.size() > 0) {
 
             for (Cart item : HomeFragment.arrCart) {
-                productAPI.getProductByID(item.getId_prod()).enqueue(new Callback<RCartItem>() {
+                productAPI.getProductByID(item.getId_prod()).enqueue(new Callback<R_ProductCartItem>() {
                     @Override
-                    public void onResponse(Call<RCartItem> call, Response<RCartItem> response) {
+                    public void onResponse(Call<R_ProductCartItem> call, Response<R_ProductCartItem> response) {
                         Product product = response.body().getData();
                         price = product.getPrice();
                         total = total + price * item.getQuantity();
@@ -58,7 +62,7 @@ public class CartActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<RCartItem> call, Throwable t) {
+                    public void onFailure(Call<R_ProductCartItem> call, Throwable t) {
                     }
 
                 });
@@ -77,6 +81,7 @@ public class CartActivity extends AppCompatActivity {
         checkData();
         eventTotalPrice();
         catchOnItemListView();
+        setEventButton();
     }
 
     private void checkData() {
@@ -108,6 +113,32 @@ public class CartActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbarcart);
         cartAdapter = new CartAdapter(getApplicationContext(), R.layout.linecartitem, HomeFragment.arrCart);
         lvCart.setAdapter(cartAdapter);
+    }
+
+    private void setEventButton() {
+        btnMuaHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (HomeFragment.arrCart.size() <= 0) {
+                    CheckConnection.showToast_Short(getApplicationContext(), "Giỏ hàng trống!");
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), InfoCartActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_container, fragment);
+        fragmentTransaction.commit();
     }
 
     private void catchOnItemListView() {
