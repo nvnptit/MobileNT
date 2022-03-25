@@ -50,7 +50,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                     int amount = Integer.parseInt(spinner.getSelectedItem().toString());
                     for (Cart item : HomeFragment.arrCart) {
                         if (item.getId_prod().equals(product.getId())) {
-                            System.out.println("Co thang nay " + product.getName());
                             item.setQuantity(item.getQuantity() + amount);
                             if (item.getQuantity() >= 10) {
                                 item.setQuantity(10);
@@ -58,13 +57,11 @@ public class ProductDetailActivity extends AppCompatActivity {
                             exist = true;
                         }
                     }
-
                     if (exist == false) {
                         HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), amount));
                     }
                 } else {
                     int amount = Integer.parseInt(spinner.getSelectedItem().toString());
-                    System.out.println("AMOUNT NVN: " + amount);
                     HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), amount));
                 }
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);

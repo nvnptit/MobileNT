@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.activity.CartActivity;
+import com.nvn.mobilent.activity.HomeFragment;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Cart;
@@ -56,6 +58,8 @@ public class CartAdapter extends ArrayAdapter<Cart> {
         Cart cart = cartArrayList.get(position);
         System.out.println(cart.toString());
         Button btnValue = convertView.findViewById(R.id.btnvalue);
+        Button btnPlus = convertView.findViewById(R.id.btnplus);
+        Button btnMinus = convertView.findViewById(R.id.btnminus);
 
         ProductAPI productAPI = null;
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
@@ -79,6 +83,38 @@ public class CartAdapter extends ArrayAdapter<Cart> {
                 .error(R.drawable.error)
                 .into(imageCart);
         btnValue.setText(cart.getQuantity() + "");
+//        int sl = Integer.parseInt(btnValue.getText().toString());
+//        if (sl>=10){
+//            btnPlus.setVisibility(View.INVISIBLE);
+//            btnMinus.setVisibility(View.VISIBLE);
+//        } else if (sl<=1){
+//            btnMinus.setVisibility(View.INVISIBLE);
+//        } else if (sl>=1){
+//            btnPlus.setVisibility(View.VISIBLE);
+//            btnMinus.setVisibility(View.VISIBLE);
+//        }
+        btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int slmoi = Integer.parseInt(btnValue.getText().toString()) + 1;
+                if (slmoi <= 10 && slmoi >= 1) {
+                    HomeFragment.arrCart.get(position).setQuantity(slmoi);
+                    btnValue.setText(slmoi + "");
+                    CartActivity.eventTotalPrice();
+                }
+            }
+        });
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int slmoi = Integer.parseInt(btnValue.getText().toString()) - 1;
+                if (slmoi <= 10 && slmoi >= 1) {
+                    HomeFragment.arrCart.get(position).setQuantity(slmoi);
+                    btnValue.setText(slmoi + "");
+                    CartActivity.eventTotalPrice();
+                }
+            }
+        });
         return convertView;
     }
 }
