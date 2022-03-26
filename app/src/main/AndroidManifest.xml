@@ -20,6 +20,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".activity.OrderStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ChangeInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.InfoCartActivity"
             android:exported="false" />
         <activity

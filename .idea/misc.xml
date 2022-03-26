@@ -30,10 +30,13 @@
         <entry key="app/src/main/res/layout-land/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_change_info.xml" value="0.2552083333333333" />
+        <entry key="app/src/main/res/layout/activity_change_password.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_info_cart.xml" value="0.159375" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.3417910447761194" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_order_status.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/activity_phone.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_product_detail.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
@@ -49,6 +52,7 @@
         <entry key="app/src/main/res/layout/line_category.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/line_product.xml" value="0.125" />
         <entry key="app/src/main/res/layout/line_producthome.xml" value="0.1527777777777778" />
+        <entry key="app/src/main/res/layout/line_settingitem.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/linecartitem.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/processbar.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/layout/search.xml" value="0.2552083333333333" />
