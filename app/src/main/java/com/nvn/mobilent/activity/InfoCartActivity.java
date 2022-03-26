@@ -8,7 +8,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nvn.mobilent.R;
-import com.nvn.mobilent.util.CheckConnection;
+import com.nvn.mobilent.util.AppUtils;
 
 public class InfoCartActivity extends AppCompatActivity {
     EditText txtNguoiNhan, txtSDT, txtDiaChi;
@@ -29,8 +29,8 @@ public class InfoCartActivity extends AppCompatActivity {
                 finish();
             }
         });
-        if (!CheckConnection.haveNetworkConnection(getApplicationContext())) {
-            CheckConnection.showToast_Short(getApplicationContext(), "Kiểm tra lại kết nối Internet");
+        if (!AppUtils.haveNetworkConnection(getApplicationContext())) {
+            AppUtils.showToast_Short(getApplicationContext(), "Kiểm tra lại kết nối Internet");
         } else {
 
             btnDatHang.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +42,7 @@ public class InfoCartActivity extends AppCompatActivity {
                     if ((name.length() > 0) && (sdt.length() > 0) && (diaChi.length() > 0)) {
 
                     } else {
-                        CheckConnection.showToast_Short(getApplicationContext(), "Kiểm tra lại dữ liệu nhập vào");
+                        AppUtils.showToast_Short(getApplicationContext(), "Kiểm tra lại dữ liệu nhập vào");
                     }
                 }
             });

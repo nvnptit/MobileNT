@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,9 +22,11 @@ import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
+import com.nvn.mobilent.model.R_Object;
 import com.nvn.mobilent.model.R_ProductCartItem;
+import com.nvn.mobilent.network.CartItemAPI;
 import com.nvn.mobilent.network.ProductAPI;
-import com.nvn.mobilent.util.CheckConnection;
+import com.nvn.mobilent.util.AppUtils;
 
 import java.text.DecimalFormat;
 
@@ -37,6 +40,7 @@ public class CartActivity extends AppCompatActivity {
     static TextView tv_TotalCart;
     static ProductAPI productAPI;
     Button btnThanhToan, btnMuaHang;
+    ImageView imgDelete;
 
     Toolbar toolbar;
     CartAdapter cartAdapter;
@@ -44,12 +48,28 @@ public class CartActivity extends AppCompatActivity {
     static long price = 0;
     TextView tv_NoticeCart;
 
+    public static void updateListCartItem(int prod_id, int quantity, int userid) {
+        CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
+        cartItemAPI.setNewCartItem(prod_id, quantity, userid).enqueue(new Callback<R_Object>() {
+            @Override
+            public void onResponse(Call<R_Object> call, Response<R_Object> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("KETQUA POST: " + response.body().getResult());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<R_Object> call, Throwable t) {
+
+            }
+        });
+    }
+
     public static void eventTotalPrice() {
         total = 0;
         price = 0;
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
         if (HomeFragment.arrCart.size() > 0) {
-
             for (Cart item : HomeFragment.arrCart) {
                 productAPI.getProductByID(item.getId_prod()).enqueue(new Callback<R_ProductCartItem>() {
                     @Override
@@ -59,6 +79,7 @@ public class CartActivity extends AppCompatActivity {
                         total = total + price * item.getQuantity();
                         DecimalFormat df = new DecimalFormat("###,###,###");
                         tv_TotalCart.setText(df.format(total) + " VNĐ");
+                        updateListCartItem(product.getId(), item.getQuantity(), 1);
                     }
 
                     @Override
@@ -110,6 +131,7 @@ public class CartActivity extends AppCompatActivity {
         tv_TotalCart = findViewById(R.id.totalcart);
         btnThanhToan = findViewById(R.id.btnThanhToan);
         btnMuaHang = findViewById(R.id.btnTTMuaHang);
+        imgDelete = findViewById(R.id.imagedeletecart);
         toolbar = findViewById(R.id.toolbarcart);
         cartAdapter = new CartAdapter(getApplicationContext(), R.layout.linecartitem, HomeFragment.arrCart);
         lvCart.setAdapter(cartAdapter);
@@ -126,13 +148,61 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (HomeFragment.arrCart.size() <= 0) {
-                    CheckConnection.showToast_Short(getApplicationContext(), "Giỏ hàng trống!");
+                    AppUtils.showToast_Short(getApplicationContext(), "Giỏ hàng trống!");
                 } else {
                     Intent intent = new Intent(getApplicationContext(), InfoCartActivity.class);
                     startActivity(intent);
                 }
             }
         });
+        lvCart.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
+                builder.setTitle("Xác nhận xoá sản phẩm");
+                builder.setMessage("Bạn có chắc xoá sản phẩm này?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (HomeFragment.arrCart.size() <= 0) {
+                            tv_NoticeCart.setVisibility(View.VISIBLE);
+                            eventTotalPrice();
+                        } else {
+                            // Xử lý ArrayCart
+                            HomeFragment.arrCart.remove(position);
+                            cartAdapter.notifyDataSetChanged();
+                            if (HomeFragment.arrCart.size() <= 0) {
+                                tv_NoticeCart.setVisibility(View.VISIBLE);
+                            } else {
+                                tv_NoticeCart.setVisibility(View.INVISIBLE);
+                                cartAdapter.notifyDataSetChanged();
+                            }
+                        }
+                        eventTotalPrice();
+                    }
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        cartAdapter.notifyDataSetChanged();
+                        CartActivity.eventTotalPrice();
+                    }
+                });
+                builder.show();
+            }
+        });
+    }
+
+    public View getViewByPosition(int pos, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
+
+        if (pos < firstListItemPosition || pos > lastListItemPosition) {
+            return listView.getAdapter().getView(pos, null, listView);
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
+        }
     }
 
     private void setFragment(Fragment fragment) {
@@ -177,7 +247,6 @@ public class CartActivity extends AppCompatActivity {
                 });
                 builder.show();
                 return true;
-
             }
         });
     }

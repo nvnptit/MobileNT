@@ -83,16 +83,6 @@ public class CartAdapter extends ArrayAdapter<Cart> {
                 .error(R.drawable.error)
                 .into(imageCart);
         btnValue.setText(cart.getQuantity() + "");
-//        int sl = Integer.parseInt(btnValue.getText().toString());
-//        if (sl>=10){
-//            btnPlus.setVisibility(View.INVISIBLE);
-//            btnMinus.setVisibility(View.VISIBLE);
-//        } else if (sl<=1){
-//            btnMinus.setVisibility(View.INVISIBLE);
-//        } else if (sl>=1){
-//            btnPlus.setVisibility(View.VISIBLE);
-//            btnMinus.setVisibility(View.VISIBLE);
-//        }
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,7 +1,7 @@
 package com.nvn.mobilent.network;
 
 import com.nvn.mobilent.model.RListCartItem;
-import com.nvn.mobilent.model.R_ResCart;
+import com.nvn.mobilent.model.R_Object;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -19,10 +19,10 @@ public interface CartItemAPI {
 
     @POST("/api/cart-item")
     @FormUrlEncoded
-    Call<R_ResCart> setNewCartItem(
-            @Field("quantity") int q,
-            @Field("prod_id") int p,
-            @Field("user_id") int u
+    Call<R_Object> setNewCartItem(
+            @Field("prod_id") int prod_id,
+            @Field("quantity") int quantiy,
+            @Field("user_id") int userid
     );
 
 }

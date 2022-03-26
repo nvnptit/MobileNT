@@ -3,7 +3,7 @@ package com.nvn.mobilent.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class R_ResCart {
+public class R_Object {
 
     @SerializedName("result")
     @Expose

@@ -148,7 +148,7 @@ public class CategoryActivity extends AppCompatActivity {
                 } else {
                     limitData = true;
                     listView.removeFooterView(footerView);
-//                    CheckConnection.showToast_Short(getApplicationContext(), "Đã hết dữ liệu!");
+//                    AppUtils.showToast_Short(getApplicationContext(), "Đã hết dữ liệu!");
                 }
             }
 

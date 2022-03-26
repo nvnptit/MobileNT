@@ -20,7 +20,7 @@ import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Category;
 import com.nvn.mobilent.model.RCategory;
 import com.nvn.mobilent.network.CategoryAPI;
-import com.nvn.mobilent.util.CheckConnection;
+import com.nvn.mobilent.util.AppUtils;
 
 import java.util.ArrayList;
 
@@ -74,8 +74,8 @@ public class CategoryFragment extends Fragment {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                            if (!CheckConnection.haveNetworkConnection(getContext())) {
-                                CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
+                            if (!AppUtils.haveNetworkConnection(getContext())) {
+                                AppUtils.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
                             } else {
                                 Intent intent = new Intent(getActivity(), CategoryActivity.class); //CategoryFragment.this.getActivity()
                                 intent.putExtra("idCate", categoryArrayList.get(i).getId());
@@ -101,8 +101,8 @@ public class CategoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         setControl();
         categoryAPI = (CategoryAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CategoryAPI.class);
-        if (!CheckConnection.haveNetworkConnection(getContext())) {
-            CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
+        if (!AppUtils.haveNetworkConnection(getContext())) {
+            AppUtils.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
         } else {
             getCategory();
         }
@@ -113,8 +113,8 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                if (!CheckConnection.haveNetworkConnection(getContext())) {
-                    CheckConnection.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
+                if (!AppUtils.haveNetworkConnection(getContext())) {
+                    AppUtils.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
                 } else {
                     Intent intent = new Intent(getActivity(), CategoryActivity.class); //CategoryFragment.this.getActivity()
                     intent.putExtra("idCate", String.valueOf(categoryAdapter.getItemId(i)));
