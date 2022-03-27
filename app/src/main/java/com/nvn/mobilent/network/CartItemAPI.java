@@ -24,5 +24,4 @@ public interface CartItemAPI {
             @Field("quantity") int quantiy,
             @Field("user_id") int userid
     );
-
 }

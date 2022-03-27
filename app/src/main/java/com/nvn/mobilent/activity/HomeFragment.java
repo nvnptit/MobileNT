@@ -30,6 +30,7 @@ import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
 import com.nvn.mobilent.model.RProduct;
+import com.nvn.mobilent.model.User;
 import com.nvn.mobilent.network.ProductAPI;
 import com.nvn.mobilent.util.AppUtils;
 import com.squareup.picasso.Picasso;
@@ -56,6 +57,8 @@ public class HomeFragment extends Fragment {
     boolean limitData = false;
     //    ItemClickListener itemClickListener;
     public static ArrayList<Cart> arrCart;
+    public static User objectUser;
+
 
     public HomeFragment() {
     }
@@ -126,6 +129,7 @@ public class HomeFragment extends Fragment {
         if (!AppUtils.haveNetworkConnection(getContext())) {
             AppUtils.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
         } else {
+            objectUser = (User) getArguments().getSerializable("objectuser");
             setControl(view);
             setActionBar();
             setActionViewLipper(view);

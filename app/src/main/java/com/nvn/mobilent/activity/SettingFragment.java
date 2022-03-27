@@ -57,7 +57,7 @@ public class SettingFragment extends Fragment {
         tv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ChangeInfoActivity.class);
+                Intent intent = new Intent(getContext(), RegisterActivity.class); //change lại
                 startActivity(intent);
             }
         });

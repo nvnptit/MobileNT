@@ -22,6 +22,7 @@ import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
+import com.nvn.mobilent.model.RListCartItem;
 import com.nvn.mobilent.model.R_Object;
 import com.nvn.mobilent.model.R_ProductCartItem;
 import com.nvn.mobilent.network.CartItemAPI;
@@ -29,6 +30,7 @@ import com.nvn.mobilent.network.ProductAPI;
 import com.nvn.mobilent.util.AppUtils;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,6 +50,44 @@ public class CartActivity extends AppCompatActivity {
     static long price = 0;
     TextView tv_NoticeCart;
 
+    CartItemAPI cartItemAPI;
+    //    admin@gmail.com
+
+    public static void eventTotalPrice() {
+        total = 0;
+        price = 0;
+        productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
+        if (HomeFragment.arrCart.size() > 0) {
+            for (Cart item : HomeFragment.arrCart) {
+                productAPI.getProductByID(item.getId_prod()).enqueue(new Callback<R_ProductCartItem>() {
+                    @Override
+                    public void onResponse(Call<R_ProductCartItem> call, Response<R_ProductCartItem> response) {
+                        Product product = response.body().getData();
+                        price = product.getPrice();
+                        total = total + price * item.getQuantity();
+                        DecimalFormat df = new DecimalFormat("###,###,###");
+                        tv_TotalCart.setText(df.format(total) + " VNĐ");
+                        updateListCartItem(product.getId(), item.getQuantity(), HomeFragment.objectUser.getId());
+                    }
+
+                    @Override
+                    public void onFailure(Call<R_ProductCartItem> call, Throwable t) {
+                    }
+
+                });
+            }
+        } else {
+            tv_TotalCart.setText("0 VNĐ");
+        }
+    }
+
+    void getCart(ArrayList<Cart> carts) {
+        HomeFragment.arrCart = carts;
+        cartAdapter = new CartAdapter(getApplicationContext(), R.layout.linecartitem, HomeFragment.arrCart);
+        lvCart.setAdapter(cartAdapter);
+//notify change list
+    }
+
     public static void updateListCartItem(int prod_id, int quantity, int userid) {
         CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
         cartItemAPI.setNewCartItem(prod_id, quantity, userid).enqueue(new Callback<R_Object>() {
@@ -65,38 +105,28 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-    public static void eventTotalPrice() {
-        total = 0;
-        price = 0;
-        productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
-        if (HomeFragment.arrCart.size() > 0) {
-            for (Cart item : HomeFragment.arrCart) {
-                productAPI.getProductByID(item.getId_prod()).enqueue(new Callback<R_ProductCartItem>() {
-                    @Override
-                    public void onResponse(Call<R_ProductCartItem> call, Response<R_ProductCartItem> response) {
-                        Product product = response.body().getData();
-                        price = product.getPrice();
-                        total = total + price * item.getQuantity();
-                        DecimalFormat df = new DecimalFormat("###,###,###");
-                        tv_TotalCart.setText(df.format(total) + " VNĐ");
-                        updateListCartItem(product.getId(), item.getQuantity(), 1);
-                    }
-
-                    @Override
-                    public void onFailure(Call<R_ProductCartItem> call, Throwable t) {
-                    }
-
-                });
+    public void loadListCart() {
+        cartItemAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
+        cartItemAPI.getCartItemByID(HomeFragment.objectUser.getId()).enqueue(new Callback<RListCartItem>() {
+            @Override
+            public void onResponse(Call<RListCartItem> call, Response<RListCartItem> response) {
+//                ArrayList<Cart> arr = response.body().getData();
+                getCart(response.body().getData());
             }
-        } else {
-            tv_TotalCart.setText("0 VNĐ");
-        }
+
+            @Override
+            public void onFailure(Call<RListCartItem> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        loadListCart(); //loadcart
+
         setControl();
         setActionBar();
         checkData();

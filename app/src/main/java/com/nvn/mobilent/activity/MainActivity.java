@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
+        User user = (User) getIntent().getSerializableExtra("user");
         CategoryFragment categoryFragment = new CategoryFragment();
         SettingFragment settingFragment = new SettingFragment();
         HomeFragment homeFragment = new HomeFragment();
@@ -31,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("objectuser", user);
+                    homeFragment.setArguments(bundle);
                     setFragment(homeFragment);
                     return true;
                 } else if (id == R.id.nav_category) {

@@ -44,12 +44,12 @@
             </RelativeLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputEmail"
+                android:id="@+id/til_loginemail"
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
                 <EditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/loginemail"
                     style="@style/modifiedEditText"
                     android:drawableLeft="@drawable/ic_baseline_email"
                     android:hint="@string/login_email_hint"
@@ -59,12 +59,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputPassword"
+                android:id="@+id/til_loginpassword"
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
                 <EditText
-                    android:id="@+id/editTextPassword"
+                    android:id="@+id/loginpassword"
                     style="@style/modifiedEditText"
                     android:drawableLeft="@drawable/ic_baseline_password"
                     android:hint="@string/login_password_hint"
@@ -82,7 +82,7 @@
                 android:textSize="@dimen/newsMoreTextSize" />x
 
             <Button
-                android:id="@+id/cirLoginButton"
+                android:id="@+id/btnlogin"
                 android:layout_width="302dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

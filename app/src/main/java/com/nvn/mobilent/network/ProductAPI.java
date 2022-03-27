@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface ProductAPI {
-    @GET("/api/product")
+    @GET("/api/product/newest")
     Call<RProduct> getProduct(
             @Query("page") int type,
             @Query("page_size") int page
@@ -19,7 +19,6 @@ public interface ProductAPI {
             @Query("type") int type,
             @Query("page") int page
     );
-
     @GET("/api/product/id")
     Call<R_ProductCartItem> getProductByID(
             @Query("id") int id

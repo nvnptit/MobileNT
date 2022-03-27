@@ -43,7 +43,9 @@
                     android:layout_margin="10dp"
                     android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputLayout style="@style/parent">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_regfname"
+                        style="@style/parent">
 
                         <EditText
                             android:id="@+id/editfisrtname"
@@ -55,7 +57,9 @@
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout style="@style/parent">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_reglname"
+                        style="@style/parent">
 
                         <EditText
                             android:id="@+id/editlastname"
@@ -67,15 +71,15 @@
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
-                        <LinearLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_reggender"
+                        style="@style/parent">
+
+                        <RadioGroup
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="3">
+                            android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -99,23 +103,27 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Nữ" />
-                        </LinearLayout>
 
-                    </RadioGroup>
+                        </RadioGroup>
 
-                    <com.google.android.material.textfield.TextInputLayout style="@style/parent">
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_regbirthday"
+                        style="@style/parent">
 
                         <EditText
                             android:id="@+id/editabirthday"
                             style="@style/modifiedEditText"
-                            android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                            android:drawableLeft="@drawable/ic_baseline_calendar"
                             android:drawablePadding="10dp"
                             android:hint="Ngày sinh"
-                            android:inputType="date"
-                            android:maxLines="1" />
+                            android:inputType="date" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout style="@style/parent">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_regaddress"
+                        style="@style/parent">
 
                         <EditText
                             android:id="@+id/editaddress"
@@ -128,11 +136,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputMobile"
+                        android:id="@+id/til_regphone"
                         style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editTextMobile"
+                            android:id="@+id/editphone"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_phone"
                             android:drawablePadding="10dp"
@@ -141,7 +149,9 @@
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout style="@style/parent">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_regemail"
+                        style="@style/parent">
 
                         <EditText
                             android:id="@+id/editTextEmail"
@@ -150,34 +160,6 @@
                             android:drawablePadding="10dp"
                             android:hint="@string/login_email_hint"
                             android:inputType="textEmailAddress"
-                            android:maxLines="1" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputPassword"
-                        style="@style/parent">
-
-                        <EditText
-                            android:id="@+id/editTextPassword"
-                            style="@style/modifiedEditText"
-                            android:drawableLeft="@drawable/ic_baseline_password"
-                            android:drawablePadding="10dp"
-                            android:hint="@string/login_password_hint"
-                            android:inputType="textPassword"
-                            android:maxLines="1" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputPassword2"
-                        style="@style/parent">
-
-                        <EditText
-                            android:id="@+id/editTextPassword2"
-                            style="@style/modifiedEditText"
-                            android:drawableLeft="@drawable/ic_baseline_password"
-                            android:drawablePadding="10dp"
-                            android:hint="@string/login_repassword_hint"
-                            android:inputType="textPassword"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
