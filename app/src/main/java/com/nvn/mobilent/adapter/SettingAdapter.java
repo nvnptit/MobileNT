@@ -53,7 +53,7 @@ public class SettingAdapter extends ArrayAdapter {
         TextView textView = convertView.findViewById(R.id.tv_datasetting);
         Picasso.get().load(setting.getImage())
                 .placeholder(R.drawable.no_image)
-                .error(R.drawable.error)
+                .error(R.drawable.no_image1)
                 .into(imageView);
         textView.setText(setting.getData());
         return convertView;

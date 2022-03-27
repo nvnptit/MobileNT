@@ -14,14 +14,13 @@
 
         <ImageView
             android:id="@+id/image_setting"
-            android:layout_width="10dp"
+            android:layout_width="20dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:foregroundGravity="center"
-            android:scaleType="fitXY" />
+            android:foregroundGravity="center" />
 
         <TextView
             android:id="@+id/tv_datasetting"

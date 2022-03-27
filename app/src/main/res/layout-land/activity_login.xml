@@ -52,6 +52,8 @@
                 <EditText
                     android:id="@+id/editTextEmail"
                     style="@style/modifiedEditText"
+                    android:drawableLeft="@drawable/ic_baseline_email"
+                    android:drawablePadding="10dp"
                     android:hint="@string/login_email_hint"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
@@ -65,6 +67,8 @@
                 <EditText
                     android:id="@+id/editTextPassword"
                     style="@style/modifiedEditText"
+                    android:drawableLeft="@drawable/ic_baseline_password"
+                    android:drawablePadding="10dp"
                     android:hint="@string/login_password_hint"
                     android:inputType="textPassword"
                     android:maxLines="1" />

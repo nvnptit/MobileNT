@@ -18,120 +18,202 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
 
-           <TextView
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="Register"
-               android:textAlignment="center"
-               android:textColor="#16716D"
-               android:textSize="30sp"
-               android:textStyle="bold">
-           </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ĐĂNG KÝ TÀI KHOẢN"
+                android:textAlignment="center"
+                android:textColor="#16716D"
+                android:textSize="30sp"
+                android:textStyle="bold"></TextView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 app:cardBackgroundColor="@color/whiteTextColor"
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputName"
-                        style="@style/parent"
-                        android:layout_marginTop="@dimen/loginViewsMargin">
+                        android:id="@+id/til_regfname"
+                        style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editTextName"
+                            android:id="@+id/editfisrtname"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_fullname"
-                            android:hint="Name"
+                            android:drawablePadding="10dp"
+                            android:hint="Tên"
                             android:inputType="textPersonName"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputEmail"
-                        style="@style/parent"
-                        android:layout_marginTop="@dimen/loginViewsMargin">
+                        android:id="@+id/til_reglname"
+                        style="@style/parent">
+
+                        <EditText
+                            android:id="@+id/editlastname"
+                            style="@style/modifiedEditText"
+                            android:drawableLeft="@drawable/ic_baseline_fullname"
+                            android:drawablePadding="10dp"
+                            android:hint="Họ"
+                            android:inputType="textPersonName"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_regsex"
+                        style="@style/parent">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="3">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="4dp"
+                                    android:layout_marginRight="20dp"
+                                    android:drawableLeft="@drawable/ic_baseline_fullname"
+                                    android:drawablePadding="10dp"
+                                    android:hint="Giới tính"
+                                    android:textSize="14dp" />
+
+                                <RadioButton
+                                    android:id="@+id/rbnam"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="20dp"
+                                    android:text="Nam" />
+
+                                <RadioButton
+                                    android:id="@+id/rbnu"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Nữ" />
+                            </LinearLayout>
+
+                        </RadioGroup>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_regbirthday"
+                        style="@style/parent">
+
+                        <EditText
+                            android:id="@+id/editabirthday"
+                            style="@style/modifiedEditText"
+                            android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                            android:drawablePadding="10dp"
+                            android:hint="Ngày sinh"
+                            android:inputType="date"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_regaddress"
+                        style="@style/parent">
+
+                        <EditText
+                            android:id="@+id/editaddress"
+                            style="@style/modifiedEditText"
+                            android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                            android:drawablePadding="10dp"
+                            android:hint="Địa chỉ"
+                            android:inputType="text"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_regphone"
+                        style="@style/parent">
+
+                        <EditText
+                            android:id="@+id/editphone"
+                            style="@style/modifiedEditText"
+                            android:drawableLeft="@drawable/ic_baseline_phone"
+                            android:drawablePadding="10dp"
+                            android:hint="Số điện thoại"
+                            android:inputType="phone"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_regemail"
+                        style="@style/parent">
 
                         <EditText
                             android:id="@+id/editTextEmail"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_email"
+                            android:drawablePadding="10dp"
                             android:hint="@string/login_email_hint"
                             android:inputType="textEmailAddress"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputMobile"
-                        style="@style/parent"
-                        android:layout_marginTop="@dimen/loginViewsMargin">
+                        android:id="@+id/til_regpass"
+                        style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editTextMobile"
-                            style="@style/modifiedEditText"
-                            android:drawableLeft="@drawable/ic_baseline_phone"
-                            android:hint="Mobile Number"
-                            android:inputType="phone"
-                            android:maxLines="1" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputPassword"
-                        style="@style/parent"
-                        android:layout_marginTop="@dimen/loginViewsMargin">
-
-                        <EditText
-                            android:id="@+id/editTextPassword"
+                            android:id="@+id/regpass"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_password"
+                            android:drawablePadding="10dp"
                             android:hint="@string/login_password_hint"
                             android:inputType="textPassword"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputPassword2"
-                        style="@style/parent"
-                        android:layout_marginTop="@dimen/loginViewsMargin">
+                        android:id="@+id/til_regrepass"
+                        style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editTextPassword2"
+                            android:id="@+id/regrepass"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_password"
-                            android:hint="Verify Password"
+                            android:drawablePadding="10dp"
+                            android:hint="@string/login_repassword_hint"
                             android:inputType="textPassword"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <Button
-                        android:id="@+id/RegisterButton"
+                        android:id="@+id/btnRegister"
                         android:layout_width="302dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         android:background="@drawable/btn_bg_design"
-                        android:text="Register"
+                        android:text="ĐĂNG KÝ"
                         android:textColor="@color/whiteTextColor" />
 
                     <TextView
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         android:onClick="onLoginClick"
-                        android:text="Already have an account?"
+                        android:text="Bạn đã có tài khoản?"
                         android:textAlignment="center"
                         android:textColor="@color/themeColor"
                         android:textSize="17sp"
-                        android:textStyle="bold" />
+                        android:textStyle="italic|bold" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -140,7 +222,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:weightSum="12">
 
@@ -171,21 +253,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
                 android:gravity="center">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
                     android:src="@drawable/ic_facebook" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_google" />
             </LinearLayout>
-
 
         </LinearLayout>
     </ScrollView>

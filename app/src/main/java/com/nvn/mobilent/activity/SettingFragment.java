@@ -5,8 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +21,7 @@ public class SettingFragment extends Fragment {
 
     ArrayList<SettingItem> arrayList;
     SettingAdapter settingAdapter;
-    ListView listView;
+    TextView tv_profile, tv_pass, tv_cartstatus, tv_logout;
 
     public SettingFragment() {
     }
@@ -49,32 +48,55 @@ public class SettingFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         setControl();
         setEvent();
-        setEventListView();
-        //super.onViewCreated(view, savedInstanceState);
     }
 
-    private void setEventListView() {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+    private void setEvent() {
+//        settingAdapter = new SettingAdapter(getContext(), R.layout.line_settingitem, arrayList);
+//        listView.setAdapter(settingAdapter);
+        tv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-                Intent intent = new Intent(getContext(), CartActivity.class);
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ChangeInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+        tv_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+        tv_cartstatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), OrderStatusActivity.class);
+                startActivity(intent);
+            }
+        });
+        tv_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-    private void setEvent() {
-        settingAdapter = new SettingAdapter(getContext(), R.layout.line_settingitem, arrayList);
-        listView.setAdapter(settingAdapter);
-    }
-
     private void setControl() {
-        listView = getView().findViewById(R.id.lvthongtin);
-        arrayList = new ArrayList<>();
-        arrayList.add(new SettingItem("https://i.postimg.cc/rFMKg9Sd/ic-contracts.png", "Thông tin cá nhân"));
-        arrayList.add(new SettingItem("https://i.postimg.cc/mPpMBPx5/ic-pass1.png", "Đổi mật khẩu"));
-        arrayList.add(new SettingItem("https://i.postimg.cc/75Z7FgRz/ic-status.png", "Trạng thái đơn hàng"));
-        arrayList.add(new SettingItem("https://i.postimg.cc/CK8V8WrW/ic-ver2.png", "Phiên bản 2022.1"));
-        arrayList.add(new SettingItem("https://i.postimg.cc/3dBmfLt7/ic-lienhe.png", "Liên hệ: Nguyễn Văn Nhất"));
+        tv_profile = getView().findViewById(R.id.profile);
+        tv_pass = getView().findViewById(R.id.changepass);
+        tv_cartstatus = getView().findViewById(R.id.cartstatus);
+        tv_logout = getView().findViewById(R.id.logout);
     }
 }
+
+
+//        listView = getView().findViewById(R.id.lvthongtin);
+//        arrayList = new ArrayList<>();
+//        arrayList.add(new SettingItem("https://i.postimg.cc/rFMKg9Sd/ic-contracts.png", "Thông tin cá nhân"));
+//        arrayList.add(new SettingItem("https://i.postimg.cc/mPpMBPx5/ic-pass1.png", "Đổi mật khẩu"));
+//        arrayList.add(new SettingItem("https://i.postimg.cc/75Z7FgRz/ic-status.png", "Trạng thái đơn hàng"));
+//        arrayList.add(new SettingItem("https://i.postimg.cc/CK8V8WrW/ic-ver2.png", "Phiên bản 2022.3"));
+//        arrayList.add(new SettingItem("https://i.postimg.cc/Gm6BwCvS/a-signout.png", "Đăng xuất tài khoản"));

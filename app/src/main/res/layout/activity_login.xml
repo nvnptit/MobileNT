@@ -54,6 +54,7 @@
                     android:drawableLeft="@drawable/ic_baseline_email"
                     android:hint="@string/login_email_hint"
                     android:inputType="textEmailAddress"
+                    android:drawablePadding="10dp"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,6 +68,7 @@
                     style="@style/modifiedEditText"
                     android:drawableLeft="@drawable/ic_baseline_password"
                     android:hint="@string/login_password_hint"
+                    android:drawablePadding="10dp"
                     android:inputType="textPassword"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
