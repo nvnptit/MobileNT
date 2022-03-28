@@ -21,7 +21,7 @@ public class SettingFragment extends Fragment {
 
     ArrayList<SettingItem> arrayList;
     SettingAdapter settingAdapter;
-    TextView tv_profile, tv_pass, tv_cartstatus, tv_logout;
+    TextView tv_profile, tv_pass, tv_cartstatus, tv_logout, welcome;
 
     public SettingFragment() {
     }
@@ -52,12 +52,13 @@ public class SettingFragment extends Fragment {
 
 
     private void setEvent() {
-//        settingAdapter = new SettingAdapter(getContext(), R.layout.line_settingitem, arrayList);
-//        listView.setAdapter(settingAdapter);
+
+        welcome.setText(HomeFragment.objectUser.getLastname() + " " + HomeFragment.objectUser.getFirstname());
         tv_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), RegisterActivity.class); //change lại
+                Intent intent = new Intent(getContext(), ChangeInfoActivity.class); //change lại
+                intent.putExtra("user", HomeFragment.objectUser);
                 startActivity(intent);
             }
         });
@@ -89,6 +90,7 @@ public class SettingFragment extends Fragment {
         tv_pass = getView().findViewById(R.id.changepass);
         tv_cartstatus = getView().findViewById(R.id.cartstatus);
         tv_logout = getView().findViewById(R.id.logout);
+        welcome = getView().findViewById(R.id.welcome);
     }
 }
 

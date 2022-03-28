@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
 
         User user = (User) getIntent().getSerializableExtra("user");
+
         CategoryFragment categoryFragment = new CategoryFragment();
         SettingFragment settingFragment = new SettingFragment();
         HomeFragment homeFragment = new HomeFragment();
@@ -62,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.cartmenu: {
-                CartActivity.loadListCart();
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                 startActivity(intent);
             }

@@ -10,6 +10,7 @@
     android:gravity="center"
     tools:context=".activity.RegisterActivity">
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,15 +21,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_changeinfo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="THÔNG TIN CÁ NHÂN"
-                android:textAlignment="center"
-                android:textColor="#16716D"
-                android:textSize="30sp"
-                android:textStyle="bold"></TextView>
+                android:layout_height="?actionBarSize"
+                android:background="@color/primaryTextColor"
+                app:title="THÔNG TIN CÁ NHÂN"
+                app:titleTextColor="@color/white">
+
+            </androidx.appcompat.widget.Toolbar>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -44,11 +46,11 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_regfname"
+                        android:id="@+id/til_changefname"
                         style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editfisrtname"
+                            android:id="@+id/changefname"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_fullname"
                             android:drawablePadding="10dp"
@@ -58,11 +60,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_reglname"
+                        android:id="@+id/til_changelname"
                         style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editlastname"
+                            android:id="@+id/changelname"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_fullname"
                             android:drawablePadding="10dp"
@@ -73,7 +75,7 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_reggender"
+                        android:id="@+id/til_changegender"
                         style="@style/parent">
 
                         <RadioGroup
@@ -92,14 +94,14 @@
                                 android:textSize="14dp" />
 
                             <RadioButton
-                                android:id="@+id/rbnam"
+                                android:id="@+id/c_rbnam"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="20dp"
                                 android:text="Nam" />
 
                             <RadioButton
-                                android:id="@+id/rbnu"
+                                android:id="@+id/c_rbnu"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Nữ" />
@@ -109,11 +111,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_regbirthday"
+                        android:id="@+id/til_changebirthday"
                         style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editabirthday"
+                            android:id="@+id/changebirthday"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_calendar"
                             android:drawablePadding="10dp"
@@ -122,11 +124,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_regaddress"
+                        android:id="@+id/til_changeaddress"
                         style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editaddress"
+                            android:id="@+id/changeaddress"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_location_on_24"
                             android:drawablePadding="10dp"
@@ -136,11 +138,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_regphone"
+                        android:id="@+id/til_changephone"
                         style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editphone"
+                            android:id="@+id/changephone"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_phone"
                             android:drawablePadding="10dp"
@@ -150,11 +152,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_regemail"
+                        android:id="@+id/til_changeemail"
                         style="@style/parent">
 
                         <EditText
-                            android:id="@+id/editTextEmail"
+                            android:id="@+id/changeemail"
                             style="@style/modifiedEditText"
                             android:drawableLeft="@drawable/ic_baseline_email"
                             android:drawablePadding="10dp"

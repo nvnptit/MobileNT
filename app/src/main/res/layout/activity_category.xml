@@ -11,8 +11,8 @@
         android:id="@+id/toolbar_itemcategory"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorAccent"
-        app:subtitleTextColor="@color/colorAccent"
+        android:background="@color/primaryTextColor"
+        app:titleTextColor="@color/white"
         app:title="Mobile-Digital Devices">
 
     </androidx.appcompat.widget.Toolbar>

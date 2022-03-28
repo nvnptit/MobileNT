@@ -8,6 +8,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface UserAPI {
@@ -44,5 +45,18 @@ public interface UserAPI {
             @Field("email") String email,
             @Field("oldPassword") String oldpassword,
             @Field("newPassword") String newPassword
+    );
+
+    @PUT("/api/user")
+    @FormUrlEncoded
+    Call<RLogin> changeInfo(
+            @Field("id") int id,
+            @Field("email") String email,
+            @Field("firstname") String firstname,
+            @Field("lastname") String lastname,
+            @Field("address") String address,
+            @Field("phone") String phone,
+            @Field("sex") int sex,
+            @Field("birthday") String birthday
     );
 }

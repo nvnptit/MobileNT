@@ -263,8 +263,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 register.getPassword(), register.getAddress(), register.getPhone(), register.getSex(), register.getBirthday()).enqueue(new Callback<RLogin>() {
                             @Override
                             public void onResponse(Call<RLogin> call, Response<RLogin> response) {
-                                System.out.println("DONE");
-                                System.out.println(response.body().getData().getFirstname());
+                                System.out.println("Đăng ký thành công" + response.body().getResult());
                             }
 
                             @Override

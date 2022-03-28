@@ -48,7 +48,6 @@ public class CartActivity extends AppCompatActivity {
     static long price = 0;
     TextView tv_NoticeCart;
 
-    //    admin@gmail.com
 
     public static void eventTotalPrice() {
         deleteAllCart(HomeFragment.objectUser.getId());
@@ -81,7 +80,6 @@ public class CartActivity extends AppCompatActivity {
 
     static void getCart(ArrayList<Cart> carts) {
         HomeFragment.arrCart = carts;
-//notify change list
     }
 
     public static void updateListCartItem(int prod_id, int quantity, int userid) {
@@ -118,7 +116,7 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-    public static void loadListCart() {
+    public void loadListCart() {
         CartItemAPI cartItemAPI;
         cartItemAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
         cartItemAPI.getCartItemByUserId(4).enqueue(new Callback<RListCartItem>() {
@@ -147,6 +145,7 @@ public class CartActivity extends AppCompatActivity {
         catchOnItemListView();
         setEventButton();
     }
+
 
     private void checkData() {
         if (HomeFragment.arrCart.size() > 0) {
