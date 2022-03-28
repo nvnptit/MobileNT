@@ -13,8 +13,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.nvn.mobilent.R;
 import com.nvn.mobilent.adapter.CartAdapter;
@@ -50,16 +48,16 @@ public class CartActivity extends AppCompatActivity {
     static long price = 0;
     TextView tv_NoticeCart;
 
-    CartItemAPI cartItemAPI;
     //    admin@gmail.com
 
     public static void eventTotalPrice() {
+        deleteAllCart(HomeFragment.objectUser.getId());
         total = 0;
         price = 0;
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
         if (HomeFragment.arrCart.size() > 0) {
             for (Cart item : HomeFragment.arrCart) {
-                productAPI.getProductByID(item.getId_prod()).enqueue(new Callback<R_ProductCartItem>() {
+                productAPI.getProductByID(item.getProdId()).enqueue(new Callback<R_ProductCartItem>() {
                     @Override
                     public void onResponse(Call<R_ProductCartItem> call, Response<R_ProductCartItem> response) {
                         Product product = response.body().getData();
@@ -81,10 +79,8 @@ public class CartActivity extends AppCompatActivity {
         }
     }
 
-    void getCart(ArrayList<Cart> carts) {
+    static void getCart(ArrayList<Cart> carts) {
         HomeFragment.arrCart = carts;
-        cartAdapter = new CartAdapter(getApplicationContext(), R.layout.linecartitem, HomeFragment.arrCart);
-        lvCart.setAdapter(cartAdapter);
 //notify change list
     }
 
@@ -105,13 +101,31 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-    public void loadListCart() {
+    public static void deleteAllCart(int userid) {
+        CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
+        cartItemAPI.deleteAllCartByUserId(userid).enqueue(new Callback<R_Object>() {
+            @Override
+            public void onResponse(Call<R_Object> call, Response<R_Object> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("KETQUA Delete: " + response.body().getResult());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<R_Object> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public static void loadListCart() {
+        CartItemAPI cartItemAPI;
         cartItemAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
-        cartItemAPI.getCartItemByID(HomeFragment.objectUser.getId()).enqueue(new Callback<RListCartItem>() {
+        cartItemAPI.getCartItemByUserId(4).enqueue(new Callback<RListCartItem>() {
             @Override
             public void onResponse(Call<RListCartItem> call, Response<RListCartItem> response) {
-//                ArrayList<Cart> arr = response.body().getData();
-                getCart(response.body().getData());
+                ArrayList<Cart> arr = response.body().getData();
+                getCart(arr);
             }
 
             @Override
@@ -125,10 +139,9 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-        loadListCart(); //loadcart
-
         setControl();
         setActionBar();
+        loadListCart();
         checkData();
         eventTotalPrice();
         catchOnItemListView();
@@ -221,24 +234,6 @@ public class CartActivity extends AppCompatActivity {
                 builder.show();
             }
         });
-    }
-
-    public View getViewByPosition(int pos, ListView listView) {
-        final int firstListItemPosition = listView.getFirstVisiblePosition();
-        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
-
-        if (pos < firstListItemPosition || pos > lastListItemPosition) {
-            return listView.getAdapter().getView(pos, null, listView);
-        } else {
-            final int childIndex = pos - firstListItemPosition;
-            return listView.getChildAt(childIndex);
-        }
-    }
-
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame_container, fragment);
-        fragmentTransaction.commit();
     }
 
     private void catchOnItemListView() {

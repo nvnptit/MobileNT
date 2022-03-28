@@ -64,7 +64,7 @@ public class CartAdapter extends ArrayAdapter<Cart> {
         ProductAPI productAPI = null;
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
 
-        productAPI.getProductByID(cart.getId_prod()).enqueue(new Callback<R_ProductCartItem>() {
+        productAPI.getProductByID(cart.getProdId()).enqueue(new Callback<R_ProductCartItem>() {
             @Override
             public void onResponse(Call<R_ProductCartItem> call, Response<R_ProductCartItem> response) {
                 Product product = response.body().getData();

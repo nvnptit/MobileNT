@@ -49,7 +49,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     boolean exist = false;
                     int amount = Integer.parseInt(spinner.getSelectedItem().toString());
                     for (Cart item : HomeFragment.arrCart) {
-                        if (item.getId_prod().equals(product.getId())) {
+                        if (item.getProdId().equals(product.getId())) {
                             item.setQuantity(item.getQuantity() + amount);
                             if (item.getQuantity() >= 10) {
                                 item.setQuantity(10);

@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.cartmenu: {
+                CartActivity.loadListCart();
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                 startActivity(intent);
             }

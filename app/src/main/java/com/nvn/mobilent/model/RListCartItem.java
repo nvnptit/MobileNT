@@ -11,7 +11,7 @@ public class RListCartItem {
     private Boolean result;
     @SerializedName("data")
     @Expose
-    private ArrayList<Cart> data = null;
+    private ArrayList<Cart> data;
 
     public Boolean getResult() {
         return result;

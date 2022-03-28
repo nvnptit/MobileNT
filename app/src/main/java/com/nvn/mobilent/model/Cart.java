@@ -6,9 +6,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Cart {
-    @SerializedName("id_prod")
+    @SerializedName("prod_id")
     @Expose
-    private Integer id_prod;
+    private Integer prodId;
     @SerializedName("name")
     @Expose
     private String name;
@@ -19,19 +19,21 @@ public class Cart {
     @Expose
     private Integer quantity;
 
-    public Cart(Integer id_prod, String name, String image, Integer quantity) {
-        this.id_prod = id_prod;
+
+    public Cart(Integer prodId, String name, String image, Integer quantity) {
+        this.prodId = prodId;
         this.name = name;
         this.image = image;
         this.quantity = quantity;
     }
 
-    public Integer getId_prod() {
-        return id_prod;
+
+    public Integer getProdId() {
+        return prodId;
     }
 
-    public void setId_prod(Integer id_prod) {
-        this.id_prod = id_prod;
+    public void setProdId(Integer prodId) {
+        this.prodId = prodId;
     }
 
     public String getName() {
@@ -61,6 +63,6 @@ public class Cart {
     @NonNull
     @Override
     public String toString() {
-        return "CART:  " + getId_prod() + "|" + getName() + "|" + getQuantity() + "|" + getImage();
+        return "CART:  " + getProdId() + "|" + getName() + "|" + getQuantity() + "|" + getImage();
     }
 }
