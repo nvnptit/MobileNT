@@ -45,26 +45,28 @@ public class ProductDetailActivity extends AppCompatActivity {
         btn_addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (HomeFragment.arrCart.size() > 0) {
-                    boolean exist = false;
-                    int amount = Integer.parseInt(spinner.getSelectedItem().toString());
-                    for (Cart item : HomeFragment.arrCart) {
-                        if (item.getProdId().equals(product.getId())) {
-                            item.setQuantity(item.getQuantity() + amount);
-                            if (item.getQuantity() >= 10) {
-                                item.setQuantity(10);
-                            }
-                            exist = true;
-                        }
-                    }
-                    if (exist == false) {
-                        HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), amount));
-                    }
-                } else {
-                    int amount = Integer.parseInt(spinner.getSelectedItem().toString());
-                    HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), amount));
-                }
+//                if (HomeFragment.arrCart.size() > 0) {
+//                    boolean exist = false;
+//                    int amount = Integer.parseInt(spinner.getSelectedItem().toString());
+//                    for (Cart item : HomeFragment.arrCart) {
+//                        if (item.getProdId().equals(product.getId())) {
+//                            item.setQuantity(item.getQuantity() + amount);
+//                            if (item.getQuantity() >= 10) {
+//                                item.setQuantity(10);
+//                            }
+//                            exist = true;
+//                        }
+//                    }
+//                    if (exist == false) {
+//                        HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), amount));
+//                    }
+//                } else {
+//                    int amount = Integer.parseInt(spinner.getSelectedItem().toString());
+//                    HomeFragment.arrCart.add(new Cart(product.getId(), product.getName(), product.getImage(), amount));
+//                }
+                int amount = Integer.parseInt(spinner.getSelectedItem().toString());
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                intent.putExtra("newcartitem", new Cart(product.getId(), product.getName(), product.getImage(), amount));
                 startActivity(intent);
             }
         });

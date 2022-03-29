@@ -61,17 +61,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Tổng tiền:"
+                android:text=""
                 android:textColor="#8E3939"
                 android:textSize="25dp"
                 android:textStyle="bold" />
-
+            <!-- Tổng tiền: -->
             <TextView
                 android:id="@+id/totalcart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right|center"
-                android:text="0"
+                android:text=""
                 android:textColor="#3949AB"
                 android:textSize="25dp" />
         </LinearLayout>

@@ -66,9 +66,9 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<RLogin> call, Response<RLogin> response) {
                             if (response.body().getResult()) {
                                 AppUtils.showToast_Short(getApplicationContext(), "Đăng nhập thành công!");
-                                User user = response.body().getData();
+                                User user1 = response.body().getData();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                intent.putExtra("user", user);
+                                intent.putExtra("user", user1);
                                 startActivity(intent);
                             } else {
                                 AppUtils.showToast_Short(getApplicationContext(), "Tài khoản hoặc mật khẩu không đúng!");
@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.loginpassword);
         btnLogin = findViewById(R.id.btnlogin);
         email.setText("admin@gmail.com");
-        password.setText("admin@gmail.com");
+        password.setText("123");
         textInputLayoutEmail = findViewById(R.id.til_loginemail);
         textInputLayoutPassword = findViewById(R.id.til_loginpassword);
     }

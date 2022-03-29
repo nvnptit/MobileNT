@@ -27,4 +27,5 @@ public class RLogin {
     public void setData(User data) {
         this.data = data;
     }
+
 }

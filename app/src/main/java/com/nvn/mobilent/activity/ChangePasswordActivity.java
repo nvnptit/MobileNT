@@ -27,37 +27,37 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private TextInputLayout textInputLayoutOldPass;
     private TextInputLayout textInputLayoutPass;
     private TextInputLayout textInputLayoutRepass;
+    User user;
+    UserAPI userAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
+        user = (User) getIntent().getSerializableExtra("user");
         setControl();
         setEvent();
     }
 
     private void setEvent() {
-        User user = HomeFragment.objectUser;
-        UserAPI userAPI;
         userAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(UserAPI.class);
-
         if (!AppUtils.haveNetworkConnection(getApplicationContext())) {
             AppUtils.showToast_Short(getApplicationContext(), "Kiểm tra lại kết nối Internet");
         } else {
             btnChangePass.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AppUtils.showToast_Short(getApplicationContext(), "Vào rồi");
                     if (checkData()) {
                         userAPI.changePassword(user.getEmail(), oldPass.getText().toString().trim(), newPass.getText().toString().trim()).enqueue(new Callback<RLogin>() {
                             @Override
                             public void onResponse(Call<RLogin> call, Response<RLogin> response) {
-                                AppUtils.showToast_Short(getApplicationContext(), "Cập nhật mật khẩu thành công!");
+                                if (response.body().getResult()) {
+                                    AppUtils.showToast_Short(getApplicationContext(), "Cập nhật mật khẩu thành công!");
+                                }
                             }
-
                             @Override
                             public void onFailure(Call<RLogin> call, Throwable t) {
-                                AppUtils.showToast_Short(getApplicationContext(), "Lỗi cập nhật mật khẩu rồi!");
+
                             }
                         });
                     }

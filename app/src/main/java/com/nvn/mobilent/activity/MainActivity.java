@@ -17,13 +17,13 @@ import com.nvn.mobilent.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
+    static User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
-
-        User user = (User) getIntent().getSerializableExtra("user");
+        user = (User) getIntent().getSerializableExtra("user");
 
         CategoryFragment categoryFragment = new CategoryFragment();
         SettingFragment settingFragment = new SettingFragment();

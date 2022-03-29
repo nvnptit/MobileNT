@@ -39,14 +39,6 @@ public interface UserAPI {
             @Field("birthday") String birthday
     );
 
-    @POST("/api/user/change-password")
-    @FormUrlEncoded
-    Call<RLogin> changePassword(
-            @Field("email") String email,
-            @Field("oldPassword") String oldpassword,
-            @Field("newPassword") String newPassword
-    );
-
     @PUT("/api/user")
     @FormUrlEncoded
     Call<RLogin> changeInfo(
@@ -58,5 +50,12 @@ public interface UserAPI {
             @Field("phone") String phone,
             @Field("sex") int sex,
             @Field("birthday") String birthday
+    );
+
+    @POST("/api/user/change-password")
+    Call<RLogin> changePassword(
+            @Query("email") String email,
+            @Query("oldPassword") String oldPassword,
+            @Query("newPassword") String newPassword
     );
 }

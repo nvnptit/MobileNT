@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 
 public class User implements Serializable {
-
     @SerializedName("id")
     @Expose
     private Integer id;

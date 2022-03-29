@@ -5,7 +5,13 @@ import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Cart {
+import java.io.Serializable;
+
+public class Cart implements Serializable {
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
     @SerializedName("prod_id")
     @Expose
     private Integer prodId;
@@ -20,6 +26,14 @@ public class Cart {
     private Integer quantity;
 
 
+    public Cart(Integer id, Integer prodId, String name, String image, Integer quantity) {
+        this.id = id;
+        this.prodId = prodId;
+        this.name = name;
+        this.image = image;
+        this.quantity = quantity;
+    }
+
     public Cart(Integer prodId, String name, String image, Integer quantity) {
         this.prodId = prodId;
         this.name = name;
@@ -27,6 +41,22 @@ public class Cart {
         this.quantity = quantity;
     }
 
+    public Cart(Cart c) {
+        this.id = c.getId();
+        this.prodId = c.getProdId();
+        this.name = c.getName();
+        this.image = c.getImage();
+        this.quantity = c.getQuantity();
+    }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getProdId() {
         return prodId;
@@ -65,4 +95,5 @@ public class Cart {
     public String toString() {
         return "CART:  " + getProdId() + "|" + getName() + "|" + getQuantity() + "|" + getImage();
     }
+
 }

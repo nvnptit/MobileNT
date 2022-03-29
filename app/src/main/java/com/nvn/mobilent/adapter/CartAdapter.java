@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 
 import com.nvn.mobilent.R;
 import com.nvn.mobilent.activity.CartActivity;
-import com.nvn.mobilent.activity.HomeFragment;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.Cart;
@@ -56,10 +55,10 @@ public class CartAdapter extends ArrayAdapter<Cart> {
         TextView priceCart = convertView.findViewById(R.id.tv_pricecart);
         ImageView imageCart = convertView.findViewById(R.id.iv_cart);
         Cart cart = cartArrayList.get(position);
-        System.out.println(cart.toString());
         Button btnValue = convertView.findViewById(R.id.btnvalue);
         Button btnPlus = convertView.findViewById(R.id.btnplus);
         Button btnMinus = convertView.findViewById(R.id.btnminus);
+        ImageView imgDelete = convertView.findViewById(R.id.imagedeletecart);
 
         ProductAPI productAPI = null;
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
@@ -71,7 +70,6 @@ public class CartAdapter extends ArrayAdapter<Cart> {
                 DecimalFormat df = new DecimalFormat("###,###,###");
                 priceCart.setText(df.format(product.getPrice()) + " VNĐ");
             }
-
             @Override
             public void onFailure(Call<R_ProductCartItem> call, Throwable t) {
                 Log.d("ERROR: ", t.toString());
@@ -83,14 +81,18 @@ public class CartAdapter extends ArrayAdapter<Cart> {
                 .error(R.drawable.error)
                 .into(imageCart);
         btnValue.setText(cart.getQuantity() + "");
+
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int slmoi = Integer.parseInt(btnValue.getText().toString()) + 1;
                 if (slmoi <= 10 && slmoi >= 1) {
-                    HomeFragment.arrCart.get(position).setQuantity(slmoi);
                     btnValue.setText(slmoi + "");
-                    CartActivity.eventTotalPrice();
+                    if (cart.getId() == null) {
+                        CartActivity.putCartItem(CartActivity.newIDCart, slmoi);
+                    } else {
+                        CartActivity.putCartItem(cart.getId(), slmoi);
+                    }
                 }
             }
         });
@@ -99,10 +101,19 @@ public class CartAdapter extends ArrayAdapter<Cart> {
             public void onClick(View view) {
                 int slmoi = Integer.parseInt(btnValue.getText().toString()) - 1;
                 if (slmoi <= 10 && slmoi >= 1) {
-                    HomeFragment.arrCart.get(position).setQuantity(slmoi);
                     btnValue.setText(slmoi + "");
-                    CartActivity.eventTotalPrice();
+                    if (cart.getId() == null) {
+                        CartActivity.putCartItem(CartActivity.newIDCart, slmoi);
+                    } else {
+                        CartActivity.putCartItem(cart.getId(), slmoi);
+                    }
                 }
+            }
+        });
+        imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CartActivity.deleteItem(position);
             }
         });
         return convertView;

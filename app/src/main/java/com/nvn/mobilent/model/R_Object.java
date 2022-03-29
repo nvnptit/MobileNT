@@ -10,7 +10,7 @@ public class R_Object {
     private Boolean result;
     @SerializedName("data")
     @Expose
-    private Object data;
+    private Cart data;
 
     public Boolean getResult() {
         return result;
@@ -20,11 +20,11 @@ public class R_Object {
         this.result = result;
     }
 
-    public Object getData() {
+    public Cart getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(Cart data) {
         this.data = data;
     }
 

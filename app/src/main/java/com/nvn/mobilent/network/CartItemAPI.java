@@ -9,6 +9,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface CartItemAPI {
@@ -29,5 +30,16 @@ public interface CartItemAPI {
     @DELETE("/api/cart-item/all-cart-item")
     Call<R_Object> deleteAllCartByUserId(
             @Query("user_id") int userid
+    );
+
+    @DELETE("/api/cart-item")
+    Call<R_Object> deleteCartItem(
+            @Query("id") int id
+    );
+
+    @PUT("/api/cart-item")
+    Call<R_Object> editCartItem(
+            @Query("cartItem_id") int cartItem_id,
+            @Query("quantity") int quantity
     );
 }

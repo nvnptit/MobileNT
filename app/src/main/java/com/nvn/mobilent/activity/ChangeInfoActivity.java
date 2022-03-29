@@ -24,7 +24,10 @@ import com.nvn.mobilent.model.User;
 import com.nvn.mobilent.network.UserAPI;
 import com.nvn.mobilent.util.AppUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,6 +71,26 @@ public class ChangeInfoActivity extends AppCompatActivity {
         setEvent();
     }
 
+
+    String convertDate(String d) {
+        String pattern = "(0?[1-9]|[1-2]\\d|3[0-1])/(0?[1-9]|1[0-2])/(19|20)\\d{2}";
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat f1 = new SimpleDateFormat("MM-dd-yyyy");
+        Date date = new Date();
+        if (!d.matches(pattern)) {
+            return "1";
+        } else {
+            f.setLenient(false);
+            try {
+                date = f.parse(d);
+                return f1.format(date);
+            } catch (ParseException e) {
+                System.out.println("Error fDate!");
+            }
+            return "1";
+        }
+    }
+
     private void setEvent() {
 
         btnChangeInfo.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +106,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
                             address.getText().toString().trim(),
                             phone.getText().toString().trim(),
                             gender,
-                            birthday.getText().toString().trim()
+                            convertDate(birthday.getText().toString().trim())
                     );
                     System.out.println(info.toString());
                     userAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(UserAPI.class);
