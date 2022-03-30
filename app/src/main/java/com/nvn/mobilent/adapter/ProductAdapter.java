@@ -21,16 +21,16 @@ import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHolder> {
 
-    // Bỏ context khi dùng interface
+    //    Bỏ context khi dùng interface
 //    ItemClickListener itemClickListener;
-
-    Context context;
-    ArrayList<Product> arrProd;
-
-//    public ProductAdapter(ArrayList<Product> arrProd,ItemClickListener itemClickListener) {
+//
+//    public ProductAdapter(ArrayList<Product> arrProd, ItemClickListener itemClickListener) {
 //        this.itemClickListener = itemClickListener;
 //        this.arrProd = arrProd;
 //    }
+    Context context;
+    ArrayList<Product> arrProd;
+
 
     @NonNull
     @Override
@@ -100,6 +100,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ProductDetailActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("product", arrProd.get(getAbsoluteAdapterPosition()));
                     context.startActivity(intent);
                 }

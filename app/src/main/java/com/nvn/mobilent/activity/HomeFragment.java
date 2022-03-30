@@ -193,4 +193,5 @@ public class HomeFragment extends Fragment {
             productAdapter.release();
         }
     }
+
 }

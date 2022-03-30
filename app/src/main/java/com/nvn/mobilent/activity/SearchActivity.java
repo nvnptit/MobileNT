@@ -105,4 +105,12 @@ public class SearchActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (productAdapter != null) {
+            productAdapter.release();
+        }
+    }
 }

@@ -214,12 +214,13 @@ public class CartActivity extends AppCompatActivity {
     public static void deleteItem(int position) {
         if (cartArrayList.get(position).getId() == null) {
             deleteCartItem(newIDCart);
+            solveTotal();
         } else {
             deleteCartItem(cartArrayList.get(position).getId());
+            solveTotal();
         }
         cartArrayList.remove(position);
         AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã xoá sản phẩm ra khỏi giỏ hàng");
-        solveTotal();
         cartAdapter.notifyDataSetChanged();
     }
 
