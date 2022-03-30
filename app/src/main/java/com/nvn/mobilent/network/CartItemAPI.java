@@ -1,7 +1,7 @@
 package com.nvn.mobilent.network;
 
 import com.nvn.mobilent.model.RListCartItem;
-import com.nvn.mobilent.model.R_Object;
+import com.nvn.mobilent.model.R_Cart;
 
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -21,24 +21,24 @@ public interface CartItemAPI {
 
     @POST("/api/cart-item")
     @FormUrlEncoded
-    Call<R_Object> setNewCartItem(
+    Call<R_Cart> setNewCartItem(
             @Field("prod_id") int prod_id,
             @Field("quantity") int quantiy,
             @Field("user_id") int userid
     );
 
     @DELETE("/api/cart-item/all-cart-item")
-    Call<R_Object> deleteAllCartByUserId(
+    Call<R_Cart> deleteAllCartByUserId(
             @Query("user_id") int userid
     );
 
     @DELETE("/api/cart-item")
-    Call<R_Object> deleteCartItem(
+    Call<R_Cart> deleteCartItem(
             @Query("id") int id
     );
 
     @PUT("/api/cart-item")
-    Call<R_Object> editCartItem(
+    Call<R_Cart> editCartItem(
             @Query("cartItem_id") int cartItem_id,
             @Query("quantity") int quantity
     );

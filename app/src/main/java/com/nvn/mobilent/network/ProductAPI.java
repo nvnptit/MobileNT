@@ -14,11 +14,19 @@ public interface ProductAPI {
             @Query("page_size") int page
     );
 
+    @GET("/api/product/name")
+    Call<RProduct> searchProduct(
+            @Query("name") String name,
+            @Query("page") int type,
+            @Query("page_size") int page
+    );
+
     @GET("/api/product/category")
     Call<RProduct> getProductByType(
             @Query("type") int type,
             @Query("page") int page
     );
+
     @GET("/api/product/id")
     Call<R_ProductCartItem> getProductByID(
             @Query("id") int id

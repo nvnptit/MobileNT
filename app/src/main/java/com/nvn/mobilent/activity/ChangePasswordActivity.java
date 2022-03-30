@@ -11,6 +11,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.nvn.mobilent.R;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
+import com.nvn.mobilent.datalocal.DataLocalManager;
 import com.nvn.mobilent.model.RLogin;
 import com.nvn.mobilent.model.User;
 import com.nvn.mobilent.network.UserAPI;
@@ -34,7 +35,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
-        user = (User) getIntent().getSerializableExtra("user");
+        user = DataLocalManager.getUser();
         setControl();
         setEvent();
     }

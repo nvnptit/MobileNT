@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="#E8E5E5"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/searchround"
         android:layout_height="?attr/actionBarSize">
 
         <EditText
@@ -17,8 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:hint="Nhập tên sản phẩm bạn muốn tìm kiếm"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorGrey"
+            android:backgroundTint="#E8E5E5"
+            android:textColor="@color/black"
             android:textSize="17sp">
 
         </EditText>
@@ -26,10 +29,12 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#E8E5E5"
+        android:fillViewport="true">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
+            android:id="@+id/searchrecyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"></androidx.recyclerview.widget.RecyclerView>

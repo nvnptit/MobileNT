@@ -1,7 +1,6 @@
 package com.nvn.mobilent.activity;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -18,6 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.nvn.mobilent.R;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
+import com.nvn.mobilent.datalocal.DataLocalManager;
 import com.nvn.mobilent.model.Info;
 import com.nvn.mobilent.model.RLogin;
 import com.nvn.mobilent.model.User;
@@ -63,7 +63,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_info);
-        user = (User) getIntent().getSerializableExtra("user");
+        user = DataLocalManager.getUser();
         setControl();
         actionToolBar();
         loadDefault();
@@ -71,8 +71,26 @@ public class ChangeInfoActivity extends AppCompatActivity {
         setEvent();
     }
 
-
     String convertDate(String d) {
+        String pattern = "(0?[1-9]|[1-2]\\d|3[0-1])/(0?[1-9]|1[0-2])/(19|20)\\d{2}";
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat f1 = new SimpleDateFormat("MM-dd-yyyy");
+        Date date = new Date();
+        if (!d.matches(pattern)) {
+            return "1";
+        } else {
+            f1.setLenient(false);
+            try {
+                date = f1.parse(d);
+                return f.format(date);
+            } catch (ParseException e) {
+                System.out.println("Error fDate!");
+            }
+            return "1";
+        }
+    }
+
+    String convertDateDB(String d) {
         String pattern = "(0?[1-9]|[1-2]\\d|3[0-1])/(0?[1-9]|1[0-2])/(19|20)\\d{2}";
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat f1 = new SimpleDateFormat("MM-dd-yyyy");
@@ -106,22 +124,31 @@ public class ChangeInfoActivity extends AppCompatActivity {
                             address.getText().toString().trim(),
                             phone.getText().toString().trim(),
                             gender,
-                            convertDate(birthday.getText().toString().trim())
+                            birthday.getText().toString().trim()
                     );
                     System.out.println(info.toString());
                     userAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(UserAPI.class);
                     if (!AppUtils.haveNetworkConnection(getApplicationContext())) {
                         AppUtils.showToast_Short(getApplicationContext(), "Kiểm tra lại kết nối Internet");
                     } else {
+                        user.setEmail(info.getEmail());
+                        user.setFirstname(info.getFirstname());
+                        user.setLastname(info.getLastname());
+                        user.setAddress(info.getAddress());
+                        user.setPhone(info.getPhone());
+                        user.setSex(info.getSex());
+                        user.setBirthday(info.getBirthday());
+                        DataLocalManager.setUser(user);
                         userAPI.changeInfo(info.getId(), info.getEmail(),
                                 info.getFirstname(), info.getLastname(),
                                 info.getAddress(), info.getPhone(), info.getSex(),
-                                info.getBirthday()).enqueue(new Callback<RLogin>() {
+                                convertDateDB(info.getBirthday())).enqueue(new Callback<RLogin>() {
                             @Override
                             public void onResponse(Call<RLogin> call, Response<RLogin> response) {
-                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 AppUtils.showToast_Short(getApplicationContext(), "Cập nhật thông tin thành công!");
-                                startActivity(intent);
+//                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                                startActivity(intent);
+//                                finish();
                             }
 
                             @Override
@@ -129,6 +156,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
                                 AppUtils.showToast_Short(getApplicationContext(), "Lỗi cập nhật thông tin rồi");
                             }
                         });
+                        loadDefault();
                     }
                 }
             }

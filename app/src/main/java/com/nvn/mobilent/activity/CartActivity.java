@@ -17,11 +17,13 @@ import com.nvn.mobilent.R;
 import com.nvn.mobilent.adapter.CartAdapter;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
+import com.nvn.mobilent.datalocal.DataLocalManager;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
 import com.nvn.mobilent.model.RListCartItem;
-import com.nvn.mobilent.model.R_Object;
+import com.nvn.mobilent.model.R_Cart;
 import com.nvn.mobilent.model.R_ProductCartItem;
+import com.nvn.mobilent.model.User;
 import com.nvn.mobilent.network.CartItemAPI;
 import com.nvn.mobilent.network.ProductAPI;
 import com.nvn.mobilent.util.AppUtils;
@@ -39,29 +41,30 @@ public class CartActivity extends AppCompatActivity {
     static TextView tv_TotalCart;
     Button btnThanhToan, btnMuaHang;
 
-    Toolbar toolbar;
-    public static ArrayList<Cart> cartArrayList;
     static long total = 0;
     static long price = 0;
+    public static ArrayList<Cart> cartArrayList;
+    private static User user;
     static ListView lvCart;
     static CartAdapter cartAdapter;
     static TextView tv_NoticeCart;
     static ProductAPI productAPI;
     static CartItemAPI cartItemAPI;
     static Cart newCart;
+    Toolbar toolbar;
 
     public static void deleteAllCart(int userid) {
         CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
-        cartItemAPI.deleteAllCartByUserId(userid).enqueue(new Callback<R_Object>() {
+        cartItemAPI.deleteAllCartByUserId(userid).enqueue(new Callback<R_Cart>() {
             @Override
-            public void onResponse(Call<R_Object> call, Response<R_Object> response) {
+            public void onResponse(Call<R_Cart> call, Response<R_Cart> response) {
                 if (response.isSuccessful()) {
                     System.out.println("KETQUA Delete: " + response.body().getResult());
                 }
             }
 
             @Override
-            public void onFailure(Call<R_Object> call, Throwable t) {
+            public void onFailure(Call<R_Cart> call, Throwable t) {
 
             }
         });
@@ -69,60 +72,60 @@ public class CartActivity extends AppCompatActivity {
 
     public static void putCartItem(int cartItem_id, int quantity) {
         System.out.println("putCartItem:" + cartItem_id + "|" + quantity + "|");
-        cartItemAPI.editCartItem(cartItem_id, quantity).enqueue(new Callback<R_Object>() {
+        cartItemAPI.editCartItem(cartItem_id, quantity).enqueue(new Callback<R_Cart>() {
             @Override
-            public void onResponse(Call<R_Object> call, Response<R_Object> response) {
+            public void onResponse(Call<R_Cart> call, Response<R_Cart> response) {
                 if (response.isSuccessful()) {
                     AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã cập nhật sản phẩm vào giỏ hàng!");
+                    solveTotal();
                 }
             }
 
             @Override
-            public void onFailure(Call<R_Object> call, Throwable t) {
+            public void onFailure(Call<R_Cart> call, Throwable t) {
             }
         });
     }
 
     public static void postCartItem(int prod_id, int quantity, int userid) {
-        cartItemAPI.setNewCartItem(prod_id, quantity, userid).enqueue(new Callback<R_Object>() {
+        cartItemAPI.setNewCartItem(prod_id, quantity, userid).enqueue(new Callback<R_Cart>() {
             @Override
-            public void onResponse(Call<R_Object> call, Response<R_Object> response) {
+            public void onResponse(Call<R_Cart> call, Response<R_Cart> response) {
                 if (response.isSuccessful()) {
                     AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã thêm sản phẩm vào giỏ hàng!");
                     newIDCart = response.body().getData().getId();
-
+                    solveTotal();
                 }
             }
 
             @Override
-            public void onFailure(Call<R_Object> call, Throwable t) {
+            public void onFailure(Call<R_Cart> call, Throwable t) {
             }
         });
     }
 
     public static void deleteCartItem(int id) {
         CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
-        cartItemAPI.deleteCartItem(id).enqueue(new Callback<R_Object>() {
+        cartItemAPI.deleteCartItem(id).enqueue(new Callback<R_Cart>() {
             @Override
-            public void onResponse(Call<R_Object> call, Response<R_Object> response) {
+            public void onResponse(Call<R_Cart> call, Response<R_Cart> response) {
                 if (response.isSuccessful()) {
                     AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã xoá sản phẩm khỏi giỏ hàng!");
+                    solveTotal();
                 }
             }
 
             @Override
-            public void onFailure(Call<R_Object> call, Throwable t) {
+            public void onFailure(Call<R_Cart> call, Throwable t) {
             }
         });
     }
 
     public static void loadListCart() {
-        total = 0;
-        price = 0;
         if (newCart != null) {
             System.out.println(newCart.getName());
         }
-        cartItemAPI.getCartItemByUserId(MainActivity.user.getId()).enqueue(new Callback<RListCartItem>() {
+        cartItemAPI.getCartItemByUserId(user.getId()).enqueue(new Callback<RListCartItem>() {
             @Override
             public void onResponse(Call<RListCartItem> call, Response<RListCartItem> response) {
                 ArrayList<Cart> arrs = response.body().getData();
@@ -135,12 +138,12 @@ public class CartActivity extends AppCompatActivity {
                             if (item.getQuantity() >= 10) {
                                 item.setQuantity(10);
                             }
-                            putCartItem(item.getId(), item.getQuantity()); //chỉnh lại userid
+                            putCartItem(item.getId(), item.getQuantity());
                             exist = true;
                         }
                     }
                     if (!exist) {
-                        postCartItem(newCart.getProdId(), newCart.getQuantity(), 4); //chỉnh lại userid
+                        postCartItem(newCart.getProdId(), newCart.getQuantity(), user.getId());
                         arrs.add(newCart);
                     }
                 }
@@ -156,14 +159,13 @@ public class CartActivity extends AppCompatActivity {
 
     public static void solveTotal() {
         // Xử lý tiền
-        total = 0;
-        price = 0;
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
-        cartItemAPI.getCartItemByUserId(MainActivity.user.getId()).enqueue(new Callback<RListCartItem>() {
+        cartItemAPI.getCartItemByUserId(user.getId()).enqueue(new Callback<RListCartItem>() {
             @Override
             public void onResponse(Call<RListCartItem> call, Response<RListCartItem> response) {
                 ArrayList<Cart> arrs = response.body().getData();
                 if (arrs.size() > 0) {
+                    total = 0;
                     for (Cart item : arrs) {
                         productAPI.getProductByID(item.getProdId()).enqueue(new Callback<R_ProductCartItem>() {
                             @Override
@@ -172,7 +174,8 @@ public class CartActivity extends AppCompatActivity {
                                 price = product.getPrice();
                                 total = total + price * item.getQuantity();
                                 DecimalFormat df = new DecimalFormat("###,###,###");
-//                                tv_TotalCart.setText(df.format(total) + " VNĐ");
+                                tv_TotalCart.setText(df.format(total) + " VNĐ");
+                                System.out.println(total);
                             }
 
                             @Override
@@ -181,7 +184,7 @@ public class CartActivity extends AppCompatActivity {
                         });
                     }
                 } else {
-//                    tv_TotalCart.setText("0 VNĐ");
+                    tv_TotalCart.setText("0 VNĐ");
                 }
             }
 
@@ -196,7 +199,6 @@ public class CartActivity extends AppCompatActivity {
         for (Cart i : data) {
             cartArrayList.add(new Cart(i));
         }
-        solveTotal();
         if (cartArrayList.size() > 0) {
             lvCart.setVisibility(View.VISIBLE);
             tv_NoticeCart.setVisibility(View.INVISIBLE);
@@ -206,6 +208,7 @@ public class CartActivity extends AppCompatActivity {
             tv_NoticeCart.setVisibility(View.VISIBLE);
             cartAdapter.notifyDataSetChanged();
         }
+        catchOnItemListView();
     }
 
     public static void deleteItem(int position) {
@@ -216,22 +219,63 @@ public class CartActivity extends AppCompatActivity {
         }
         cartArrayList.remove(position);
         AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã xoá sản phẩm ra khỏi giỏ hàng");
+        solveTotal();
         cartAdapter.notifyDataSetChanged();
     }
 
+    public static void catchOnItemListView() {
+        lvCart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(lvCart.getContext());
+                builder.setTitle("Xác nhận xoá sản phẩm");
+                builder.setMessage("Bạn có chắc xoá sản phẩm này?");
+                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (cartArrayList.size() <= 0) {
+                            tv_NoticeCart.setVisibility(View.VISIBLE);
+                        } else {
+                            // Xử lý ArrayCart
+                            if (cartArrayList.get(position).getId() == null) {
+                                deleteCartItem(newIDCart);
+                            } else {
+                                deleteCartItem(cartArrayList.get(position).getId());
+                            }
+                            cartArrayList.remove(position);
+                            AppUtils.showToast_Short(lvCart.getContext(), "Đã xoá sản phẩm khỏi giỏ hàng");
+                            cartAdapter.notifyDataSetChanged();
+                            if (cartArrayList.size() <= 0) {
+                                tv_NoticeCart.setVisibility(View.VISIBLE);
+                            } else {
+                                tv_NoticeCart.setVisibility(View.INVISIBLE);
+                                cartAdapter.notifyDataSetChanged();
+                            }
+                            solveTotal();
+                        }
+                    }
+                });
+                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        cartAdapter.notifyDataSetChanged();
+                    }
+                });
+                builder.show();
+                return true;
+            }
+        });
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
-        setControl();
-        newCart = (Cart) getIntent().getSerializableExtra("newcartitem");
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+    }
 
-        setActionBar();
-        loadListCart();
-
-        catchOnItemListView();
-        setEventButton();
-        System.out.println("SIZECARTCLICK: " + cartArrayList.size());
+    @Override
+    protected void onResume() {
+        solveTotal();
+        super.onResume();
     }
 
     private void setControl() {
@@ -256,11 +300,25 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_cart);
+        user = DataLocalManager.getUser();
+        setControl();
+        newCart = (Cart) getIntent().getSerializableExtra("newcartitem");
+        setActionBar();
+
+        loadListCart();
+        setEventButton();
+        System.out.println("SIZECARTCLICK: " + cartArrayList.size());
+    }
+
     private void setEventButton() {
         btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                finish();
             }
         });
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
@@ -272,44 +330,6 @@ public class CartActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), InfoCartActivity.class);
                     startActivity(intent);
                 }
-            }
-        });
-    }
-
-    public void catchOnItemListView() {
-        lvCart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(CartActivity.this);
-                builder.setTitle("Xác nhận xoá sản phẩm");
-                builder.setMessage("Bạn có chắc xoá sản phẩm này?");
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (cartArrayList.size() <= 0) {
-                            tv_NoticeCart.setVisibility(View.VISIBLE);
-                        } else {
-                            // Xử lý ArrayCart
-                            deleteCartItem(cartArrayList.get(position).getId());
-                            cartArrayList.remove(position);
-                            cartAdapter.notifyDataSetChanged();
-                            if (cartArrayList.size() <= 0) {
-                                tv_NoticeCart.setVisibility(View.VISIBLE);
-                            } else {
-                                tv_NoticeCart.setVisibility(View.INVISIBLE);
-                                cartAdapter.notifyDataSetChanged();
-                            }
-                        }
-                    }
-                });
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        cartAdapter.notifyDataSetChanged();
-                    }
-                });
-                builder.show();
-                return true;
             }
         });
     }

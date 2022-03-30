@@ -27,6 +27,7 @@ import com.nvn.mobilent.R;
 import com.nvn.mobilent.adapter.ProductAdapter;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
+import com.nvn.mobilent.datalocal.DataLocalManager;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
 import com.nvn.mobilent.model.RProduct;
@@ -56,8 +57,8 @@ public class HomeFragment extends Fragment {
     Button timkiem, btnAddCartHome;
     boolean limitData = false;
     //    ItemClickListener itemClickListener;
-    public static ArrayList<Cart> arrCart;
-    public User objectUser;
+    ArrayList<Cart> arrCart;
+    User user;
 
 
     public HomeFragment() {
@@ -129,7 +130,7 @@ public class HomeFragment extends Fragment {
         if (!AppUtils.haveNetworkConnection(getContext())) {
             AppUtils.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
         } else {
-            objectUser = (User) getArguments().getSerializable("objectuser");
+            user = DataLocalManager.getUser();
             setControl(view);
             setActionBar();
             setActionViewLipper(view);

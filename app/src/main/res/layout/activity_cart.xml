@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        app:title="My Cart"
+        app:title="Giỏ hàng"
         app:titleTextColor="@color/colorWhite" />
 
     <LinearLayout
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text=""
+                android:text="TỔNG TIỀN:"
                 android:textColor="#8E3939"
                 android:textSize="25dp"
                 android:textStyle="bold" />

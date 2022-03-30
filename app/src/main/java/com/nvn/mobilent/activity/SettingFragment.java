@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.nvn.mobilent.R;
 import com.nvn.mobilent.adapter.SettingAdapter;
+import com.nvn.mobilent.datalocal.DataLocalManager;
 import com.nvn.mobilent.model.SettingItem;
 import com.nvn.mobilent.model.User;
 
@@ -51,6 +52,13 @@ public class SettingFragment extends Fragment {
         setEvent();
     }
 
+    @Override
+    public void onResume() {
+        System.out.println("onResume");
+        user = DataLocalManager.getUser();
+        welcome.setText(user.getLastname() + " " + user.getFirstname());
+        super.onResume();
+    }
 
     private void setEvent() {
         welcome.setText(user.getLastname() + " " + user.getFirstname());
@@ -58,7 +66,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ChangeInfoActivity.class); //change lại
-                intent.putExtra("user", user);
+                //   intent.putExtra("user", user);
                 startActivity(intent);
             }
         });
@@ -66,7 +74,7 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
-                intent.putExtra("user", user);
+                //   intent.putExtra("user", user);
                 startActivity(intent);
             }
         });
@@ -92,6 +100,6 @@ public class SettingFragment extends Fragment {
         tv_cartstatus = getView().findViewById(R.id.cartstatus);
         tv_logout = getView().findViewById(R.id.logout);
         welcome = getView().findViewById(R.id.welcome);
-        user = MainActivity.user;
+        user = DataLocalManager.getUser();
     }
 }

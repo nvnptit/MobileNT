@@ -56,6 +56,5 @@ public class InfoCartActivity extends AppCompatActivity {
         txtDiaChi = findViewById(R.id.txtdiachi);
         btnDatHang = findViewById(R.id.btncheckout);
         btnTroVe = findViewById(R.id.btnbackcart);
-
     }
 }
