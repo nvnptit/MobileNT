@@ -29,6 +29,26 @@ public class Order {
     @Expose
     private ArrayList<ListOrderItem> listOrderItem = null;
 
+    public Order(Integer id, Integer userId, String deliveryAddress, String buyDate, String deliveryCancelDay, Integer status, ArrayList<ListOrderItem> listOrderItem) {
+        this.id = id;
+        this.userId = userId;
+        this.deliveryAddress = deliveryAddress;
+        this.buyDate = buyDate;
+        this.deliveryCancelDay = deliveryCancelDay;
+        this.status = status;
+        this.listOrderItem = listOrderItem;
+    }
+
+    public Order(Order ord) {
+        this.id = ord.getId();
+        this.userId = ord.getUserId();
+        this.deliveryAddress = ord.getDeliveryAddress();
+        this.buyDate = ord.getBuyDate();
+        this.deliveryCancelDay = ord.getDeliveryCancelDay();
+        this.status = ord.getStatus();
+        this.listOrderItem = ord.getListOrderItem();
+    }
+
     public Integer getId() {
         return id;
     }
@@ -61,7 +81,7 @@ public class Order {
         this.buyDate = buyDate;
     }
 
-    public Object getDeliveryCancelDay() {
+    public String getDeliveryCancelDay() {
         return deliveryCancelDay;
     }
 

@@ -23,7 +23,7 @@
             android:name=".activity.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.OrderStatusActivity"
+            android:name=".activity.OrderActivity"
             android:exported="false" />
         <activity
             android:name=".activity.ChangePasswordActivity"

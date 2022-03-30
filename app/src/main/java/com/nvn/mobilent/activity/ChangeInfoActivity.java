@@ -84,7 +84,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
                 date = f1.parse(d);
                 return f.format(date);
             } catch (ParseException e) {
-                System.out.println("Error fDate!");
+                System.out.println("Error fDate dd/MM/yyyy!");
             }
             return "1";
         }
@@ -139,6 +139,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
                         user.setSex(info.getSex());
                         user.setBirthday(info.getBirthday());
                         DataLocalManager.setUser(user);
+
                         userAPI.changeInfo(info.getId(), info.getEmail(),
                                 info.getFirstname(), info.getLastname(),
                                 info.getAddress(), info.getPhone(), info.getSex(),
@@ -146,9 +147,6 @@ public class ChangeInfoActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<RLogin> call, Response<RLogin> response) {
                                 AppUtils.showToast_Short(getApplicationContext(), "Cập nhật thông tin thành công!");
-//                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                                startActivity(intent);
-//                                finish();
                             }
 
                             @Override

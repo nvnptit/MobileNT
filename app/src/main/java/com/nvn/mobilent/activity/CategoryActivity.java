@@ -39,6 +39,7 @@ public class CategoryActivity extends AppCompatActivity {
     int idCate;
     String nameCate;
     int page = 1;
+
     ItemCategoryAdapter itemCategoryAdapter;
     ArrayList<Product> productArrayList;
     ProductAPI productAPI;

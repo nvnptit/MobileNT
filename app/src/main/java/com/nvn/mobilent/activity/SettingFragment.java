@@ -81,7 +81,7 @@ public class SettingFragment extends Fragment {
         tv_cartstatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), OrderStatusActivity.class);
+                Intent intent = new Intent(getContext(), OrderActivity.class);
                 startActivity(intent);
             }
         });

@@ -29,7 +29,7 @@ public class CategoryAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public Category getItem(int i) {
         return arrCate.get(i);
     }
 
