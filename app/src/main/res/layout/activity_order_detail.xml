@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".activity.OrderActivity">
+    tools:context=".activity.OrderDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_order"
+        android:id="@+id/toolbar_orderdetail"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/primaryTextColor"
-        app:title="Lịch sử các đơn hàng"
+        app:title="Chi tiết đơn hàng"
         app:titleTextColor="@color/white"></androidx.appcompat.widget.Toolbar>
 
     <ListView
-        android:id="@+id/listOrder"
+        android:id="@+id/listorderdetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 </LinearLayout>

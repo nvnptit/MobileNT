@@ -3,7 +3,7 @@ package com.nvn.mobilent.network;
 import com.nvn.mobilent.model.OrderDetail;
 import com.nvn.mobilent.model.RLogin;
 import com.nvn.mobilent.model.ROrder;
-import com.nvn.mobilent.model.RProduct;
+import com.nvn.mobilent.model.ROrderItemDetail;
 
 import java.util.ArrayList;
 
@@ -23,16 +23,16 @@ public interface OrderAPI {
     );
 
     @GET("/api/order")
-    Call<RProduct> getDetailOrderbyIdOrder(
+    Call<ROrderItemDetail> getDetailOrderbyIdOrder(
             @Query("id") int orderid
     );
 
     @POST("/api/order")
     @FormUrlEncoded
-    Call<RLogin> postOrder(
-            @Field("user_id") int user_id,
-            @Field("deliveryAddress") String deliveryAddress,
-            @Field("phone") String phone,
-            @Field("orderDetail") ArrayList<OrderDetail> arr
+    Call<RLogin> postOrder( //CHỉnh call
+                            @Field("user_id") int user_id,
+                            @Field("deliveryAddress") String deliveryAddress,
+                            @Field("phone") String phone,
+                            @Field("orderDetail") ArrayList<OrderDetail> arr
     );
 }

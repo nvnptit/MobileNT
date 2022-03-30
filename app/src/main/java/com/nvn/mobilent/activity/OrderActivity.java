@@ -84,10 +84,10 @@ public class OrderActivity extends AppCompatActivity {
     private void getOrderbyUserId(int page) {
         user = DataLocalManager.getUser();
         orderAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(OrderAPI.class);
-        orderAPI.getOrderbyUserId(2, page, 10).enqueue(new Callback<ROrder>() {
+        orderAPI.getOrderbyUserId(user.getId(), page, 10).enqueue(new Callback<ROrder>() {
             @Override
             public void onResponse(Call<ROrder> call, Response<ROrder> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body().getData().size() > 0) {
                     listOrder.removeFooterView(footerView);
                     for (Order o : response.body().getData()) {
                         orderArrayList.add(new Order(o));
@@ -112,8 +112,8 @@ public class OrderActivity extends AppCompatActivity {
         listOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getApplicationContext(), Order.class);
-                intent.putExtra("order", orderArrayList.get(i));
+                Intent intent = new Intent(getApplicationContext(), OrderDetailActivity.class);
+                intent.putExtra("idorder", orderArrayList.get(i).getId());
                 startActivity(intent);
             }
         });

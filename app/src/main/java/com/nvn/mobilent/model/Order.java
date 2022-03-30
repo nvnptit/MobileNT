@@ -106,4 +106,11 @@ public class Order implements Serializable {
         this.listOrderItem = listOrderItem;
     }
 
+    public long getTotal() {
+        long total = 0;
+        for (ListOrderItem o : listOrderItem) {
+            total += o.getPrice() * o.getQuantity();
+        }
+        return total;
+    }
 }
