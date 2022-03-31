@@ -45,6 +45,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         btn_addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 int amount = Integer.parseInt(spinner.getSelectedItem().toString());
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                 intent.putExtra("newcartitem", new Cart(product.getId(), product.getName(), product.getImage(), amount));

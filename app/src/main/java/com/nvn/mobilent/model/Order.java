@@ -22,32 +22,42 @@ public class Order implements Serializable {
     private String buyDate;
     @SerializedName("deliveryCancelDay")
     @Expose
-    private String deliveryCancelDay;
+    private Object deliveryCancelDay;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
     @SerializedName("status")
     @Expose
     private Integer status;
+    @SerializedName("recipientName")
+    @Expose
+    private String recipientName;
     @SerializedName("listOrderItem")
     @Expose
     private ArrayList<ListOrderItem> listOrderItem = null;
 
-    public Order(Integer id, Integer userId, String deliveryAddress, String buyDate, String deliveryCancelDay, Integer status, ArrayList<ListOrderItem> listOrderItem) {
+    public Order(Integer id, Integer userId, String deliveryAddress, String buyDate, Object deliveryCancelDay, String phone, Integer status, String recipientName, ArrayList<ListOrderItem> listOrderItem) {
         this.id = id;
         this.userId = userId;
         this.deliveryAddress = deliveryAddress;
         this.buyDate = buyDate;
         this.deliveryCancelDay = deliveryCancelDay;
+        this.phone = phone;
         this.status = status;
+        this.recipientName = recipientName;
         this.listOrderItem = listOrderItem;
     }
 
-    public Order(Order ord) {
-        this.id = ord.getId();
-        this.userId = ord.getUserId();
-        this.deliveryAddress = ord.getDeliveryAddress();
-        this.buyDate = ord.getBuyDate();
-        this.deliveryCancelDay = ord.getDeliveryCancelDay();
-        this.status = ord.getStatus();
-        this.listOrderItem = ord.getListOrderItem();
+    public Order(Order order) {
+        this.id = order.getId();
+        this.userId = order.getUserId();
+        this.deliveryAddress = order.getDeliveryAddress();
+        this.buyDate = order.getBuyDate();
+        this.deliveryCancelDay = order.getDeliveryCancelDay();
+        this.phone = order.getPhone();
+        this.status = order.getStatus();
+        this.recipientName = order.getRecipientName();
+        this.listOrderItem = order.getListOrderItem();
     }
 
     public Integer getId() {
@@ -82,12 +92,20 @@ public class Order implements Serializable {
         this.buyDate = buyDate;
     }
 
-    public String getDeliveryCancelDay() {
+    public Object getDeliveryCancelDay() {
         return deliveryCancelDay;
     }
 
-    public void setDeliveryCancelDay(String deliveryCancelDay) {
+    public void setDeliveryCancelDay(Object deliveryCancelDay) {
         this.deliveryCancelDay = deliveryCancelDay;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Integer getStatus() {
@@ -96,6 +114,14 @@ public class Order implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getRecipientName() {
+        return recipientName;
+    }
+
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
     }
 
     public ArrayList<ListOrderItem> getListOrderItem() {

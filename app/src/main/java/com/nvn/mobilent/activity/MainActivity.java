@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("objectuser", user);
-//                    homeFragment.setArguments(bundle);
                     setFragment(homeFragment);
                     return true;
                 } else if (id == R.id.nav_category) {

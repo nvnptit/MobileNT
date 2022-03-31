@@ -40,9 +40,11 @@ public class OrderDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         idOrder = getIntent().getIntExtra("idorder", -1);
+        System.out.println("IDORDER:" + idOrder);
         setControl();
+        actionToolBar();
         setEvent();
-        getOrderbyUserId(idOrder);
+        getOrderbyOrderId(idOrder);
     }
 
     private void setEvent() {
@@ -65,15 +67,17 @@ public class OrderDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void getOrderbyUserId(int idOrder) {
+    private void getOrderbyOrderId(int idOrder) {
         orderAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(OrderAPI.class);
         orderAPI.getDetailOrderbyIdOrder(idOrder).enqueue(new Callback<ROrderItemDetail>() {
             @Override
             public void onResponse(Call<ROrderItemDetail> call, Response<ROrderItemDetail> response) {
                 if (response.isSuccessful()) {
                     for (ListOrderItem loi : response.body().getData()) {
-                        orderItemArrayList.add(loi);
+                        orderItemArrayList.add(new ListOrderItem(loi));
                     }
+                    System.out.println(orderItemArrayList.size());
+                    System.out.println("SIZELiSTORDERITEM: " + orderItemArrayList.size());
                     orderItemAdapter = new OrderItemAdapter(getApplicationContext(), R.layout.line_orderdetail, orderItemArrayList);
                     listOrderDetail.setAdapter(orderItemAdapter);
                     orderItemAdapter.notifyDataSetChanged();

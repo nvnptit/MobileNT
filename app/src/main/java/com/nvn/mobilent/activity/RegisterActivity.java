@@ -23,7 +23,10 @@ import com.nvn.mobilent.model.Register;
 import com.nvn.mobilent.network.UserAPI;
 import com.nvn.mobilent.util.AppUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -238,6 +241,25 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    String convertDateDB(String d) {
+        String pattern = "(0?[1-9]|[1-2]\\d|3[0-1])/(0?[1-9]|1[0-2])/(19|20)\\d{2}";
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat f1 = new SimpleDateFormat("MM-dd-yyyy");
+        Date date = new Date();
+        if (!d.matches(pattern)) {
+            return "1";
+        } else {
+            f.setLenient(false);
+            try {
+                date = f.parse(d);
+                return f1.format(date);
+            } catch (ParseException e) {
+                System.out.println("Error fDate!");
+            }
+            return "1";
+        }
+    }
+
     private void setEvent() {
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -253,7 +275,7 @@ public class RegisterActivity extends AppCompatActivity {
                             address.getText().toString().trim(),
                             phone.getText().toString().trim(),
                             gender,
-                            birthday.getText().toString().trim()
+                            convertDateDB(birthday.getText().toString().trim())
                     );
                     userAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(UserAPI.class);
                     if (!AppUtils.haveNetworkConnection(getApplicationContext())) {
@@ -264,6 +286,7 @@ public class RegisterActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<RLogin> call, Response<RLogin> response) {
                                 System.out.println("Đăng ký thành công" + response.body().getResult());
+                                finish();
                             }
 
                             @Override

@@ -53,22 +53,6 @@ public class CartActivity extends AppCompatActivity {
     static Cart newCart;
     Toolbar toolbar;
 
-    public static void deleteAllCart(int userid) {
-        CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
-        cartItemAPI.deleteAllCartByUserId(userid).enqueue(new Callback<R_Cart>() {
-            @Override
-            public void onResponse(Call<R_Cart> call, Response<R_Cart> response) {
-                if (response.isSuccessful()) {
-                    System.out.println("KETQUA Delete: " + response.body().getResult());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<R_Cart> call, Throwable t) {
-
-            }
-        });
-    }
 
     public static void putCartItem(int cartItem_id, int quantity) {
         System.out.println("putCartItem:" + cartItem_id + "|" + quantity + "|");
@@ -276,6 +260,8 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         solveTotal();
+        cartArrayList.clear();
+        cartAdapter.notifyDataSetChanged();
         super.onResume();
     }
 
@@ -328,7 +314,10 @@ public class CartActivity extends AppCompatActivity {
                 if (cartArrayList.size() <= 0) {
                     AppUtils.showToast_Short(getApplicationContext(), "Giỏ hàng trống!");
                 } else {
+                    finish(); // destroy activity
+                    System.out.println("CARTSIZE odio:" + cartArrayList.size());
                     Intent intent = new Intent(getApplicationContext(), InfoCartActivity.class);
+                    intent.putExtra("sizecart", cartArrayList.size());
                     startActivity(intent);
                 }
             }

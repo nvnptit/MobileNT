@@ -59,6 +59,14 @@
                 android:textColor="#E68101"
                 android:textSize="20dp" />
 
+            <TextView
+                android:id="@+id/moneyorderdetail"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Thành tiền"
+                android:textColor="#D81B60"
+                android:textSize="20dp" />
+
         </LinearLayout>
 
     </LinearLayout>

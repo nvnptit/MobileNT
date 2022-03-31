@@ -38,9 +38,11 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         convertView = LayoutInflater.from(context).inflate(resource, null);
         TextView numberOrder = convertView.findViewById(R.id.tvOrder);
         TextView dateOder = convertView.findViewById(R.id.tvDate);
+        TextView person = convertView.findViewById(R.id.tv_person);
         Order order = orderArrayList.get(position);
         numberOrder.setText("Đơn hàng số " + order.getId());
         dateOder.setText("Ngày lập: " + order.getBuyDate());
+        person.setText("Người nhận: " + order.getRecipientName() + "\nĐịa chỉ: " + order.getDeliveryAddress());
         return convertView;
     }
 }

@@ -4,5 +4,8 @@
     <string name="login_password_hint">Mật khẩu</string>
     <string name="login_repassword_hint">Nhập lại mật khẩu</string>
     <string name="tvDSSP">Sản phẩm mới 2022</string>
+    <string name="recoverypassword">Khôi phục mật khẩu</string>
+    <string name="tv_recovery">Nhập email tài khoản của bạn</string>
+    <string name="tv_ttgh">Mời nhập thông tin giao hàng</string>
 
 </resources>

@@ -1,7 +1,8 @@
 package com.nvn.mobilent.network;
 
-import com.nvn.mobilent.model.OrderDetail;
-import com.nvn.mobilent.model.RLogin;
+import com.nvn.mobilent.model.OrderCheckout;
+import com.nvn.mobilent.model.OrderDetailCheckout;
+import com.nvn.mobilent.model.RObject;
 import com.nvn.mobilent.model.ROrder;
 import com.nvn.mobilent.model.ROrderItemDetail;
 
@@ -22,17 +23,36 @@ public interface OrderAPI {
             @Query("page_size") int pagesize
     );
 
-    @GET("/api/order")
+    @GET("/api/order/detail")
     Call<ROrderItemDetail> getDetailOrderbyIdOrder(
             @Query("id") int orderid
     );
 
     @POST("/api/order")
     @FormUrlEncoded
-    Call<RLogin> postOrder( //CHỉnh call
-                            @Field("user_id") int user_id,
-                            @Field("deliveryAddress") String deliveryAddress,
-                            @Field("phone") String phone,
-                            @Field("orderDetail") ArrayList<OrderDetail> arr
+    Call<OrderCheckout> postOrder1(
+            @Field("user_id") int user_id,
+            @Field("deliveryAddress") String deliveryAddress,
+            @Field("phone") String phone,
+            @Field("recipientName") String name,
+            @Field("orderDetail[]") ArrayList<OrderDetailCheckout> arr
+    );// check lại
+
+    @POST("/api/order")
+    @FormUrlEncoded
+    Call<RObject> postOrder(
+            @Field("user_id") int user_id,
+            @Field("deliveryAddress") String deliveryAddress,
+            @Field("phone") String phone,
+            @Field("recipientName") String name
+    );
+
+    @POST("/api/order/order-item")
+    @FormUrlEncoded
+    Call<OrderDetailCheckout> postOrderDetail(
+            @Field("quantity") int quantity,
+            @Field("prod_id") int prod_id,
+            @Field("price") int price,
+            @Field("order_id") int order_id
     );
 }

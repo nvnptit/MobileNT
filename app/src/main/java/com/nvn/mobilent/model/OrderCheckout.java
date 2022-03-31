@@ -3,10 +3,9 @@ package com.nvn.mobilent.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class OrderCheckout {
-
+public class OrderCheckout implements Serializable {
     @SerializedName("user_id")
     @Expose
     private Integer userId;
@@ -16,9 +15,9 @@ public class OrderCheckout {
     @SerializedName("phone")
     @Expose
     private String phone;
-    @SerializedName("orderDetail")
+    @SerializedName("recipientName")
     @Expose
-    private ArrayList<OrderDetail> orderDetail = null;
+    private String recipientName;
 
     public Integer getUserId() {
         return userId;
@@ -44,12 +43,12 @@ public class OrderCheckout {
         this.phone = phone;
     }
 
-    public ArrayList<OrderDetail> getOrderDetail() {
-        return orderDetail;
+    public String getRecipientName() {
+        return recipientName;
     }
 
-    public void setOrderDetail(ArrayList<OrderDetail> orderDetail) {
-        this.orderDetail = orderDetail;
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
     }
 
 }

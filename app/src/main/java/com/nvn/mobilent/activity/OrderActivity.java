@@ -45,6 +45,9 @@ public class OrderActivity extends AppCompatActivity {
     boolean isLoading = false;
     boolean limitData = false;
 
+    @Override
+    public void onBackPressed() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
