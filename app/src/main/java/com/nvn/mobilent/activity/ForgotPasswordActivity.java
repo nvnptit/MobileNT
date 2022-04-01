@@ -54,7 +54,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     textInputLayoutEmail.setError(null);
                 }
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
             }

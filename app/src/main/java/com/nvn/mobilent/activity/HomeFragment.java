@@ -56,10 +56,10 @@ public class HomeFragment extends Fragment {
 
     Button timkiem, btnAddCartHome;
     boolean limitData = false;
-    //    ItemClickListener itemClickListener;
     ArrayList<Cart> arrCart;
     User user;
 
+    //    ItemClickListener itemClickListener;
 
     public HomeFragment() {
     }
@@ -163,7 +163,6 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
     }
 
     @Override
