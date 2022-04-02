@@ -12,6 +12,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.base.PathAPI;
+import com.nvn.mobilent.base.RetrofitClient;
+import com.nvn.mobilent.model.RSDT;
+import com.nvn.mobilent.network.UserAPI;
+import com.nvn.mobilent.util.AppUtils;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
     EditText email;
@@ -20,6 +29,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private TextInputLayout textInputLayoutEmail;
     private String regexEmail = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$";
+    UserAPI userAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +64,32 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     textInputLayoutEmail.setError(null);
                 }
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
             }
         });
+        userAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(UserAPI.class);
         btnRecovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (checkData()) {
-                    //Do something!
+                    userAPI.forgotPassword(email.getText().toString().trim()).enqueue(new Callback<RSDT>() {
+                        @Override
+                        public void onResponse(Call<RSDT> call, Response<RSDT> response) {
+                            if (response.body().getResult()) {
+                                AppUtils.showToast_Short(getApplicationContext(), "Đã gửi mật khẩu mới về email của bạn!");
+                                email.setText("");
+                            } else {
+                                AppUtils.showToast_Short(getApplicationContext(), "Email không tồn tại trên hệ thống!");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<RSDT> call, Throwable t) {
+
+                        }
+                    });
                 }
             }
         });

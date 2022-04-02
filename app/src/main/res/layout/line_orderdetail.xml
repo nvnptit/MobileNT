@@ -65,6 +65,7 @@
                 android:layout_height="match_parent"
                 android:text="Thành tiền"
                 android:textColor="#D81B60"
+                android:layout_gravity="end"
                 android:textSize="20dp" />
 
         </LinearLayout>

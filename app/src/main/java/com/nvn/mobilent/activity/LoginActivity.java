@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText email, password;
     Button btnLogin;
     UserAPI userAPI;
+    TextView tv_ForgotPass;
     private TextInputLayout textInputLayoutEmail;
     private TextInputLayout textInputLayoutPassword;
 
@@ -84,14 +86,22 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        tv_ForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setControl() {
         email = findViewById(R.id.loginemail);
         password = findViewById(R.id.loginpassword);
         btnLogin = findViewById(R.id.btnlogin);
-        email.setText("admin@gmail.com");
-        password.setText("123");
+        email.setText("@gmail.com");
+        password.setText("");
+        tv_ForgotPass = findViewById(R.id.tv_forgotpass);
         textInputLayoutEmail = findViewById(R.id.til_loginemail);
         textInputLayoutPassword = findViewById(R.id.til_loginpassword);
     }

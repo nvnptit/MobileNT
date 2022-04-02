@@ -1,6 +1,7 @@
 package com.nvn.mobilent.network;
 
 import com.nvn.mobilent.model.RLogin;
+import com.nvn.mobilent.model.RSDT;
 import com.nvn.mobilent.model.RUser;
 
 import retrofit2.Call;
@@ -57,5 +58,10 @@ public interface UserAPI {
             @Query("email") String email,
             @Query("oldPassword") String oldPassword,
             @Query("newPassword") String newPassword
+    );
+
+    @POST("/api/user/forgot-password")
+    Call<RSDT> forgotPassword(
+            @Query("email") String email
     );
 }
