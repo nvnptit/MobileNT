@@ -120,6 +120,14 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             textInputLayoutPassword.setError(null);
         }
+
+        // Check TextInput null
+        if (!(textInputLayoutEmail.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutPassword.getError() == null)) {
+            return false;
+        }
         return check;
     }
 

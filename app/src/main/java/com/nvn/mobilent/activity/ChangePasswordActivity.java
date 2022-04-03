@@ -98,6 +98,17 @@ public class ChangePasswordActivity extends AppCompatActivity {
         } else {
             textInputLayoutRepass.setError(null);
         }
+
+        // Check TextInput null
+        if (!(textInputLayoutOldPass.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutPass.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutRepass.getError() == null)) {
+            return false;
+        }
         return check;
     }
 

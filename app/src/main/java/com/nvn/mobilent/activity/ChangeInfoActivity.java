@@ -243,6 +243,30 @@ public class ChangeInfoActivity extends AppCompatActivity {
             textInputLayoutEmail.setError("Không được để trống!");
             return false;
         }
+
+        // Check TextInput null
+        if (!(textInputLayoutFirstName.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutLastName.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutGender.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutBirthDay.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutAddress.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutPhone.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutEmail.getError() == null)) {
+            return false;
+        }
+
         return check;
     }
 

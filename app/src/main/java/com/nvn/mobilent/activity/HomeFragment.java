@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
 
     private void setActionBar() {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar); // hỗ trợ toolbar như actionbar
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nút home toolbar
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nút home toolbar
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
         toolbar.setNavigationOnClickListener(view -> {
             drawerLayout.openDrawer(GravityCompat.START); //nhảy ra giữa

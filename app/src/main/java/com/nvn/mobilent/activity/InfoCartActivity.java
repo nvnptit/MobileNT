@@ -120,6 +120,17 @@ public class InfoCartActivity extends AppCompatActivity {
         } else {
             textInputLayoutPhone.setError(null);
         }
+
+        // Check TextInput null
+        if (!(textInputLayoutName.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutAddress.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutPhone.getError() == null)) {
+            return false;
+        }
         return check;
     }
 

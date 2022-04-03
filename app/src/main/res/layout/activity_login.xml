@@ -33,7 +33,9 @@
                     android:layout_height="108dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="Already \nhave an \nAccount?" />
+                    android:gravity="center"
+                    android:text="MobileVN\n2022"
+                    android:textColor="#00897B" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -78,7 +80,7 @@
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
-                android:text="Forgot Password?"
+                android:text="Quên mật khẩu?"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/newsMoreTextSize" />x
 
@@ -89,14 +91,14 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:background="@drawable/btn_bg_design"
-                android:text="Login"
+                android:text="Đăng nhập"
                 android:textColor="@color/whiteTextColor" />
 
             <TextView
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:onClick="onLoginClick"
-                android:text="New user? Register Now"
+                android:text="Người dùng mới? Đăng ký ngay!"
                 android:textAlignment="center"
                 android:textColor="@color/themeColor"
                 android:textSize="17sp"
@@ -121,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
-                    android:text="Use other Methods"
+                    android:text="Phương thức khác"
                     android:textAlignment="center"
                     android:textSize="12sp" />
 

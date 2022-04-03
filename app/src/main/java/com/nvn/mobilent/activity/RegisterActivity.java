@@ -120,6 +120,34 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             textInputLayoutRepass.setError(null);
         }
+        // Check TextInput null
+        if (!(textInputLayoutFirstName.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutLastName.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutGender.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutBirthDay.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutAddress.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutPhone.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutEmail.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutPass.getError() == null)) {
+            return false;
+        }
+        if (!(textInputLayoutRepass.getError() == null)) {
+            return false;
+        }
         return check;
     }
 

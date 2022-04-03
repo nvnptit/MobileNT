@@ -47,6 +47,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         } else {
             textInputLayoutEmail.setError(null);
         }
+        // Check TextInput null
+        if (!(textInputLayoutEmail.getError() == null)) {
+            return false;
+        }
         return check;
     }
 
