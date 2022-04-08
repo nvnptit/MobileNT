@@ -109,7 +109,6 @@ public class HomeFragment extends Fragment {
         timkiem = view.findViewById(R.id.timkiem);
 
         if (arrCart != null) {
-
         } else {
             arrCart = new ArrayList<>();
         }
