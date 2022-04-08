@@ -21,15 +21,9 @@ import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHolder> {
 
-    //    Bỏ context khi dùng interface
-//    ItemClickListener itemClickListener;
-//
-//    public ProductAdapter(ArrayList<Product> arrProd, ItemClickListener itemClickListener) {
-//        this.itemClickListener = itemClickListener;
-//        this.arrProd = arrProd;
-//    }
     Context context;
     ArrayList<Product> arrProd;
+    ArrayList<Product> arrTmp = new ArrayList<>();
 
 
     @NonNull
@@ -43,6 +37,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
     public ProductAdapter(Context context, ArrayList<Product> arrProd) {
         this.context = context;
         this.arrProd = arrProd;
+        this.arrTmp.addAll(arrProd);
     }
 
     @Override
@@ -60,12 +55,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
                 .error(R.drawable.error)
                 .into(holder.imgProduct); // tra ve imageview
 
-//        holder.layoutItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                itemClickListener.onItemClick(prod);
-//            }
-//        });
     }
 
     public void release() {
@@ -86,12 +75,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
         public ImageView imgProduct;
         public TextView tvNameProduct, tvPriceProduct;
 
-//        public LinearLayout layoutItem;
 
         public ItemHolder(@NonNull View itemView) {
             super(itemView);
-//            layoutItem = itemView.findViewById(R.id.layouthome);
-
             tvNameProduct = itemView.findViewById(R.id.tvnameproduct);
             tvPriceProduct = itemView.findViewById(R.id.tvpriceproduct);
             imgProduct = itemView.findViewById(R.id.imgProduct);
@@ -109,5 +95,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
 
     }
 
+    public void filter(String text) {
+        arrProd.clear();
+        text = text.toLowerCase();
+        if (text.length() == 0) {
+            arrProd.addAll(arrTmp);
+        } else {
+            for (Product sp : arrTmp) {
+                if (sp.getName().toLowerCase().contains(text)) {
+                    arrProd.add(sp);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 
 }

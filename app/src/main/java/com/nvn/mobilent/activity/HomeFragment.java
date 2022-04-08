@@ -1,6 +1,5 @@
 package com.nvn.mobilent.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +14,7 @@ import android.widget.ViewFlipper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -54,11 +54,12 @@ public class HomeFragment extends Fragment {
     ArrayList<Product> productArrayList;
     ProductAdapter productAdapter;
 
-    Button timkiem, btnAddCartHome;
+    //    Button timkiem, btnAddCartHome;
+    Button btnAddCartHome;
+    SearchView timkiem;
     boolean limitData = false;
     ArrayList<Cart> arrCart;
     User user;
-
     //    ItemClickListener itemClickListener;
 
     public HomeFragment() {
@@ -168,11 +169,23 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        timkiem.setOnClickListener(new View.OnClickListener() {
+//        timkiem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), SearchActivity.class); //CategoryFragment.this.getActivity()
+//                startActivity(intent);
+//            }
+//        });
+        timkiem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SearchActivity.class); //CategoryFragment.this.getActivity()
-                startActivity(intent);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                productAdapter.filter(newText);
+                return false;
             }
         });
 

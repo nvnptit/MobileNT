@@ -24,23 +24,29 @@
                 android:background="#EDEAEA"
                 app:titleTextColor="@color/login_bk_color">
 
-                <Button
+                <!--                <Button-->
+                <!--                    android:id="@+id/timkiem"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="40dp"-->
+                <!--                    android:layout_marginRight="30dp"-->
+                <!--                    android:background="@drawable/roundbutton"-->
+                <!--                    android:backgroundTint="@color/whiteTextColor"-->
+                <!--                    android:hint="Tìm kiếm sản phẩm"-->
+                <!--                    android:textSize="20dp" />-->
+                <androidx.appcompat.widget.SearchView
                     android:id="@+id/timkiem"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginRight="30dp"
-                    android:background="@drawable/roundbutton"
-                    android:backgroundTint="@color/whiteTextColor"
-                    android:hint="Tìm kiếm sản phẩm"
-                    android:textSize="20dp" />
+                    android:layout_height="wrap_content"
+                    app:queryHint="Nhập từ khoá cần tìm kiếm tại đây"
+
+                    />
             </androidx.appcompat.widget.Toolbar>
 
             <ViewFlipper
                 android:id="@+id/viewlipper"
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
-
-            </ViewFlipper>
+                android:layout_height="150dp"
+                android:layout_margin="5dp"></ViewFlipper>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,7 +69,9 @@
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="5dp">
+                    android:layout_margin="10dp"
+                    android:background="@drawable/roundbutton"
+                    android:backgroundTint="@color/white">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
