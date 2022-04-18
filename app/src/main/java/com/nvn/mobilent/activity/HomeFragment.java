@@ -54,13 +54,11 @@ public class HomeFragment extends Fragment {
     ArrayList<Product> productArrayList;
     ProductAdapter productAdapter;
 
-    //    Button timkiem, btnAddCartHome;
     Button btnAddCartHome;
     SearchView timkiem;
     boolean limitData = false;
     ArrayList<Cart> arrCart;
     User user;
-    //    ItemClickListener itemClickListener;
 
     public HomeFragment() {
     }
@@ -89,7 +87,6 @@ public class HomeFragment extends Fragment {
 
     private void setActionBar() {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar); // hỗ trợ toolbar như actionbar
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nút home toolbar
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
         toolbar.setNavigationOnClickListener(view -> {
             drawerLayout.openDrawer(GravityCompat.START); //nhảy ra giữa
@@ -104,7 +101,6 @@ public class HomeFragment extends Fragment {
         drawerLayout = view.findViewById(R.id.drawerlayout);
         btnAddCartHome = view.findViewById(R.id.btn_addcarthome);
 
-        // Listview
         productArrayList = new ArrayList<>();
         timkiem = view.findViewById(R.id.timkiem);
 
@@ -125,7 +121,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         if (!AppUtils.haveNetworkConnection(getContext())) {
             AppUtils.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
