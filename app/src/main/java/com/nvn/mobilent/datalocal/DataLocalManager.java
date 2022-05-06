@@ -1,6 +1,7 @@
 package com.nvn.mobilent.datalocal;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.google.gson.Gson;
 import com.nvn.mobilent.model.User;
@@ -33,4 +34,17 @@ public class DataLocalManager {
         String jsonUser = gson.toJson(user);
         DataLocalManager.getInstance().mySharedPrererences.putStringValue(PREF_OBJECT, jsonUser);
     }
+
+    public static Uri getUriImage() {
+        String uri = DataLocalManager.getInstance().mySharedPrererences.getStringValue("URI");
+        if (uri.isEmpty()) {
+            return null;
+        }
+        return Uri.parse(uri);
+    }
+
+    public static void setUriImage(Uri uriImage) {
+        DataLocalManager.getInstance().mySharedPrererences.putStringValue("URI", uriImage.toString());
+    }
+
 }

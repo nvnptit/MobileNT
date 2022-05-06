@@ -1,36 +1,55 @@
 package com.nvn.mobilent.activity;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nvn.mobilent.R;
 import com.nvn.mobilent.adapter.SettingAdapter;
 import com.nvn.mobilent.datalocal.DataLocalManager;
 import com.nvn.mobilent.model.SettingItem;
 import com.nvn.mobilent.model.User;
+import com.nvn.mobilent.util.AppUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class SettingFragment extends Fragment {
 
+    private static final int MY_REQUEST_CODE = 18;
     ArrayList<SettingItem> arrayList;
     SettingAdapter settingAdapter;
     TextView tv_profile, tv_pass, tv_cartstatus, tv_logout, welcome;
     User user;
+    private static final int IMAGE_PICK_CODE = 1000;
+    private static final int PERMISSION_CODE = 1001;
+    FloatingActionButton btnEditImage;
+    ImageView avt;
+    private ActivityResultLauncher<Intent> activityResultLauncher;
+
     public SettingFragment() {
     }
 
@@ -63,6 +82,10 @@ public class SettingFragment extends Fragment {
         System.out.println("onResume");
         user = DataLocalManager.getUser();
         welcome.setText(user.getLastname() + " " + user.getFirstname());
+        if (DataLocalManager.getUriImage() != null) {
+            Picasso.get().load(DataLocalManager.getUriImage())
+                    .into(avt);
+        }
         super.onResume();
     }
 
@@ -72,7 +95,6 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ChangeInfoActivity.class); //change lại
-                //   intent.putExtra("user", user);
                 startActivity(intent);
             }
         });
@@ -80,7 +102,6 @@ public class SettingFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
-                //   intent.putExtra("user", user);
                 startActivity(intent);
             }
         });
@@ -97,6 +118,27 @@ public class SettingFragment extends Fragment {
                 openConfirmDialog();
             }
         });
+        btnEditImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRequestPermission();
+            }
+
+        });
+        activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), (activityResult) -> {
+                    Log.e("MY_TAG", "activityResult");
+                    if (activityResult.getResultCode() == RESULT_OK) {
+                        Intent dataIntent = activityResult.getData();
+                        if (dataIntent != null) {
+                            Picasso.get().load(dataIntent.getData())
+                                    .into(avt);
+                            String path = AppUtils.getRealPathFromURI(getContext(), dataIntent.getData());
+                            DataLocalManager.setUriImage(dataIntent.getData());
+                        }
+                    }
+                }
+        );
     }
 
     private void openConfirmDialog() {
@@ -143,5 +185,35 @@ public class SettingFragment extends Fragment {
         tv_logout = getView().findViewById(R.id.logout);
         welcome = getView().findViewById(R.id.welcome);
         user = DataLocalManager.getUser();
+
+        btnEditImage = getView().findViewById(R.id.btnEditImage);
+        avt = getView().findViewById(R.id.avt);
     }
+
+    private void pickImageFromGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, IMAGE_PICK_CODE);
+    }
+
+
+    private void onRequestPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return;
+        }
+        if (getActivity().checkSelfPermission(READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            openGallery();
+        } else {
+            String[] permission = {READ_EXTERNAL_STORAGE};
+            requestPermissions(permission, MY_REQUEST_CODE);
+        }
+    }
+
+    private void openGallery() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        activityResultLauncher.launch(Intent.createChooser(intent, "Mời lựa chọn ảnh"));
+    }
+
 }
