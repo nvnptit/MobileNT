@@ -60,6 +60,12 @@ public interface UserAPI {
             @Query("newPassword") String newPassword
     );
 
+    @POST("/api/user/change-password")
+    Call<RLogin> changePasswordbyPhone(
+            @Query("phone") String phone,
+            @Query("newPassword") String newPassword
+    );
+
     @POST("/api/user/forgot-password")
     Call<RSDT> forgotPassword(
             @Query("email") String email

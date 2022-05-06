@@ -42,7 +42,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
 
     @Override
     public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
-        // Set/Get thông tin
         Product prod = arrProd.get(position);
         if (prod == null) {
             return;
@@ -71,30 +70,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
         return arrProd.size();
     }
 
-    public class ItemHolder extends RecyclerView.ViewHolder {
-        public ImageView imgProduct;
-        public TextView tvNameProduct, tvPriceProduct;
-
-
-        public ItemHolder(@NonNull View itemView) {
-            super(itemView);
-            tvNameProduct = itemView.findViewById(R.id.tvnameproduct);
-            tvPriceProduct = itemView.findViewById(R.id.tvpriceproduct);
-            imgProduct = itemView.findViewById(R.id.imgProduct);
-            // Sự kiện click vào item
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, ProductDetailActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("product", arrProd.get(getAbsoluteAdapterPosition()));
-                    context.startActivity(intent);
-                }
-            });
-        }
-
-    }
-
     public void filter(String text) {
         arrProd.clear();
         text = text.toLowerCase();
@@ -108,6 +83,29 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
             }
         }
         notifyDataSetChanged();
+    }
+
+    public class ItemHolder extends RecyclerView.ViewHolder {
+        public ImageView imgProduct;
+        public TextView tvNameProduct, tvPriceProduct;
+
+
+        public ItemHolder(@NonNull View itemView) {
+            super(itemView);
+            tvNameProduct = itemView.findViewById(R.id.tvnameproduct);
+            tvPriceProduct = itemView.findViewById(R.id.tvpriceproduct);
+            imgProduct = itemView.findViewById(R.id.imgProduct);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ProductDetailActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("product", arrProd.get(getAbsoluteAdapterPosition()));
+                    context.startActivity(intent);
+                }
+            });
+        }
+
     }
 
 }

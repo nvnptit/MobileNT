@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
     ProductAdapter productAdapter;
 
     Button btnAddCartHome;
-    SearchView timkiem;
+    SearchView timKiem;
     boolean limitData = false;
     ArrayList<Cart> arrCart;
     User user;
@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment {
 
     private void setActionBar() {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar); // hỗ trợ toolbar như actionbar
-        toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
+//        toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
         toolbar.setNavigationOnClickListener(view -> {
             drawerLayout.openDrawer(GravityCompat.START); //nhảy ra giữa
         });
@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
         btnAddCartHome = view.findViewById(R.id.btn_addcarthome);
 
         productArrayList = new ArrayList<>();
-        timkiem = view.findViewById(R.id.timkiem);
+        timKiem = view.findViewById(R.id.timkiem);
 
         if (arrCart != null) {
         } else {
@@ -170,7 +170,7 @@ public class HomeFragment extends Fragment {
 //                startActivity(intent);
 //            }
 //        });
-        timkiem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        timKiem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -180,6 +180,13 @@ public class HomeFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 productAdapter.filter(newText);
                 return false;
+            }
+        });
+
+        timKiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timKiem.setIconified(false);
             }
         });
 

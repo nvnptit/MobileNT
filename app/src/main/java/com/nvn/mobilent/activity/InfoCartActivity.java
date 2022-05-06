@@ -140,7 +140,7 @@ public class InfoCartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info_cart);
         user = DataLocalManager.getUser();
         setControl();
-        recipientName.setText(user.getLastname() + " " + user.getLastname());
+        recipientName.setText(user.getLastname() + " " + user.getFirstname());
         address.setText(user.getAddress());
         phone.setText(user.getPhone());
         catchData();
@@ -177,6 +177,7 @@ public class InfoCartActivity extends AppCompatActivity {
                         //CHECK CHECK CHECK
                         System.out.println("INFOSIZECART: " + sizeCart);
                         if (sizeCart > 0) {
+                            System.out.println("AAAAAA: " + user.getId());
                             orderAPI.postOrder(user.getId(), diaChi, sdt, name).enqueue(new Callback<RObject>() {
                                 @Override
                                 public void onResponse(Call<RObject> call, Response<RObject> response) {
@@ -225,6 +226,7 @@ public class InfoCartActivity extends AppCompatActivity {
 
                                             @Override
                                             public void onFailure(Call<RListCartItem> call, Throwable t) {
+                                                System.out.println();
                                             }
                                         });
                                     }
@@ -232,7 +234,7 @@ public class InfoCartActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<RObject> call, Throwable t) {
-
+                                    System.out.println("Lỗi " + t);
                                 }
                             });
                             sizeCart = 0;

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".activity.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -17,30 +18,42 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:background="#EDEAEA"
-                app:titleTextColor="@color/login_bk_color">
+            <!--            <androidx.appcompat.widget.Toolbar-->
+            <!--                android:id="@+id/toolbar"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="?actionBarSize"-->
+            <!--                android:background="#EDEAEA"-->
+            <!--                app:titleTextColor="@color/login_bk_color">-->
 
-                <!--                <Button-->
-                <!--                    android:id="@+id/timkiem"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="40dp"-->
-                <!--                    android:layout_marginRight="30dp"-->
-                <!--                    android:background="@drawable/roundbutton"-->
-                <!--                    android:backgroundTint="@color/whiteTextColor"-->
-                <!--                    android:hint="Tìm kiếm sản phẩm"-->
-                <!--                    android:textSize="20dp" />-->
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/timkiem"
+            <!--                <androidx.appcompat.widget.SearchView-->
+            <!--                    android:id="@+id/timkiem"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    app:queryHint="Nhập từ khoá cần tìm kiếm tại đây"-->
+
+            <!--                    />-->
+            <!--            </androidx.appcompat.widget.Toolbar>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:queryHint="Nhập từ khoá cần tìm kiếm tại đây"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/round_corners">
 
-                    />
-            </androidx.appcompat.widget.Toolbar>
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/timkiem"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:queryHint="Nhập từ khoá tìm kiếm" />
+                </androidx.appcompat.widget.Toolbar>
+            </LinearLayout>
 
             <ViewFlipper
                 android:id="@+id/viewlipper"
@@ -69,9 +82,10 @@
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/roundbutton"
-                    android:backgroundTint="@color/white">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/round_corners">
 
                 </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>

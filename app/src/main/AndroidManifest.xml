@@ -20,6 +20,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".activity.NewPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.VerifyResetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.ForgotPasswordActivity"
             android:exported="false" />
         <activity

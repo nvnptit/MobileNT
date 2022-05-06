@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.EmailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="478dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tv_email_recovery"
+            android:textSize="25dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_recoveremail"
+            style="@style/parent">
+
+            <EditText
+                android:id="@+id/recoveryemail"
+                style="@style/modifiedEditText"
+                android:drawableLeft="@drawable/ic_baseline_email"
+                android:drawablePadding="10dp"
+                android:hint="@string/login_email_hint"
+                android:inputType="textEmailAddress"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnrecovery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/btn_bg_design"
+            android:text="@string/recoverypassword"
+            android:textColor="@color/whiteTextColor" />
+    </LinearLayout>
+
+</LinearLayout>
