@@ -147,6 +147,7 @@ public class ChangeInfoActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<RLogin> call, Response<RLogin> response) {
                                 AppUtils.showToast_Short(getApplicationContext(), "Cập nhật thông tin thành công!");
+                                finish();
                             }
 
                             @Override

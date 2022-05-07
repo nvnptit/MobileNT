@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -140,9 +142,11 @@ public class OrderDetailActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
         }, PackageManager.PERMISSION_GRANTED);
+
         Date date = new Date();
         orderAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(OrderAPI.class);
         orderAPI.getDetailOrderbyIdOrder(idOrder).enqueue(new Callback<ROrderItemDetail>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<ROrderItemDetail> call, Response<ROrderItemDetail> response) {
                 if (response.isSuccessful()) {
@@ -207,9 +211,9 @@ public class OrderDetailActivity extends AppCompatActivity {
                         myPaint.setTextAlign(Paint.Align.RIGHT);
                         canvas.drawText(String.valueOf(money), pageWidth - 40, 1415 + rowNumber * 100, myPaint);
                         pdfDocument.finishPage(page);
-
+                        dateFormat = new SimpleDateFormat("dd-MM-yy-HH-mm-ss");
                         File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS),
-                                File.separator + "Report.pdf");
+                                File.separator + "Report" + dateFormat.format(date) + ".pdf");
                         try {
                             pdfDocument.writeTo(new FileOutputStream(file));
                         } catch (Exception e) {

@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
@@ -54,7 +53,6 @@ public class HomeFragment extends Fragment {
     ArrayList<Product> productArrayList;
     ProductAdapter productAdapter;
 
-    Button btnAddCartHome;
     SearchView timKiem;
     boolean limitData = false;
     ArrayList<Cart> arrCart;
@@ -99,7 +97,6 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         navigationView = view.findViewById(R.id.navigationview);
         drawerLayout = view.findViewById(R.id.drawerlayout);
-        btnAddCartHome = view.findViewById(R.id.btn_addcarthome);
 
         productArrayList = new ArrayList<>();
         timKiem = view.findViewById(R.id.timkiem);

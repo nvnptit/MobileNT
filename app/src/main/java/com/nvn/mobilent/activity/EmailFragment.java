@@ -102,6 +102,7 @@ public class EmailFragment extends Fragment {
                                 if (response.body().getResult()) {
                                     AppUtils.showToast_Short(getContext(), "Đã gửi mật khẩu mới về email của bạn!");
                                     email.setText("");
+                                    getActivity().finish();
                                 }
                             } else {
                                 AppUtils.showToast_Short(getContext(), "Email không tồn tại trên hệ thống!");

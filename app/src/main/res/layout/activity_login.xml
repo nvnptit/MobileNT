@@ -118,14 +118,14 @@
                     android:layout_weight="3"
                     android:background="@color/colorPrimaryDark" />
 
-                <TextView
-                    style="@style/viewParent.headerText.NoMode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:text="Phương thức khác"
-                    android:textAlignment="center"
-                    android:textSize="12sp" />
+                <!--                <TextView-->
+                <!--                    style="@style/viewParent.headerText.NoMode"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_weight="6"-->
+                <!--                    android:text="Phương thức khác"-->
+                <!--                    android:textAlignment="center"-->
+                <!--                    android:textSize="12sp" />-->
 
                 <View
                     android:layout_width="0dp"
@@ -135,23 +135,23 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center">
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="20dp"-->
+            <!--                android:gravity="center">-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_facebook" />
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:src="@drawable/ic_facebook" />-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_google" />
-            </LinearLayout>
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginLeft="10dp"-->
+            <!--                    android:src="@drawable/ic_google" />-->
+            <!--            </LinearLayout>-->
 
         </LinearLayout>
     </ScrollView>

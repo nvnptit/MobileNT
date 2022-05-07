@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.nvn.mobilent.R;
@@ -25,6 +26,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
     EditText oldPass, newPass, newRePass;
     Button btnChangePass;
 
+    Toolbar toolbar;
     private TextInputLayout textInputLayoutOldPass;
     private TextInputLayout textInputLayoutPass;
     private TextInputLayout textInputLayoutRepass;
@@ -38,6 +40,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
         user = DataLocalManager.getUser();
         setControl();
         setEvent();
+        actionToolBar();
+    }
+
+    private void actionToolBar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //tạo nút home
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void setEvent() {
@@ -54,6 +68,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             public void onResponse(Call<RLogin> call, Response<RLogin> response) {
                                 if (response.body().getResult()) {
                                     AppUtils.showToast_Short(getApplicationContext(), "Cập nhật mật khẩu thành công!");
+                                    finish();
                                 }
                             }
                             @Override
@@ -117,6 +132,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         newPass = findViewById(R.id.newpass);
         newRePass = findViewById(R.id.renewpass);
         btnChangePass = findViewById(R.id.btnchangepass);
+        toolbar = findViewById(R.id.toolbar_changepass);
 
         textInputLayoutOldPass = findViewById(R.id.til_changepass1);
         textInputLayoutPass = findViewById(R.id.til_changepass2);
@@ -126,4 +142,5 @@ public class ChangePasswordActivity extends AppCompatActivity {
     public void backChangePass(View view) {
         finish();
     }
+
 }

@@ -48,18 +48,21 @@
                     android:textColor="#854B4B"
                     android:textSize="18sp" />
 
-                <Button
-                    android:id="@+id/btn_addcarthome"
-                    android:layout_width="35sp"
-                    android:layout_height="35sp"
-                    android:layout_gravity="end"
-                    android:layout_margin="2sp"
-                    android:background="@drawable/roundbutton"
-                    android:backgroundTint="#83C181"
-                    android:text="+"
-                    android:textColor="@color/whiteTextColor"
+                <TextView
+                    android:id="@+id/tvz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:text="   "
                     android:textSize="20sp" />
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="2sp"
+                android:background="@drawable/ic_baseline_add_circle_24" />
         </FrameLayout>
     </androidx.cardview.widget.CardView>
 
