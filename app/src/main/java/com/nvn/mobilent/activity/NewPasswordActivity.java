@@ -1,5 +1,6 @@
 package com.nvn.mobilent.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,8 @@ public class NewPasswordActivity extends AppCompatActivity {
                         public void onResponse(Call<RLogin> call, Response<RLogin> response) {
                             if (response.isSuccessful()) {
                                 if (response.body().getResult()) {
+                                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                                    startActivity(intent);
                                     AppUtils.showToast_Short(getApplicationContext(), "Khôi phục mật khẩu thành công!");
                                 }
                             } else {
