@@ -182,7 +182,7 @@ public class InfoCartActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<RObject> call, Response<RObject> response) {
                                     if (response.isSuccessful()) {
-                                        AppUtils.showToast_Short(getApplicationContext(), "Đã thêm thông tin hoá đơn");
+                                        AppUtils.showToast_Short(getApplicationContext(), "Đặt hàng thành công!");
                                         int idOrder = response.body().getData().getId();
                                         recipientName.setText("");
                                         phone.setText("");
@@ -229,6 +229,7 @@ public class InfoCartActivity extends AppCompatActivity {
                                                 System.out.println();
                                             }
                                         });
+                                        finish();
                                     }
                                 }
 
