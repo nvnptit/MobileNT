@@ -1,5 +1,6 @@
 package com.nvn.mobilent.activity;
 
+import android.app.Notification;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,6 +10,8 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.nvn.mobilent.R;
@@ -32,6 +35,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InfoCartActivity extends AppCompatActivity {
+
+    NotificationManagerCompat notificationManagerCompat;
+
     EditText recipientName, phone, address;
     Button btnDatHang;
     User user;
@@ -182,7 +188,7 @@ public class InfoCartActivity extends AppCompatActivity {
                                 @Override
                                 public void onResponse(Call<RObject> call, Response<RObject> response) {
                                     if (response.isSuccessful()) {
-                                        AppUtils.showToast_Short(getApplicationContext(), "Đặt hàng thành công!");
+//                                        AppUtils.showToast_Short(getApplicationContext(), "Đặt hàng thành công!");
                                         int idOrder = response.body().getData().getId();
                                         recipientName.setText("");
                                         phone.setText("");
@@ -229,6 +235,7 @@ public class InfoCartActivity extends AppCompatActivity {
                                                 System.out.println();
                                             }
                                         });
+                                        sendOnChannel1();
                                         finish();
                                     }
                                 }
@@ -261,5 +268,39 @@ public class InfoCartActivity extends AppCompatActivity {
         textInputLayoutPhone = findViewById(R.id.phonepayment);
         textInputLayoutAddress = findViewById(R.id.addresspayment);
 
+    }
+
+    private void sendOnChannel1() {
+        String title = "Mobile Shop App";
+        String message = "Đơn hàng của bạn đã được đặt thành công!";
+
+        Notification notification = new NotificationCompat.Builder(this, NotificationApp.CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_ok)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        int notificationId = 1;
+        NotificationManagerCompat.from(getApplicationContext())
+                .notify("tag", notificationId, notification);
+    }
+
+    private void sendOnChannel2() {
+        String title = "Mobile Shop App";
+        String message = "Đơn hàng của bạn đã được đặt thành công!";
+
+        Notification notification = new NotificationCompat.Builder(this, NotificationApp.CHANNEL_2_ID)
+                .setSmallIcon(R.drawable.ic_ok)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setCategory(NotificationCompat.CATEGORY_PROMO) // Promotion.
+                .build();
+
+        int notificationId = 2;
+        NotificationManagerCompat.from(getApplicationContext())
+                .notify("tag", notificationId, notification);
     }
 }
