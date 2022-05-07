@@ -140,7 +140,7 @@ public class HomeFragment extends Fragment {
                 if (response.isSuccessful() && !limitData) {
                     productArrayList = (ArrayList<Product>) response.body().getData();
                     for (int i = 0; i < productArrayList.size(); i++) {
-                        if (productArrayList.get(i).getStatus().equals("false")) {
+                        if (productArrayList.get(i).getStatus().equals(false)) {
                             productArrayList.remove(i);
                         }
                     }

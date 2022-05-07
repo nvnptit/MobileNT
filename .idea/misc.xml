@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/drawable/ic_add_img.xml" value="0.216" />
         <entry key="app/src/main/res/drawable/ic_back_img.xml" value="0.216" />
         <entry key="app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.1745" />
+        <entry key="app/src/main/res/drawable/ic_baseline_picture_as_pdf_24.xml" value="0.1525" />
         <entry key="app/src/main/res/drawable/ic_cart.xml" value="0.136" />
         <entry key="app/src/main/res/drawable/ic_facebook.xml" value="0.1795" />
         <entry key="app/src/main/res/drawable/ic_google_plus.xml" value="0.125" />
@@ -43,7 +44,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_new_password.xml" value="0.14166666666666666" />
-        <entry key="app/src/main/res/layout/activity_order.xml" value="0.2546875" />
+        <entry key="app/src/main/res/layout/activity_order.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_order_detail.xml" value="0.2546875" />
         <entry key="app/src/main/res/layout/activity_order_status.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/activity_phone.xml" value="0.24895833333333334" />
@@ -79,6 +80,7 @@
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/menu/menu_information_store.xml" value="0.11458333333333333" />
         <entry key="app/src/main/res/menu/menu_store.xml" value="0.165" />
+        <entry key="app/src/main/res/menu/pdf_menu.xml" value="0.25" />
         <entry key="app/src/main/res/menu/sort_menu.xml" value="0.2003362019856771" />
       </map>
     </option>
