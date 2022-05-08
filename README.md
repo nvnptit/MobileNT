@@ -10,11 +10,11 @@
 - **Xem danh sách các sản phẩm, danh mục sản phẩm:**
     - Cho phép người dùng xem, tìm kiếm sản phẩm, lựa chọn thêm sản phẩm vào giỏ hàng
 - **Thêm sản phẩm vào giỏ hàng, xem chi tiết giỏ hàng, tổng tiền**
-    - Người dùng thêm sản phẩm vào giỏ hàng, xem tiền hiện tại
+    - Người dùng thêm sản phẩm vào giỏ hàng, xem số tiền mua hàng hiện tại, xem giỏ hàng, hiệu chỉnh số lượng mua hàng
 - **Thay đổi thông tin cá nhân**
     - Người dùng có thể thay đổi, hiệu chỉnh thông tin cá nhân. 
-- **Lịch sử các đơn hàng:**
-    - Cho phép người dùng xem lại lịch sử đơn hàng, chi tiết đơn hàng
+- **Lịch sử, giao dịch các đơn hàng:**
+    - Cho phép người dùng xem lại lịch sử đơn hàng, chi tiết đơn hàng, xuất, in hoá đơn pdf
 
 #### II. Ảnh Demo
 <img width="383" alt="Screen Shot 2022-05-03 at 00 52 18" src="https://user-images.githubusercontent.com/87685010/166298989-1d90d339-6829-490e-b13d-105f0fc3dacc.png">
