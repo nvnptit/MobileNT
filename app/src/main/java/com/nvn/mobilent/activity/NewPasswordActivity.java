@@ -36,10 +36,8 @@ public class NewPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_password);
         setControl();
 
-//        phone = getIntent().getStringExtra("phone_number");
-//        phone = "0"+phone.substring(3);
-        phone = "0974428984";
-        System.out.println(phone);
+        phone = getIntent().getStringExtra("phone_number");
+        phone = "0" + phone.substring(3);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
