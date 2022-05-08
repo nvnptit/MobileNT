@@ -1,4 +1,4 @@
-package com.nvn.mobilent.activity;
+package com.nvn.mobilent.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.activity.CartActivity;
+import com.nvn.mobilent.activity.CategoryActivity;
 import com.nvn.mobilent.adapter.CategoryAdapter;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;

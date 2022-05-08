@@ -1,4 +1,4 @@
-package com.nvn.mobilent.activity;
+package com.nvn.mobilent.base;
 
 import android.app.Application;
 import android.app.NotificationChannel;

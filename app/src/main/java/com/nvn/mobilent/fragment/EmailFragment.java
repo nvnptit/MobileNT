@@ -1,4 +1,4 @@
-package com.nvn.mobilent.activity;
+package com.nvn.mobilent.fragment;
 
 import android.os.Bundle;
 import android.text.Editable;

@@ -14,6 +14,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.nvn.mobilent.R;
 import com.nvn.mobilent.datalocal.DataLocalManager;
+import com.nvn.mobilent.fragment.CategoryFragment;
+import com.nvn.mobilent.fragment.HomeFragment;
+import com.nvn.mobilent.fragment.SettingFragment;
 import com.nvn.mobilent.model.User;
 
 public class MainActivity extends AppCompatActivity {

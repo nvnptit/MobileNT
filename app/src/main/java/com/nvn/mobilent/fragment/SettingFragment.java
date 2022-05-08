@@ -1,4 +1,4 @@
-package com.nvn.mobilent.activity;
+package com.nvn.mobilent.fragment;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.app.Activity.RESULT_OK;
@@ -28,6 +28,10 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.activity.ChangeInfoActivity;
+import com.nvn.mobilent.activity.ChangePasswordActivity;
+import com.nvn.mobilent.activity.LoginActivity;
+import com.nvn.mobilent.activity.OrderActivity;
 import com.nvn.mobilent.adapter.SettingAdapter;
 import com.nvn.mobilent.datalocal.DataLocalManager;
 import com.nvn.mobilent.model.SettingItem;

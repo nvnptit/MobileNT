@@ -1,4 +1,4 @@
-package com.nvn.mobilent.activity;
+package com.nvn.mobilent.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +29,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.activity.VerifyResetPasswordActivity;
 
 import java.util.concurrent.TimeUnit;
 

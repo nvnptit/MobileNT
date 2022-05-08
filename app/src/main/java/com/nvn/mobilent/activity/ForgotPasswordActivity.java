@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.fragment.EmailFragment;
+import com.nvn.mobilent.fragment.PhoneFragment;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
     Toolbar toolbar;
