@@ -16,7 +16,7 @@
             android:background="#B6B3B3"
             android:backgroundTint="#5E84A6"
             android:gravity="center"
-            android:text="Category"
+            android:text="Danh mục sản phẩm"
             android:textColor="@color/whiteTextColor"
             android:textSize="20dp"
             android:textStyle="bold"></TextView>

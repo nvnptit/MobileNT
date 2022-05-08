@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.base.PathAPI;
+import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.model.RLogin;
 import com.nvn.mobilent.network.UserAPI;
 import com.nvn.mobilent.util.AppUtils;
@@ -34,15 +36,19 @@ public class NewPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_password);
         setControl();
 
-        phone = getIntent().getStringExtra("phone_number");
-
-        if (!password.getText().toString().equals(repass.getText().toString())) {
-            Toast.makeText(getApplicationContext(), "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
-        }
+//        phone = getIntent().getStringExtra("phone_number");
+//        phone = "0"+phone.substring(3);
+        phone = "0974428984";
+        System.out.println(phone);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (checkData()) {
+                    if (!password.getText().toString().trim().equals(repass.getText().toString().trim())) {
+                        Toast.makeText(getApplicationContext(), "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    userAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(UserAPI.class);
                     userAPI.changePasswordbyPhone(phone.trim(), password.getText().toString().trim()).enqueue(new Callback<RLogin>() {
                         @Override
                         public void onResponse(Call<RLogin> call, Response<RLogin> response) {

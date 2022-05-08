@@ -313,16 +313,15 @@ public class RegisterActivity extends AppCompatActivity {
                                 register.getPassword(), register.getAddress(), register.getPhone(), register.getSex(), register.getBirthday()).enqueue(new Callback<RLogin>() {
                             @Override
                             public void onResponse(Call<RLogin> call, Response<RLogin> response) {
-                                System.out.println("Đăng ký thành công" + response.body().getResult());
+                                AppUtils.showToast_Short(getApplicationContext(), "Đăng ký thành công!");
                                 finish();
                             }
 
                             @Override
                             public void onFailure(Call<RLogin> call, Throwable t) {
-
+                                AppUtils.showToast_Short(getApplicationContext(), "Email đã tồn tại!");
                             }
                         });
-                        AppUtils.showToast_Short(getApplicationContext(), "Đăng ký thành công!");
                     }
                 }
             }
