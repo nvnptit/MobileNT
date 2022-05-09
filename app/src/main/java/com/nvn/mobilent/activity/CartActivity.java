@@ -90,9 +90,9 @@ public class CartActivity extends AppCompatActivity {
 
     public static void deleteCartItem(int id) {
         CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
-        cartItemAPI.deleteCartItem(id).enqueue(new Callback<R_Cart>() {
+        cartItemAPI.deleteCartItem(id).enqueue(new Callback<Error>() {
             @Override
-            public void onResponse(Call<R_Cart> call, Response<R_Cart> response) {
+            public void onResponse(Call<Error> call, Response<Error> response) {
                 if (response.isSuccessful()) {
                     AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã xoá sản phẩm khỏi giỏ hàng!");
                     solveTotal();
@@ -100,7 +100,8 @@ public class CartActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<R_Cart> call, Throwable t) {
+            public void onFailure(Call<Error> call, Throwable t) {
+                AppUtils.showToast_Short(tv_TotalCart.getContext(), "Lỗi xoá!");
             }
         });
     }

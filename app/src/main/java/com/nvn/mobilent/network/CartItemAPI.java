@@ -33,7 +33,7 @@ public interface CartItemAPI {
     );
 
     @DELETE("/api/cart-item")
-    Call<R_Cart> deleteCartItem(
+    Call<Error> deleteCartItem(
             @Query("id") int id
     );
 
