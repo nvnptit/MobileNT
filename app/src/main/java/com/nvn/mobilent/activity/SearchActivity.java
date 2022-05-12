@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,7 @@ public class SearchActivity extends AppCompatActivity {
     ProductAPI productAPI;
     EditText keySearch;
     ProductAdapter productAdapter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,18 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         setControl();
         setEvent();
+        setActionBar();
     }
+
+    private void setActionBar() {
+        toolbar = findViewById(R.id.toolbarsearch1);
+        setSupportActionBar(toolbar); // hỗ trợ toolbar như actionbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nút backhome toolbar
+        toolbar.setNavigationOnClickListener(view -> {
+            finish();
+        });
+    }
+
 
     private void setEvent() {
         keySearch.addTextChangedListener(new TextWatcher() {
@@ -74,7 +87,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void setControl() {
-        keySearch = findViewById(R.id.editSearch);
+        keySearch = findViewById(R.id.editSearch1);
         recyclerView = findViewById(R.id.searchrecyclerview);
     }
 

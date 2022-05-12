@@ -99,8 +99,8 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.loginemail);
         password = findViewById(R.id.loginpassword);
         btnLogin = findViewById(R.id.btnlogin);
-//        email.setText("codervn77@gmail.com");
-        password.setText("");
+        email.setText("codervn77@gmail.com");
+        password.setText("99");
         tv_ForgotPass = findViewById(R.id.tv_forgotpass);
         textInputLayoutEmail = findViewById(R.id.til_loginemail);
         textInputLayoutPassword = findViewById(R.id.til_loginpassword);

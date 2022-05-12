@@ -3,6 +3,8 @@ package com.nvn.mobilent.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ActionMode;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import com.nvn.mobilent.adapter.CartAdapter;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.datalocal.DataLocalManager;
+import com.nvn.mobilent.model.ACart;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
 import com.nvn.mobilent.model.RListCartItem;
@@ -43,7 +46,7 @@ public class CartActivity extends AppCompatActivity {
 
     static long total = 0;
     static long price = 0;
-    public static ArrayList<Cart> cartArrayList;
+    public static ArrayList<Cart> cartArrayList1;
     private static User user;
     static ListView lvCart;
     static CartAdapter cartAdapter;
@@ -53,6 +56,7 @@ public class CartActivity extends AppCompatActivity {
     static Cart newCart;
     Toolbar toolbar;
 
+    public static ArrayList<ACart> cartArrayList;
 
     public static void putCartItem(int cartItem_id, int quantity) {
         System.out.println("putCartItem:" + cartItem_id + "|" + quantity + "|");
@@ -61,8 +65,8 @@ public class CartActivity extends AppCompatActivity {
             public void onResponse(Call<R_Cart> call, Response<R_Cart> response) {
                 if (response.isSuccessful()) {
                     AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã cập nhật sản phẩm vào giỏ hàng!");
-                    solveTotal();
                 }
+                addCart(null);
             }
 
             @Override
@@ -78,7 +82,6 @@ public class CartActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã thêm sản phẩm vào giỏ hàng!");
                     newIDCart = response.body().getData().getId();
-                    solveTotal();
                 }
             }
 
@@ -95,7 +98,7 @@ public class CartActivity extends AppCompatActivity {
             public void onResponse(Call<Error> call, Response<Error> response) {
                 if (response.isSuccessful()) {
                     AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã xoá sản phẩm khỏi giỏ hàng!");
-                    solveTotal();
+                    addCart(null);
                 }
             }
 
@@ -106,103 +109,76 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-    public static void loadListCart() {
-        if (newCart != null) {
-            System.out.println(newCart.getName());
-        }
-        cartItemAPI.getCartItemByUserId(user.getId()).enqueue(new Callback<RListCartItem>() {
-            @Override
-            public void onResponse(Call<RListCartItem> call, Response<RListCartItem> response) {
-                ArrayList<Cart> arrs = response.body().getData();
-                if (newCart != null) {
-                    System.out.println("NEWCART");
-                    boolean exist = false;
-                    for (Cart item : arrs) {
-                        if (item.getProdId().equals(newCart.getProdId())) {
-                            item.setQuantity(item.getQuantity() + newCart.getQuantity());
-                            if (item.getQuantity() >= 10) {
-                                item.setQuantity(10);
-                            }
-                            putCartItem(item.getId(), item.getQuantity());
-                            exist = true;
-                        }
-                    }
-                    if (!exist) {
-                        postCartItem(newCart.getProdId(), newCart.getQuantity(), user.getId());
-                        arrs.add(newCart);
-                    }
-                }
-                cartAdapter.notifyDataSetChanged();
-                getListCart(arrs);
-            }
-
-            @Override
-            public void onFailure(Call<RListCartItem> call, Throwable t) {
-            }
-        });
-    }
-
-    public static void solveTotal() {
-        // Xử lý tiền
-        productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
-        cartItemAPI.getCartItemByUserId(user.getId()).enqueue(new Callback<RListCartItem>() {
-            @Override
-            public void onResponse(Call<RListCartItem> call, Response<RListCartItem> response) {
-                ArrayList<Cart> arrs = response.body().getData();
-                if (arrs.size() > 0) {
-                    total = 0;
-                    for (Cart item : arrs) {
-                        productAPI.getProductByID(item.getProdId()).enqueue(new Callback<R_ProductCartItem>() {
-                            @Override
-                            public void onResponse(Call<R_ProductCartItem> call, Response<R_ProductCartItem> response) {
-                                Product product = response.body().getData();
-                                price = product.getPrice();
-                                total = total + price * item.getQuantity();
-                                DecimalFormat df = new DecimalFormat("###,###,###");
-                                tv_TotalCart.setText(df.format(total) + " VNĐ");
-                                System.out.println(total);
-                            }
-
-                            @Override
-                            public void onFailure(Call<R_ProductCartItem> call, Throwable t) {
-                            }
-                        });
-                    }
-                } else {
-                    tv_TotalCart.setText("0 VNĐ");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RListCartItem> call, Throwable t) {
-            }
-        });
-    }
-
-    private static void getListCart(ArrayList<Cart> data) {
-        cartArrayList.clear();
-        for (Cart i : data) {
-            cartArrayList.add(new Cart(i));
-        }
+    public static void update() {
         if (cartArrayList.size() > 0) {
             lvCart.setVisibility(View.VISIBLE);
             tv_NoticeCart.setVisibility(View.INVISIBLE);
-            cartAdapter.notifyDataSetChanged();
         } else {
             lvCart.setVisibility(View.INVISIBLE);
             tv_NoticeCart.setVisibility(View.VISIBLE);
+        }
+        cartAdapter.notifyDataSetChanged();
+        //catchOnItemListView();
+    }
+
+    public static void loadCartArrayList() {
+        cartItemAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
+        productAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
+        cartItemAPI.getCartItemByUserId(user.getId()).enqueue(new Callback<RListCartItem>() {
+            @Override
+            public void onResponse(Call<RListCartItem> call, Response<RListCartItem> response) {
+                ArrayList<Cart> arrs = response.body().getData();
+
+                for (Cart item : arrs) {
+                    productAPI.getProductByID(item.getProdId()).enqueue(new Callback<R_ProductCartItem>() {
+                        @Override
+                        public void onResponse(Call<R_ProductCartItem> call, Response<R_ProductCartItem> response) {
+                            Product product = response.body().getData();
+                            ACart aCart = new ACart(item, product.getPrice());
+                            addCart(aCart);
+                        }
+
+                        @Override
+                        public void onFailure(Call<R_ProductCartItem> call, Throwable t) {
+                            Log.d("ERROR: ", t.toString());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RListCartItem> call, Throwable t) {
+                Log.d("ERROR: ", t.toString());
+            }
+        });
+        cartAdapter.notifyDataSetChanged();
+        update();
+    }
+
+    public static void addCart(ACart aCart) {
+        int money = 0;
+        if (aCart != null) {
+            cartArrayList.add(aCart);
             cartAdapter.notifyDataSetChanged();
         }
-        catchOnItemListView();
+
+        for (ACart item :cartArrayList){
+            money+= item.getQuantity()*item.getPrice();
+        }
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        tv_TotalCart.setText(df.format(money) + " VNĐ");
+        update();
     }
 
     public static void deleteItem(int position) {
         if (cartArrayList.get(position).getId() == null) {
             deleteCartItem(newIDCart);
-            solveTotal();
+            addCart(null);
+          //  loadListCart();
         } else {
             deleteCartItem(cartArrayList.get(position).getId());
-            solveTotal();
+        //    loadListCart();
+            addCart(null);
         }
         cartArrayList.remove(position);
         AppUtils.showToast_Short(tv_TotalCart.getContext(), "Đã xoá sản phẩm ra khỏi giỏ hàng");
@@ -237,7 +213,7 @@ public class CartActivity extends AppCompatActivity {
                                 tv_NoticeCart.setVisibility(View.INVISIBLE);
                                 cartAdapter.notifyDataSetChanged();
                             }
-                            solveTotal();
+            //                loadListCart();
                         }
                     }
                 });
@@ -258,13 +234,14 @@ public class CartActivity extends AppCompatActivity {
         super.onResumeFragments();
     }
 
-    @Override
-    protected void onResume() {
-        solveTotal();
-        cartArrayList.clear();
-        cartAdapter.notifyDataSetChanged();
-        super.onResume();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        addCart(null);
+////        cartArrayList.clear();
+////        loadListCart();
+////        cartAdapter.notifyDataSetChanged();
+//    }
 
     private void setControl() {
         lvCart = findViewById(R.id.listviewcart);
@@ -277,7 +254,6 @@ public class CartActivity extends AppCompatActivity {
         cartArrayList = new ArrayList<>();
         cartAdapter = new CartAdapter(getApplicationContext(), R.layout.linecartitem, cartArrayList);
         lvCart.setAdapter(cartAdapter);
-        cartItemAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
     }
 
     private void setActionBar() {
@@ -288,6 +264,7 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -297,9 +274,8 @@ public class CartActivity extends AppCompatActivity {
         newCart = (Cart) getIntent().getSerializableExtra("newcartitem");
         setActionBar();
 
-        loadListCart();
+        loadCartArrayList();
         setEventButton();
-        System.out.println("SIZECARTCLICK: " + cartArrayList.size());
     }
 
     private void setEventButton() {

@@ -17,6 +17,7 @@ import com.nvn.mobilent.R;
 import com.nvn.mobilent.activity.CartActivity;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
+import com.nvn.mobilent.model.ACart;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
 import com.nvn.mobilent.model.R_ProductCartItem;
@@ -30,12 +31,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CartAdapter extends ArrayAdapter<Cart> {
+public class CartAdapter extends ArrayAdapter<ACart> {
     Context context;
     int resource;
-    ArrayList<Cart> cartArrayList;
+    ArrayList<ACart> cartArrayList;
 
-    public CartAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Cart> objects) {
+    public CartAdapter(@NonNull Context context, int resource, @NonNull ArrayList<ACart> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -54,27 +55,14 @@ public class CartAdapter extends ArrayAdapter<Cart> {
         TextView nameCart = convertView.findViewById(R.id.tv_cart);
         TextView priceCart = convertView.findViewById(R.id.tv_pricecart);
         ImageView imageCart = convertView.findViewById(R.id.iv_cart);
-        Cart cart = cartArrayList.get(position);
+        ACart cart = cartArrayList.get(position);
         Button btnValue = convertView.findViewById(R.id.btnvalue);
         Button btnPlus = convertView.findViewById(R.id.btnplus);
         Button btnMinus = convertView.findViewById(R.id.btnminus);
         ImageView imgDelete = convertView.findViewById(R.id.imagedeletecart);
 
-        ProductAPI productAPI = null;
-        productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
-
-        productAPI.getProductByID(cart.getProdId()).enqueue(new Callback<R_ProductCartItem>() {
-            @Override
-            public void onResponse(Call<R_ProductCartItem> call, Response<R_ProductCartItem> response) {
-                Product product = response.body().getData();
-                DecimalFormat df = new DecimalFormat("###,###,###");
-                priceCart.setText(df.format(product.getPrice()) + " VNĐ");
-            }
-            @Override
-            public void onFailure(Call<R_ProductCartItem> call, Throwable t) {
-                Log.d("ERROR: ", t.toString());
-            }
-        });
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        priceCart.setText(df.format(cart.getPrice()) + " VNĐ");
         nameCart.setText(cart.getName());
         Picasso.get().load(cart.getImage())
                 .placeholder(R.drawable.no_image)
@@ -88,6 +76,7 @@ public class CartAdapter extends ArrayAdapter<Cart> {
                 int slmoi = Integer.parseInt(btnValue.getText().toString()) + 1;
                 if (slmoi <= 10 && slmoi >= 1) {
                     btnValue.setText(slmoi + "");
+                    cart.setQuantity(slmoi);
                     if (cart.getId() == null) {
                         CartActivity.putCartItem(CartActivity.newIDCart, slmoi);
                     } else {
@@ -102,6 +91,7 @@ public class CartAdapter extends ArrayAdapter<Cart> {
                 int slmoi = Integer.parseInt(btnValue.getText().toString()) - 1;
                 if (slmoi <= 10 && slmoi >= 1) {
                     btnValue.setText(slmoi + "");
+                    cart.setQuantity(slmoi);
                     if (cart.getId() == null) {
                         CartActivity.putCartItem(CartActivity.newIDCart, slmoi);
                     } else {

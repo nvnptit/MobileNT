@@ -2,6 +2,7 @@ package com.nvn.mobilent.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,16 +14,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.base.PathAPI;
+import com.nvn.mobilent.base.RetrofitClient;
+import com.nvn.mobilent.datalocal.DataLocalManager;
 import com.nvn.mobilent.model.Cart;
 import com.nvn.mobilent.model.Product;
+import com.nvn.mobilent.model.RListCartItem;
+import com.nvn.mobilent.model.R_Cart;
+import com.nvn.mobilent.model.User;
+import com.nvn.mobilent.network.CartItemAPI;
+import com.nvn.mobilent.util.AppUtils;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProductDetailActivity extends AppCompatActivity {
-    Toolbar toolbar;
+    static Toolbar toolbar;
     Product product;
 
+    private static User user;
     ImageView image, heart;
     boolean tmp = false;
     TextView name, quantity, price, detail;
@@ -33,6 +48,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+        user = DataLocalManager.getUser();
         setControl();
         actionToolBar();
         setEventSpinner();
@@ -41,15 +57,72 @@ public class ProductDetailActivity extends AppCompatActivity {
         setEventButton();
     }
 
+    public static void postCartItem(int prod_id, int quantity, int userid) {
+        CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
+        cartItemAPI.setNewCartItem(prod_id, quantity, userid).enqueue(new Callback<R_Cart>() {
+            @Override
+            public void onResponse(Call<R_Cart> call, Response<R_Cart> response) {
+                if (response.isSuccessful()) {
+                    AppUtils.showToast_Short(toolbar.getContext(), "Đã thêm sản phẩm vào giỏ hàng!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<R_Cart> call, Throwable t) {
+            }
+        });
+    }
+
+    public static void putCartItem(int cartItem_id, int quantity) {
+        CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
+        cartItemAPI.editCartItem(cartItem_id, quantity).enqueue(new Callback<R_Cart>() {
+            @Override
+            public void onResponse(Call<R_Cart> call, Response<R_Cart> response) {
+                if (response.isSuccessful()) {
+                    AppUtils.showToast_Short(toolbar.getContext(), "Đã cập nhật sản phẩm vào giỏ hàng!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<R_Cart> call, Throwable t) {
+            }
+        });
+    }
+
     private void setEventButton() {
         btn_addcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
                 int amount = Integer.parseInt(spinner.getSelectedItem().toString());
-                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-                intent.putExtra("newcartitem", new Cart(product.getId(), product.getName(), product.getImage(), amount));
-                startActivity(intent);
+                CartItemAPI cartItemAPI = (CartItemAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CartItemAPI.class);
+                cartItemAPI.getCartItemByUserId(user.getId()).enqueue(new Callback<RListCartItem>() {
+                    @Override
+                    public void onResponse(Call<RListCartItem> call, Response<RListCartItem> response) {
+                        ArrayList<Cart> arrs = response.body().getData();
+                        boolean exist = false;
+                        for (Cart item : arrs) {
+                            if (item.getProdId().equals(product.getId())) {
+                                item.setQuantity(item.getQuantity() + amount);
+                                if (item.getQuantity() >= 10) {
+                                    item.setQuantity(10);
+                                }
+                                putCartItem(item.getId(), item.getQuantity());
+                                exist = true;
+                            }
+                        }
+
+                        if (!exist) {
+                            postCartItem(product.getId(), amount, user.getId());
+                        }
+                    }
+
+
+                    @Override
+                    public void onFailure(Call<RListCartItem> call, Throwable t) {
+                        Log.d("ERROR: ", t.toString());
+                    }
+                });
             }
         });
     }

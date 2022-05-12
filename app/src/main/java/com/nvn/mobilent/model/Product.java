@@ -28,15 +28,15 @@ public class Product implements Serializable {
     @SerializedName("unit")
     @Expose
     private String unit;
-    @SerializedName("status")
-    @Expose
-    private Boolean status;
     @SerializedName("quantity")
     @Expose
     private Integer quantity;
     @SerializedName("detail")
     @Expose
     private String detail;
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
 
     public Integer getId() {
         return id;

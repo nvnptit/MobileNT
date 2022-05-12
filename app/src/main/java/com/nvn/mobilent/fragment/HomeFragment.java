@@ -1,5 +1,6 @@
 package com.nvn.mobilent.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.activity.SearchActivity;
 import com.nvn.mobilent.adapter.ProductAdapter;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
@@ -85,7 +87,7 @@ public class HomeFragment extends Fragment {
 
     private void setActionBar() {
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar); // hỗ trợ toolbar như actionbar
-//        toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
+       // toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
         toolbar.setNavigationOnClickListener(view -> {
             drawerLayout.openDrawer(GravityCompat.START); //nhảy ra giữa
         });
@@ -97,9 +99,9 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview);
         navigationView = view.findViewById(R.id.navigationview);
         drawerLayout = view.findViewById(R.id.drawerlayout);
+        timKiem = view.findViewById(R.id.timkiem);
 
         productArrayList = new ArrayList<>();
-        timKiem = view.findViewById(R.id.timkiem);
 
         if (arrCart != null) {
         } else {
@@ -152,7 +154,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<RProduct> call, Throwable t) {
                 Log.d("NVN-API", t.toString());
-
             }
         });
     }
@@ -160,13 +161,16 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        timkiem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getActivity(), SearchActivity.class); //CategoryFragment.this.getActivity()
-//                startActivity(intent);
-//            }
-//        });
+
+        timKiem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("HEIEI");
+                Intent intent = new Intent(getActivity(), SearchActivity.class); //CategoryFragment.this.getActivity()
+                startActivity(intent);
+            }
+        });
+
         timKiem.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -180,12 +184,12 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        timKiem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                timKiem.setIconified(false);
-            }
-        });
+//        timKiem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                timKiem.setIconified(false);
+//            }
+//        });
 
         productAPI = (ProductAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(ProductAPI.class);
         if (!AppUtils.haveNetworkConnection(getContext())) {
