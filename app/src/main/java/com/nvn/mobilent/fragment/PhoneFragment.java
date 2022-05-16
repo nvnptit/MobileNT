@@ -114,7 +114,7 @@ public class PhoneFragment extends Fragment {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                Toast.makeText(getContext(), "Verify Failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Lỗi xác thực", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override

@@ -11,17 +11,17 @@
         android:id="@+id/toolbar_itemcategory"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/primaryTextColor"
+        android:background="#A6A6A6"
         app:titleTextColor="@color/white"
-        app:titleMarginStart="110dp"
+        app:titleMarginStart="80dp"
         app:title="Danh mục sản phẩm">
 
         <ImageView
             android:id="@+id/reportcategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:src="@drawable/ic_analytics"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/chartz"
             ></ImageView>
     </androidx.appcompat.widget.Toolbar>
 

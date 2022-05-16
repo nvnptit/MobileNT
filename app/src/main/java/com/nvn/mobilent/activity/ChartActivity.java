@@ -76,9 +76,12 @@ public class ChartActivity extends AppCompatActivity {
                     pieEntries = new ArrayList<>();
                     for (int i=0;i<arrayList.size();i++){
                         sum+= arrayList.get(i).getSoLuong();
-                        barEntries.add(new BarEntry(i+1, (arrayList.get(i).getSoLuong() * 100 / sum)));
-                        pieEntries.add(new PieEntry(arrayList.get(i).getSoLuong() *100/sum, arrayList.get(i).getName()));
                     }
+                    for (int i=0;i<arrayList.size();i++){
+                        barEntries.add(new BarEntry(i+1, (arrayList.get(i).getSoLuong() * 100 / sum)));
+                        pieEntries.add(new PieEntry(arrayList.get(i).getSoLuong() *100 /sum, arrayList.get(i).getName()));
+                    }
+
                     //Initialize bar data set
                     BarDataSet barDataSet = new BarDataSet(barEntries, "Danh mục sản phẩm");
                     barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
