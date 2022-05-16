@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/drawable/border_design.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/button_background_blue.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_add_img.xml" value="0.216" />
+        <entry key="app/src/main/res/drawable/ic_analytics.xml" value="0.1245" />
         <entry key="app/src/main/res/drawable/ic_back_img.xml" value="0.216" />
         <entry key="app/src/main/res/drawable/ic_baseline_camera_alt_24.xml" value="0.1745" />
         <entry key="app/src/main/res/drawable/ic_baseline_picture_as_pdf_24.xml" value="0.1525" />
@@ -35,9 +36,10 @@
         <entry key="app/src/main/res/layout-land/activity_register.xml" value="0.25" />
         <entry key="app/src/main/res/layout-land/layout_dialog_confirm.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/layout/activity_cart.xml" value="0.2552083333333333" />
-        <entry key="app/src/main/res/layout/activity_category.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_category.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_change_info.xml" value="0.2552083333333333" />
         <entry key="app/src/main/res/layout/activity_change_password.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/layout/activity_chart.xml" value="0.11354166666666667" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_info_cart.xml" value="0.25" />

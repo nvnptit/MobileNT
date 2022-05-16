@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import com.nvn.mobilent.R;
 import com.nvn.mobilent.activity.CartActivity;
 import com.nvn.mobilent.activity.CategoryActivity;
+import com.nvn.mobilent.activity.ChartActivity;
 import com.nvn.mobilent.adapter.CategoryAdapter;
 import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
@@ -39,6 +41,7 @@ public class CategoryFragment extends Fragment {
     public ArrayList<Category> categoryArrayList;
     CategoryAdapter categoryAdapter;
     CategoryAPI categoryAPI;
+    ImageView reportCategory;
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -80,6 +83,7 @@ public class CategoryFragment extends Fragment {
 
     private void setControl() {
         listViewCategory = getView().findViewById(R.id.listviewcategory);
+        reportCategory = getView().findViewById(R.id.reportcategory);
         categoryArrayList = new ArrayList<>();
     }
 
@@ -125,12 +129,23 @@ public class CategoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setControl();
+        setEvent();
         categoryAPI = (CategoryAPI) RetrofitClient.getClient(PathAPI.linkAPI).create(CategoryAPI.class);
         if (!AppUtils.haveNetworkConnection(getContext())) {
             AppUtils.showToast_Short(getContext(), "Kiểm tra lại kết nối Internet");
         } else {
             getCategory();
         }
+    }
+
+    private void setEvent() {
+        reportCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ChartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void lisenCategory() {
