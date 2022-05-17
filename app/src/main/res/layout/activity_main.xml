@@ -26,7 +26,7 @@
             android:layout_gravity="bottom"
             android:background="#83715A"
             android:foreground="?attr/selectableItemBackground"
-            app:itemIconTint="@android:color/white"
+            app:itemIconTint="@xml/custom_bottom_nav"
             app:itemTextColor="@android:color/white"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/main_menu" />

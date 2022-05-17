@@ -94,6 +94,7 @@
             android:layout_marginLeft="50dp"
             android:background="@drawable/roundbutton"
             android:gravity="center"
+            app:itemIconTint="@xml/custom_bottom_nav"
             android:text="Thêm vào giỏ hàng"
             android:textColor="@color/whiteTextColor" />
     </LinearLayout>

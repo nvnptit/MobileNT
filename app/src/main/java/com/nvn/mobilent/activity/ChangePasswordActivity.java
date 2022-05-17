@@ -73,7 +73,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             }
                             @Override
                             public void onFailure(Call<RLogin> call, Throwable t) {
-
+                                AppUtils.showToast_Short(getApplicationContext(), "Mật khẩu hiện tại không đúng!");
                             }
                         });
                     }
