@@ -51,4 +51,34 @@
             android:textSize="15dp" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/statusorder"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="Đã giao hàng"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/primaryTextColor"
+            />
+        <TextView
+            android:id="@+id/cancelorder"
+            android:layout_marginTop="10dp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:text="Huỷ đơn"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="#AF3F3D"
+            />
+    </LinearLayout>
 </LinearLayout>

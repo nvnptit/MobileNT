@@ -139,8 +139,5 @@ public class ChangePasswordActivity extends AppCompatActivity {
         textInputLayoutRepass = findViewById(R.id.til_changepass3);
     }
 
-    public void backChangePass(View view) {
-        finish();
-    }
 
 }

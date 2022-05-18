@@ -5,6 +5,7 @@ import com.nvn.mobilent.model.OrderDetailCheckout;
 import com.nvn.mobilent.model.RObject;
 import com.nvn.mobilent.model.ROrder;
 import com.nvn.mobilent.model.ROrderItemDetail;
+import com.nvn.mobilent.model.R_Cart;
 
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface OrderAPI {
@@ -54,5 +56,9 @@ public interface OrderAPI {
             @Field("prod_id") int prod_id,
             @Field("price") int price,
             @Field("order_id") int order_id
+    );
+    @PUT("/api/order/huy-hang")
+    Call<RObject> cancelOrder(
+            @Query("id") int id
     );
 }

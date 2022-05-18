@@ -161,6 +161,7 @@
                             android:drawableLeft="@drawable/ic_baseline_email"
                             android:drawablePadding="10dp"
                             android:hint="@string/login_email_hint"
+                            android:focusable="false"
                             android:inputType="textEmailAddress"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>

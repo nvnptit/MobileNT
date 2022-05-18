@@ -1,16 +1,25 @@
 package com.nvn.mobilent.activity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -20,9 +29,12 @@ import com.nvn.mobilent.base.PathAPI;
 import com.nvn.mobilent.base.RetrofitClient;
 import com.nvn.mobilent.datalocal.DataLocalManager;
 import com.nvn.mobilent.model.Order;
+import com.nvn.mobilent.model.RObject;
 import com.nvn.mobilent.model.ROrder;
+import com.nvn.mobilent.model.R_Cart;
 import com.nvn.mobilent.model.User;
 import com.nvn.mobilent.network.OrderAPI;
+import com.nvn.mobilent.util.AppUtils;
 
 import java.util.ArrayList;
 
@@ -32,10 +44,10 @@ import retrofit2.Response;
 
 public class OrderActivity extends AppCompatActivity {
     ListView listOrder;
-    OrderAPI orderAPI;
+    static OrderAPI orderAPI;
 
-    ArrayList<Order> orderArrayList;
-    OrderAdapter orderAdapter;
+   public static ArrayList<Order> orderArrayList;
+    static OrderAdapter orderAdapter;
     User user;
 
     int page = 1;
@@ -80,6 +92,25 @@ public class OrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+    }
+
+    public static void cancelOrder(int id) {
+        orderAPI = RetrofitClient.getClient(PathAPI.linkAPI).create(OrderAPI.class);
+        orderAPI.cancelOrder(id).enqueue(new Callback<RObject>() {
+            @Override
+            public void onResponse(Call<RObject> call, Response<RObject> response) {
+                if (response.isSuccessful()){
+                    if (response.body().getResult()){
+                        AppUtils.showToast_Short(orderAdapter.getContext(), "Đã huỷ đơn hàng thành công!");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RObject> call, Throwable t) {
+                AppUtils.showToast_Short(orderAdapter.getContext(), "Lỗi huỷ đơn hàng!");
             }
         });
     }

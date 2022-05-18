@@ -1,6 +1,7 @@
 package com.nvn.mobilent.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+
 
 import com.nvn.mobilent.R;
+import com.nvn.mobilent.activity.OrderActivity;
 import com.nvn.mobilent.model.Order;
 
 import java.util.ArrayList;
@@ -39,10 +43,31 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         TextView numberOrder = convertView.findViewById(R.id.tvOrder);
         TextView dateOder = convertView.findViewById(R.id.tvDate);
         TextView person = convertView.findViewById(R.id.tv_person);
+        TextView statusOrder = convertView.findViewById(R.id.statusorder);
+        TextView cancelOrder = convertView.findViewById(R.id.cancelorder);
         Order order = orderArrayList.get(position);
         numberOrder.setText("Đơn hàng số " + order.getId());
         dateOder.setText("Ngày lập: " + order.getBuyDate());
         person.setText("Người nhận: " + order.getRecipientName() + "\nĐịa chỉ: " + order.getDeliveryAddress());
+        if (order.getStatus()==0){
+            statusOrder.setText("Chưa xử lý");
+            cancelOrder.setVisibility(View.VISIBLE);
+
+        }else if (order.getStatus()==1){
+            statusOrder.setText("Đã giao hàng");
+            cancelOrder.setVisibility(View.INVISIBLE);
+        }else {
+            statusOrder.setText("Đơn đã huỷ");
+            cancelOrder.setVisibility(View.INVISIBLE);
+        }
+        cancelOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                OrderActivity.cancelOrder(order.getId());
+                statusOrder.setText("Đơn đã huỷ");
+                cancelOrder.setVisibility(View.INVISIBLE);
+            }
+        });
         return convertView;
     }
 }
