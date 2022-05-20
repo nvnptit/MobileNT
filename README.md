@@ -29,8 +29,7 @@
 <img width="356" alt="Screen Shot 2022-05-03 at 01 54 04" src="https://user-images.githubusercontent.com/87685010/166307638-a5a33fbf-ee98-4f19-8ad5-dffdec8d8815.png">
 <img width="359" alt="Screen Shot 2022-05-03 at 01 54 21" src="https://user-images.githubusercontent.com/87685010/166307667-39ca3d1e-97e0-4642-a111-55b56a2b7733.png">
 <img width="358" alt="Screen Shot 2022-05-07 at 15 11 07" src="https://user-images.githubusercontent.com/87685010/167245467-8857a75b-8dbb-4793-ac7b-c1e999a63ffa.png">
-
-<img width="369" alt="Screen Shot 2022-05-20 at 10 31 19" src="[https://user-images.githubusercontent.com/87685010/167245137-82a141fd-42d4-4f6f-a25b-434e486e730f.png](https://user-images.githubusercontent.com/87685010/169484691-36315608-02d1-407f-84c4-79bc979f0707.png)">
+<img width="358" alt="Screen Shot 2022-05-20 at 15 15 30" src="https://user-images.githubusercontent.com/87685010/169485034-076a61d8-1ca0-4683-bcc3-23d915fe9594.png">
 
 <img width="373" alt="Screen Shot 2022-05-07 at 10 31 19" src="https://user-images.githubusercontent.com/87685010/167245137-82a141fd-42d4-4f6f-a25b-434e486e730f.png">
 <img width="359" alt="Screen Shot 2022-05-03 at 02 17 06" src="https://user-images.githubusercontent.com/87685010/166310845-83251f87-2bab-4043-a239-bc83ccd27722.png">
