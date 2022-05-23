@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".activity.OrderActivity">
+    tools:context=".screens.orders.OrderActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_order"

@@ -6,7 +6,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".activity.ChartActivity">
+        tools:context=".screens.category.ChartActivity">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_chart"
             android:layout_width="match_parent"
