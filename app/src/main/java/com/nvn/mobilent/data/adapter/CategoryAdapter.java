@@ -40,20 +40,19 @@ public class CategoryAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder = null; // tuy chinh theo view minh muon
-        if (view == null) { // View rong thi nhay vao day
-            viewHolder = new ViewHolder();   // Get service la cai layout ra
-            // LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        ViewHolder viewHolder = null;
+        if (view == null) {
+            viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
-            view = inflater.inflate(R.layout.line_category, null); //vẽ
+            view = inflater.inflate(R.layout.line_category, null);
 
             viewHolder.tvCategory = view.findViewById(R.id.tvCategory);
             viewHolder.imgCategory = view.findViewById(R.id.imgCategory);
 
-            view.setTag(viewHolder); // gan man hinh vao viewholder tuy chinh
+            view.setTag(viewHolder);
 
         } else {
-            viewHolder = (ViewHolder) view.getTag(); // khi da goi truoc do roi thi get cai tag ra thoi
+            viewHolder = (ViewHolder) view.getTag();
 
         }
         Category category = (Category) getItem(i);
