@@ -146,8 +146,6 @@ public class PhoneFragment extends Fragment {
                             }
                         }
                     }
-
-
                 });
     }
 
