@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 
 public class RProduct {
-
     @SerializedName("result")
     @Expose
     private Boolean result;

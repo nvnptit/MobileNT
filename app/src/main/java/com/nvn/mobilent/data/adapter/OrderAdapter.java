@@ -61,8 +61,8 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         cancelOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OrderActivity.cancelOrder(order.getId());
                 statusOrder.setText("Đơn đã huỷ");
+                OrderActivity.cancelOrder(order.getId());
                 cancelOrder.setVisibility(View.INVISIBLE);
             }
         });
